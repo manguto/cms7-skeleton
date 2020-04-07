@@ -1,0 +1,28 @@
+{
+    "name": "manguto/cms7-skeleton",
+    "type": "template",
+    "description": "A project template to make creating new cms7 projects easier.",
+	"authors": [
+        {
+            "name": "Marcos Torres",
+            "email": "admin@manguto.com"
+        }
+    ],
+	"require" : {
+		"manguto/cms7" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"application\\core\\" : "application/core/",
+			"application\\lib\\" : "application/lib/",
+			"application\\mvc\\" : "application/mvc/"
+		},
+		"files" : [
+			"application/functions/functions.php",
+			"application/configurations/configurations.php"				
+		]
+	},	
+	"minimum-stability" : "dev",
+    "keywords": ["template"],    
+    "license": "MIT",    
+}
