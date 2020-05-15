@@ -1,0 +1,31 @@
+{
+	"name" : "manguto/cms7-skeleton",
+	"type" : "template",
+	"description" : "A project template to create new manguto/cms7 projects easier.",
+	"authors" : [{
+			"name" : "Manguto",
+			"email" : "admin@manguto.com"
+		}
+	],
+	"require" : {
+		"manguto/cms7" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"application\\core\\" : "application/core/",
+			"application\\controllers\\" : "application/controllers/",
+			"application\\models\\" : "application/models/",
+			"application\\views\\" : "application/views/",
+			"application\\libraries\\" : "application/libraries/",
+			"application\\modules\\" : "application/modules/"
+		},
+		"files" : [
+			"application/functions/functions.php"
+		]
+	},
+	"minimum-stability" : "dev",
+	"keywords" : [
+		"template"
+	],
+	"license" : "GPL-3.0-or-later"
+}

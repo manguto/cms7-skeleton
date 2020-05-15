@@ -1,0 +1,22 @@
+<header class="container-fluid text-center no-print {#APP_PLATFORM#}">
+	<div class="container">
+		<div class="row">
+			<div class="col-11 text-left">				
+				<h1>
+					<a id="title" href='{#URL_ROOT#}' title="{#APP_SHORT_NAME#}"> {#APP_SHORT_NAME#} </a>
+				</h1>				
+			</div>
+			<div class="col-1">
+				{if="application\core\Access::checkUserLogged()==false"}
+				<a href="{#URL_ROOT#}login" class="float-right ml-1" title="Clique para efetuar o login no sistema (LOGIN).">Entrar</a>
+				{else}
+				<a href="{#URL_ROOT#}badge" class="float-right ml1" title="Clique para alterar os seus dados.">{function="application\core\Access::getSessionUserAttribute('name')"}</a>									
+				<a href="{#URL_ROOT#}dev" class="float-right ml-2" title='Acessar a plataforma de DESENVOLVIMENTO'>DEV</a>
+				<a href="{#URL_ROOT#}admin" class="float-right ml-2" title='Acessar a plataforma ADMINISTRATIVA'>ADM</a>					
+				<a href="{#URL_ROOT#}" class="float-right ml-2" title='Acessar a plataforma do SITE'>SITE</a>				
+				<a href="{#URL_ROOT#}logout" class="float-right ml-2" title="Sair do sistema (LOGOUT).">Sair</a>				
+				{/if}
+			</div>
+		</div>
+	</div>	
+</header>

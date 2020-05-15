@@ -1,0 +1,12 @@
+########################################### NÃO IGNORAR OS ARQUIVOS
+!repository/.htaccess
+########################################### IGNORAR OS ARQUIVOS
+.project
+.buildpath
+########################################### IGNORAR PASTAS E ARQUIVOS
+.settings/
+repository/
+cache/
+vendor/
+########################################### IGNORAR APENAS OS ARQUIVOS DAS PASTAS
+application/modules/*

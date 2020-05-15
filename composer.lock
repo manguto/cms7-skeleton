@@ -1,0 +1,59 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c008f8ae2e52984d704ef465768d4391",
+    "packages": [
+        {
+            "name": "manguto/cms7",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/manguto/cms7.git",
+                "reference": "dd2ec5a06aeff100e774c31aef12f0646012cc90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/manguto/cms7/zipball/dd2ec5a06aeff100e774c31aef12f0646012cc90",
+                "reference": "dd2ec5a06aeff100e774c31aef12f0646012cc90",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "manguto\\cms7\\database\\": "database/",
+                    "manguto\\cms7\\libraries\\": "libraries/",
+                    "manguto\\cms7\\model\\": "model/"
+                },
+                "files": [
+                    "functions/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Manguto",
+                    "email": "admin@manguto.com"
+                }
+            ],
+            "description": "Content management system suport libraries.",
+            "time": "2020-05-05T00:00:33+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

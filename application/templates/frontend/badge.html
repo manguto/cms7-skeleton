@@ -1,0 +1,58 @@
+{include="_general/open"} {include="_general/header/header"}
+<section>
+	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1>Dados Pessoais</h1>
+				<hr />
+				<br />
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 userData">
+				<div class="col-12">
+					<div class="title">Nome:</div>
+					<div class="value">{$user->getName()}</div>
+					<div class="title">Login:</div>
+					<div class="value">{$user->getLogin()}</div>
+					<div class="title">E-mail:</div>
+					<div class="value">{$user->getEmail()}</div>
+					<div class="title">Telefone:</div>
+					<div class="value">{$user->getPhone()}</div>
+					<div class="title">{if="sizeof($user->getProfiles())>1"}Perfís{else}Perfil{/if}:</div>
+					<div class="value">{$user->getProfilesStr()}</div>
+					<br />		
+					<hr />										
+					<a href="/badge/edit" class="btn btn-warning mt-2 float-right" title="Clique aqui para modificar os seus dados pessoais">Modificar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<style>
+.userData {
+	
+}
+
+.userData .title, .value {	
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.userData .title {
+	font-size: 14px;
+	text-align: left;
+}
+
+.userData .value {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: left;
+	margin-bottom:20px;
+}
+</style>
+{include="_general/_footer/footer"} {include="_general/close"}
