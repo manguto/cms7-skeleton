@@ -62,8 +62,10 @@ class PageReplacer
         }
         { // replaces
           // debc($this->matches,0);
-            foreach ($this->matches as $search => $replace) {
-                $content = str_replace($search, $replace, $content);
+            foreach ($this->matches as $search => $replaces) {
+                foreach ($replaces as $replace){
+                    $content = Strings::str_replace_first($search, $replace, $content);
+                }
             }
         }
         return $content;
@@ -111,15 +113,18 @@ class PageReplacer
      * @param string $replace
      */
     private function addMatch(string $search, string $replace)
-    {
-        if (! isset($this->matches[$search])) {
+    {   
+        $this->matches[$search][] = $replace;
+        
+        /*if (! isset($this->matches[$search])) {
             $this->matches[$search] = $replace;
         } else {
             if ($this->matches[$search] != $replace) {
-                $errorMsg = "Foi encontrado um termo para substuituição ('$search') com correspondentes diferenciados ('" . $this->matches[$search] . "' != '$replace').";
+                //debc($this->matches,0);
+                $errorMsg = "Foi encontrado um termo para substituição ($search) com correspondentes diferenciados.<br/>$search = " . $this->matches[$search] . "<br/>$search = $replace";
                 throw new Exception($errorMsg);
             }
-        }
+        }/**/
     }
 
     // ####################################################################################################
@@ -187,6 +192,7 @@ class PageReplacer
                     $center = '[';
                     $center .= '\w'; // Any word character (letter, number, underscore)
                     $center .= "'";
+                    $center .= "\$";
                     $center .= '\[';
                     $center .= '\]';
                     $center .= ']+'; // 1 vez ou mais
