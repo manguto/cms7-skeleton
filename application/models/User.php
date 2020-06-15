@@ -31,14 +31,14 @@ class User extends Model implements ModelDatabase
             'login' => 'adm',
             'password' => 'mad', // 7538ebc37ad0917853e044b9b42bd8a4
             'email' => 'adm@sis.com',
-            'phone' => '(YY) Y.YYYY-YYYY'
+            'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Usuário',
             'login' => 'user',
             'password' => 'user',
             'email' => 'user@sis.com',
-            'phone' => '(ZZ) Z.ZZZZ-ZZZZ'
+            'phone' => '(XX) X.XXXX-XXXX'
         ]
     ];
 
@@ -48,7 +48,7 @@ class User extends Model implements ModelDatabase
 
     /**
      * !IMPORTANT
-     * Função para defniicao do atributos do modelo!
+     * Função para definicao do atributos do modelo!
      */
     private function defineAttributes()
     {
@@ -74,7 +74,6 @@ class User extends Model implements ModelDatabase
 
     /**
      * definicao do password (c/ cifragem)
-     *
      * @param string $value
      */
     public function setPassword(string $value)
@@ -132,36 +131,20 @@ class User extends Model implements ModelDatabase
     {
         return User_profile::getUserProfiles($this->getId());
     }
-
-    // ############################################################################################################################################
-    /**
-     * retorna os perfis do usuario em uma string
-     *
-     * @return string
-     */
-    public function getProfilesStr(): string
-    {
-        $profiles = $this->getProfiles();
-        $return = [];
-        foreach ($profiles as $profile) {
-            $return[] = $profile->getName();
-        }
-        $return = implode(', ', $return);
-        return $return;
-    }
+  
 
     // ############################################################################################################################################
     /**
      * verifica se o usuario possui o perfil correspondente aa chave informada
      *
-     * @param string $profileKey
+     * @param string $profileNickname
      * @return bool
      */
-    public function checkProfile(string $profileKey): bool
+    public function checkProfile(string $profileNickname): bool
     {
         $profiles = $this->getProfiles();
         foreach ($profiles as $profile) {
-            if ($profile->checkKey($profileKey, false)) {
+            if ($profile->checkNickname($profileNickname, false)) {
                 return true;
             }
         }
@@ -202,8 +185,7 @@ class User extends Model implements ModelDatabase
                 }
             }
             // deb($user);
-            $user->save();
-            Access::setSessionUser($user);
+            $user->save();            
             ProcessResult::setSuccess('Alteração de dados realizada com sucesso!');
             $return = true;
         } catch (Exception $e) {
@@ -393,7 +375,7 @@ class User extends Model implements ModelDatabase
             <li>Login: <b>{$this->getLogin()}</b></li>
             <li>E-mail: <b>{$this->getEmail()}</b></li>
             <li>Telefone(s): <b>{$this->getPhone()}</b></li>
-            <li>" . (sizeof($this->getProfiles()) == 1 ? 'Perfil' : 'Perfís') . ": <b>{$this->getProfilesStr()}</b></li>
+            <li>" . (sizeof($this->getProfiles()) == 1 ? 'Perfil' : 'Perfís') . ": <b>".implode(', ',$this->getProfilesStr())."</b></li>
         </ul>";
         return $return;
     }

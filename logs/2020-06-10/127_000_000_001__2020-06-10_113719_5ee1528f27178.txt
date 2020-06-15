@@ -1,0 +1,13 @@
+[23:37:19:167800 10-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[23:37:19:168700 10-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[23:37:19:169300 10-06-2020][INFO] Configuracao inicializada 
+[23:37:19:169600 10-06-2020][INFO] Constantes fundamentais registradas 
+[23:37:19:170500 10-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[23:37:19:171600 10-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[23:37:19:172300 10-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[23:37:19:173400 10-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/login' | platform='' | url='/login' | parameters[0]='' | parameters[1]='login' 
+[23:37:19:173900 10-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[23:37:19:174300 10-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[23:37:19:174700 10-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/login' <<< 
+[23:37:19:189400 10-06-2020][INFO] Controladoras encontradas: 26 
+[23:37:19:197900 10-06-2020][SUCCESS] Rota encontrada com sucesso! 

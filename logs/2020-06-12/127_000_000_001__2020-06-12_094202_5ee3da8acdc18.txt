@@ -1,0 +1,39 @@
+[21:42:02:854100 12-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[21:42:02:855300 12-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[21:42:02:856300 12-06-2020][INFO] Configuracao inicializada 
+[21:42:02:857000 12-06-2020][INFO] Constantes fundamentais registradas 
+[21:42:02:858500 12-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[21:42:02:859800 12-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[21:42:02:868400 12-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[21:42:02:869400 12-06-2020][PROC] URL Domain Fix (fix-A) '/new/matematica/jogos' 
+[21:42:02:870900 12-06-2020][PROC] URL Domain Fix (fix-B) '/new/matematica/jogos' 
+[21:42:02:871500 12-06-2020][PROC] URL Domain Fix (fix-C) '/matematica/jogos' 
+[21:42:02:873000 12-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/matematica/jogos' | platform='' | url='/matematica/jogos' | parameters[0]='' | parameters[1]='matematica' | parameters[2]='jogos' 
+[21:42:02:873500 12-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[21:42:02:873900 12-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[21:42:02:874300 12-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/matematica/jogos' <<< 
+[21:42:02:910900 12-06-2020][INFO] Controladoras encontradas: 27 
+[21:42:02:911500 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerHome 
+[21:42:02:923700 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerUsers 
+[21:42:02:927300 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerZzz 
+[21:42:02:929800 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerDocs 
+[21:42:02:935800 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerHome 
+[21:42:02:941000 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerManutencao 
+[21:42:02:947000 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerModels 
+[21:42:02:952200 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerModules 
+[21:42:02:956300 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerRepository 
+[21:42:02:962000 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerTools 
+[21:42:02:967600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerToolsModules 
+[21:42:02:969000 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerToolsRepository 
+[21:42:02:976600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerUsers 
+[21:42:02:980500 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerZzz 
+[21:42:02:987900 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerBadge 
+[21:42:02:991700 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerErrors 
+[21:42:02:996500 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerForgot 
+[21:42:02:998700 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerHome 
+[21:42:03:005300 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerLogin 
+[21:42:03:008800 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerZzz 
+[21:42:03:012400 12-06-2020][INFO] Verificando a controladora: modules\clean\ControllerClean 
+[21:42:03:014500 12-06-2020][INFO] Verificando a controladora: modules\compesa\ControllerCompesa 
+[21:42:03:026000 12-06-2020][INFO] Verificando a controladora: modules\matematica\ControllerMatematica 
+[21:42:03:036900 12-06-2020][SUCCESS] Rota encontrada com sucesso! [/matematica/jogos] 

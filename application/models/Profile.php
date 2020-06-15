@@ -17,17 +17,17 @@ class Profile extends Model implements ModelDatabase
     const default = [
         [
             'name' => 'Desenvolvedor',
-            'key' => 'dev',
+            'nickname' => 'dev',
             'obs' => ''
         ],
         [
             'name' => 'Administrador',
-            'key' => 'admin',
+            'nickname' => 'admin',
             'obs' => ''
         ],
         [
             'name' => 'Usuário',
-            'key' => 'user',
+            'nickname' => 'user',
             'obs' => ''
         ]
     ];
@@ -41,7 +41,7 @@ class Profile extends Model implements ModelDatabase
         $a = new ModelAttribute('name');
         $this->SetAttribute($a);
         // ---------------------------------------------------
-        $a = new ModelAttribute('key');
+        $a = new ModelAttribute('nickname');
         $this->SetAttribute($a);
         // ---------------------------------------------------
         $a = new ModelAttribute('obs');
@@ -50,48 +50,54 @@ class Profile extends Model implements ModelDatabase
     }
 
     /**
-     * verifica se a 'key' informada existe dentre as especificadas no sistema
+     * verifica se a 'nickname' informada existe dentre as especificadas no sistema
      *
-     * @param string $key
+     * @param string $nickname
      * @param bool $throwException
      * @throws Exception
      * @return bool
      */
-    static function checkKeyExist(string $key, bool $throwException = false): bool
+    static function checkNicknameExist(string $nickname, bool $throwException = false): bool
     {
         foreach (Profile::default as $info) {
-            $key_temp = $info['key'];
-            if ($key == trim($key_temp)) {
+            $nickname_temp = $info['nickname'];
+            if ($nickname == trim($nickname_temp)) {
                 return true;
             }
         }
         if ($throwException) {
-            throw new Exception("Não foi encontrado nenhum perfil com a 'chave' informada ($key).");
+            throw new Exception("Não foi encontrado nenhum perfil com o 'apelido' informado ($nickname).");
         } else {
             return false;
         }
     }
 
     /**
-     * verifica se a 'key' deste perfil eh igual a informada
+     * verifica se a 'nickname' deste perfil eh igual a informada
      *
-     * @param string $key
+     * @param string $nickname
      * @param bool $throwException
      * @throws Exception
      * @return boolean
      */
-    public function checkKey(string $key, bool $throwException = false): bool
+    public function checkNickname(string $nickname, bool $throwException = false): bool
     {
-        if (Profile::checkKeyExist($key, $throwException) && $this->getKey() == trim($key)) {
+        if (Profile::checkNicknameExist($nickname, $throwException) && $this->getNickname() == trim($nickname)) {
             $return = true;
         } else {
             if ($throwException) {
-                throw new Exception("A chave de Perfil informada ('$key') não foi encontrada no sistema.");
+                throw new Exception("A chave de Perfil informada ('$nickname') não foi encontrada no sistema.");
             } else {
                 $return = false;
             }
         }
         return $return;
+    }
+    
+    
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
 

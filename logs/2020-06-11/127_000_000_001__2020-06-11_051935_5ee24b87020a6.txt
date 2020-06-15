@@ -1,0 +1,28 @@
+[17:19:35:018100 11-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[17:19:35:019000 11-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[17:19:35:019700 11-06-2020][INFO] Configuracao inicializada 
+[17:19:35:020100 11-06-2020][INFO] Constantes fundamentais registradas 
+[17:19:35:021200 11-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[17:19:35:022200 11-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[17:19:35:023100 11-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[17:19:35:024500 11-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/zzz' | platform='' | url='/zzz' | parameters[0]='' | parameters[1]='zzz' 
+[17:19:35:025000 11-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[17:19:35:025500 11-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[17:19:35:025900 11-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/zzz' <<< 
+[17:19:35:045600 11-06-2020][INFO] Controladoras encontradas: 26 
+[17:19:35:059200 11-06-2020][SUCCESS] Rota encontrada com sucesso! 
+[17:19:35:071800 11-06-2020][PROC] Busca do nome completo da classe 'User_profile' - manguto\cms7\model\ModelHelper::getObjectClassName_by_ClassName 
+[17:19:35:072400 11-06-2020][PROC] Diretorios como modelos: E:\xampp\htdocs\manguto.com\new\application\models\)  
+[17:19:35:073600 11-06-2020][PROC] Arquivo da classe 'EmManutencao' 
+[17:19:35:074000 11-06-2020][PROC] Teste: 'EmManutencao' == 'User_profile'  
+[17:19:35:074500 11-06-2020][PROC] Arquivo da classe 'Profile' 
+[17:19:35:075000 11-06-2020][PROC] Teste: 'Profile' == 'User_profile'  
+[17:19:35:075400 11-06-2020][PROC] Arquivo da classe 'User' 
+[17:19:35:075900 11-06-2020][PROC] Teste: 'User' == 'User_profile'  
+[17:19:35:076300 11-06-2020][PROC] Arquivo da classe 'User_module' 
+[17:19:35:076700 11-06-2020][PROC] Teste: 'User_module' == 'User_profile'  
+[17:19:35:077100 11-06-2020][PROC] Arquivo da classe 'User_password_recover' 
+[17:19:35:077500 11-06-2020][PROC] Teste: 'User_password_recover' == 'User_profile'  
+[17:19:35:077800 11-06-2020][PROC] Arquivo da classe 'User_profile' 
+[17:19:35:078100 11-06-2020][PROC] Teste: 'User_profile' == 'User_profile'  
+[17:19:35:078500 11-06-2020][PROC] Classe alvo encontrada! Caminho para uso da mesma: '\E:\xampp\htdocs\manguto.com\new\application\models\User_profile' 

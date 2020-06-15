@@ -3,7 +3,6 @@ namespace application\core;
 
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Exception;
-use manguto\cms7\libraries\RegexPatternTool;
 
 class PageReplacer
 {
@@ -193,6 +192,10 @@ class PageReplacer
                     $center .= '\w'; // Any word character (letter, number, underscore)
                     $center .= "'";
                     $center .= "\$";
+                    $center .= '-';
+                    $center .= '>';
+                    $center .= '\(';
+                    $center .= '\)';
                     $center .= '\[';
                     $center .= '\]';
                     $center .= ']+'; // 1 vez ou mais

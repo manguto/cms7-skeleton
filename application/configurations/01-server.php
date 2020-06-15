@@ -1,33 +1,100 @@
 <?php
-define("APP_VIRTUAL_HOST", false);
-
-define("DS", DIRECTORY_SEPARATOR);
-
+use manguto\cms7\libraries\ServerHelp;
+// ####################################################################################################
 {
-    $actualDirectory = __DIR__;
-    $level = 2;
-    $ROOT = dirname($actualDirectory, $level) . DIRECTORY_SEPARATOR;    
+    define("APP_VIRTUAL_HOST", false);
 }
-define("APP_ROOT", $ROOT);
-
-define("APP_FOLDERNAME", basename(APP_ROOT));
-
+// ####################################################################################################
 {
-    if (APP_VIRTUAL_HOST) {
-        $URL_ROOT = "";
-    } else {
-        $URL_ROOT = '/'.APP_FOLDERNAME . '/';
+    define("DS", DIRECTORY_SEPARATOR);
+}
+// ####################################################################################################
+{
+    define('APP_CWD',getcwd().DS);
+    //deb(APP_CWD);
+}
+// ####################################################################################################
+{
+    {
+        $cte = $_SERVER['DOCUMENT_ROOT'];
+        $cte = str_replace('/', DS, $cte);
+        $cte = str_replace('\\', DS, $cte);
+    }        
+    define("APP_SERVER_ROOT_DIR", $cte);
+    //deb(APP_SERVER_ROOT_DIR);
+}
+// ####################################################################################################
+{  
+    {
+        $cte = dirname(__DIR__, 2) . DS;
     }
+    define("APP_DIR_COMPLETE", $cte);
+    //deb(APP_DIR);
 }
-define("URL_ROOT", $URL_ROOT);
+// ####################################################################################################
+{  
+    {
+        $cte = str_replace(APP_SERVER_ROOT_DIR, '', APP_DIR_COMPLETE);
+    }
+    /*
+     * caminho relativo ao dominio
+     */
+    define("APP_DIR_RELATIVE", $cte);
+    //deb(APP_DIR_RELATIVE);
+}
+// ####################################################################################################
+{   
+    $APP_DIRECTORY = ''; 
+    //deb($APP_DIRECTORY);
+    /**
+     * raiz relativa da aplicacao a partir da raiz do servidor web
+     *
+     * @var string
+     */
+    define("APP_DIRECTORY", $APP_DIRECTORY);
+    //deb(APP_DIRECTORY);
+}
+// ####################################################################################################
+{
+    
+    {
+        $cte = APP_DIR_RELATIVE;
+        $cte = str_replace('/', ' ', $cte);
+        $cte = str_replace('\\', ' ', $cte);
+        $cte = trim($cte);
+    }
+    /**
+     * nome base do aplicativo relativo ao caminho (diretorios) do mesmo 
+     *
+     * @var string
+     */
+    define("APP_BASENAME", $cte);
+    //deb(APP_BASENAME);
+}
+// ####################################################################################################
+{
 
-define("APP_DATE",date('Ymd'));
-
-define("APP_TIME",date('His'));
-
-define("APP_UNIQID",uniqid());
-
-define("APP_ITERATION",APP_DATE.'_'.APP_TIME.'_'.APP_UNIQID);
-
+    if (APP_VIRTUAL_HOST==true) {
+        $cte = "";
+    } else {
+        $cte = ServerHelp::fixds(APP_DIR_RELATIVE, '/');
+    }
+    /**
+     * caminho base para insercao na url a partir do dominio
+     *
+     * @var string
+     */
+    define("APP_URL_ROOT", $cte);
+    //deb(APP_URL_ROOT);
+}
+// ####################################################################################################
+{
+    define("APP_TIMESTAMP", time());
+}
+// ####################################################################################################
+{
+    define("APP_UNIQID", uniqid());
+}
+// ####################################################################################################
 
 ?>

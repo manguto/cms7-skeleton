@@ -1,0 +1,58 @@
+<?php
+namespace application\controllers\devend;
+
+use application\core\Access;
+use application\core\Controller;
+use application\core\Route;
+use manguto\cms7\libraries\ProcessResult;
+use application\models\EmManutencao;
+use application\views\frontend\ViewZzz;
+use application\core\View;
+
+class ControllerManutencao extends Controller
+{
+
+    static function RouteMatchCheck(Route $route)
+    {
+        $route->get('/dev/manutencao', function () {
+            Access::CheckUserProfiles([
+                "developer"
+            ]);
+            {
+                $emManutencao = EmManutencao::EmFuncionamento();
+            }
+            View::PageDevend('manutencao', get_defined_vars());
+        });
+
+        $route->post('/dev/manutencao', function () {
+            Access::CheckUserProfiles([
+                "developer"
+            ]);
+            {
+                if (isset($_POST['motivo'])) {
+                    // ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO!
+                    // ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO!
+                    // ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO! - ATIVACAO!
+                    $emManutencao = new EmManutencao();
+                    $emManutencao->setMotivo($_POST['motivo']);
+                    $emManutencao->save();
+                    ProcessResult::setSuccess("Manutenção ativada com sucesso!");
+                    Controller::HeaderLocation('/dev/manutencao');
+                } else {
+                    // DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO!
+                    // DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO!
+                    // DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO!
+                    $emManutencao = new EmManutencao($_POST['id']);
+                    $emManutencao->setStatus('inativa');
+                    $emManutencao->save();
+                    ProcessResult::setSuccess("Manutenção desativada com sucesso!");
+                    Controller::HeaderLocation('/dev/manutencao');
+                }
+                $emManutencao = EmManutencao::EmFuncionamento();
+            }
+            ViewZzz::PageDevend('manutencao', get_defined_vars());
+        });
+    }
+}
+
+?>

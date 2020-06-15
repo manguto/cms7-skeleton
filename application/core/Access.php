@@ -2,16 +2,18 @@
 namespace application\core;
 
 use manguto\cms7\libraries\Sessions;
-use application\models\User; 
+use application\models\User;
+use manguto\cms7\libraries\Exception;
+use manguto\cms7\libraries\Logger;
 
 class Access
-{    
-    
-    public function __construct() {
-        
+{
 
+    public function __construct()
+    {
+        Logger::info('Controle de acesso inicializado - '.__METHOD__);
     }
-    
+
     // ############################################################################################################################################
     // ############################################################################################################################ LOGIN / LOGOUT
     // ############################################################################################################################################
@@ -26,16 +28,53 @@ class Access
     {
         $user = User::checkUserCredentials($login, $password);
         if ($user !== false) {
-            self::setSessionUser($user);
+            self::setSessionUser_id($user->getId());
             return true;
+        }else{
+            self::resetSession();
+            return false;
+        }        
+    }
+
+    // ############################################################################################################################################
+    /**
+     * PORTEIRO - verifica se o usuario possui 
+     * o perfil informado para liberacao do acesso
+     * ou redireciona-o aa pagina de login. 
+     * @param string $profile [admin,dev,user]
+     * @return boolean
+     */
+    static function Concierge(string $profile){
+        if(self::checkUserProfiles([$profile]) == false){
+            Controller::HeaderLocation('/login');
+        }else{
+            return true;
+        }
+    }
+    // ############################################################################################################################################
+    static function checkUserProfiles(array $required_profile_nickname_array)
+    {
+        if (sizeof($required_profile_nickname_array) == 0) {
+            return true;
+        } else {
+            if (self::checkUserLogged()) {
+                foreach ($required_profile_nickname_array as $required_profile_nickname) {
+                    $user = self::getSessionUser();
+                    if($user->checkProfile($required_profile_nickname)===true){
+                        return true;
+                    }
+                }
+            } else {
+                return false;
+            }
         }
         return false;
     }
-    
+
     // ############################################################################################################################################
-    
+
     /**
-     * verifica se existe um usuario logado no sistema
+     * verifica se existe alguum usuario logado
      *
      * @return bool
      */
@@ -43,67 +82,80 @@ class Access
     {
         return Sessions::isset(User::SESSION);
     }
-    
+
     // ############################################################################################################################################
-    static function checkUserLoggedAdmin(): bool
+    
+    /**
+     * verifica se o usuario atual possui o perfil (apelido) informado
+     * @param string $profile_nickname
+     * @return bool
+     */
+    static function checkUserProfile(string $profile_nickname): bool
     {
-        if (self::checkUserLogged()) {
-            $user = self::getSessionUser();
-            $return = $user->checkProfile('admin',false);
-        } else {
-            $return = false;
-        }
-        return $return;
+        $user = self::getSessionUser();
+        return $user->checkProfile($profile_nickname, false);
     }
-    
+
     // ############################################################################################################################################
-    static function checkUserLoggedDev(): bool
+    
+    /**
+     * define o usuario atualmente logado 
+     * @param User $user
+     */
+    static function setSessionUser_id($user_id)
     {
-        if (self::checkUserLogged()) {
-            $user = self::getSessionUser();
-            $return = $user->checkProfile('dev',false);
-        } else {
-            $return = false;
-        }
-        return $return;
+        Sessions::set(User::SESSION, $user_id);
     }
-    
+
     // ############################################################################################################################################
-    static function setSessionUser(User $user)
+    
+    /**
+     * obtem o usuario logado ou levanta um excecao
+     * @return User
+     * @throws Exception
+     */
+    static function getSessionUser():User
     {
-        Sessions::set(User::SESSION, $user);        
+        $user_id = Sessions::get(User::SESSION,false);
+        if($user_id!==false){
+            $user = new User($user_id);
+        }else{
+            $user = false;
+        }        
+        return $user;
     }
-    
+
     // ############################################################################################################################################
-    static function getSessionUser()
-    {
-        return Sessions::get(User::SESSION, false);
-    }
     
-    // ############################################################################################################################################
-    static function getSessionUserAttribute($attribute)
+    /**
+     * obtem um parametro do usuario atual
+     * @param string $attributeName
+     * @return mixed|string
+     */
+    static function getSessionUserAttribute(string $attributeName)
     {
         $user = self::getSessionUser();
         if ($user !== false) {
-            $getMethod = 'get' . ucfirst($attribute);
-            $attribute = $user->$getMethod();
+            $getMethod = 'get' . ucfirst($attributeName);
+            return $user->$getMethod();
         } else {
-            $attribute = '';
-        }
-        return $attribute;
+            return 'Nenhum usuário logado';
+        }        
     }
-    
-    // ############################################################################################################################################
-    static function clearSessionUser()
-    {
-        Sessions::unset(User::SESSION);
-    }
-   
-    // ############################################################################################################################################
-    // ############################################################################################################################################
-    // ############################################################################################################################################
-    // ############################################################################################################################################
-    // ############################################################################################################################################
-    // ############################################################################################################################################
 
+    // ############################################################################################################################################
+    /*
+     * remove registro de usuario logado no sistema
+     */
+    static function resetSession()
+    {
+        Sessions::Reset();        
+    }
+
+    // ############################################################################################################################################
+    // ############################################################################################################################################
+    // ############################################################################################################################################
+    // ############################################################################################################################################
+    // ############################################################################################################################################
+    // ############################################################################################################################################
 }

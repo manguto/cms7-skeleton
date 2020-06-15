@@ -1,0 +1,13 @@
+[23:08:36:669600 10-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[23:08:36:671000 10-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[23:08:36:672100 10-06-2020][INFO] Configuracao inicializada 
+[23:08:36:672700 10-06-2020][INFO] Constantes fundamentais registradas 
+[23:08:36:675100 10-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[23:08:36:676600 10-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[23:08:36:677600 10-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[23:08:36:679000 10-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/' | platform='' | url='/' | parameters[0]='' 
+[23:08:36:679500 10-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[23:08:36:679800 10-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[23:08:36:680100 10-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/' <<< 
+[23:08:36:711300 10-06-2020][INFO] Controladoras encontradas: 26 
+[23:08:36:728100 10-06-2020][SUCCESS] Rota encontrada com sucesso! 

@@ -5,6 +5,7 @@ use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Numbers;
+use manguto\cms7\libraries\Sessions;
 
 class Configuration
 {
@@ -43,9 +44,11 @@ class Configuration
      */
     private function automaticConstants()
     {
+        // ####################################################################################################
         { // plataforma atual
             $url = ServerHelp::getURL();
-            $url = Route::clearURL($url);
+            $url = Route::fixURL($url);
+            // deb($url);
             if (Strings::checkIni('admin/', $url)) {
                 $platform = 'backend';
             } else if (Strings::checkIni('dev/', $url)) {
@@ -56,9 +59,11 @@ class Configuration
             // deb($platform);
             define('APP_PLATFORM', $platform);
         }
+        // ####################################################################################################
         { // ip do usuario
             define('APP_USER_IP', ServerHelp::getIp());
         }
+        // ####################################################################################################
         { // ip do usuario mascarado
             {
                 $APP_USER_IP_MASKED = explode('.', APP_USER_IP);
@@ -66,9 +71,32 @@ class Configuration
                     return Numbers::str_pad_left(strval($value), 3);
                 }, $APP_USER_IP_MASKED);
                 $APP_USER_IP_MASKED = implode('_', $APP_USER_IP_MASKED);
-                //deb($APP_USER_IP_MASKED);
+                // deb($APP_USER_IP_MASKED);
             }
             define('APP_USER_IP_MASKED', $APP_USER_IP_MASKED);
+        }
+        // ####################################################################################################
+        {// iteracao
+            {
+                $APP_ITERATION = Sessions::get('APP_ITERATION',false,true);
+                if($APP_ITERATION === false){
+                    $APP_ITERATION = date('Y-m-d_his',APP_TIMESTAMP).'_'.APP_UNIQID;
+                }
+            }
+            define("APP_ITERATION", $APP_ITERATION);            
+        }
+        // ####################################################################################################
+        // ####################################################################################################
+        // ####################################################################################################        
+        { // DEBUG CONSTANTS!                        
+            /*foreach (get_defined_constants() as $cteName => $cteValue) {
+                if (strpos($cteName, 'APP_') !== false) {
+                    echo "<b>$cteName</b>";
+                    deb($cteValue, 0);
+                    echo "<hr/>";
+                }
+            }
+            die('');/**/
         }
     }
 }

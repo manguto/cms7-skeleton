@@ -1,0 +1,49 @@
+[22:49:12:159200 10-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[22:49:12:163300 10-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[22:49:12:165700 10-06-2020][INFO] Configuracao inicializada 
+[22:49:12:166700 10-06-2020][INFO]  - Constantes fundamentais registradas 
+[22:49:12:168400 10-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[22:49:12:169800 10-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[22:49:12:171100 10-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[22:49:12:173100 10-06-2020][INFO]  - Parametros da Rota => method='GET' | raw_url='/new/' | platform='' | url='/' | parameters[0]='' 
+[22:49:12:173700 10-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[22:49:12:174100 10-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[22:49:12:174400 10-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/' <<< 
+[22:49:12:190000 10-06-2020][INFO] Controladoras encontradas: 26 
+[22:49:12:190900 10-06-2020][INFO] Verificação da rota '/admin' 
+[22:49:12:192700 10-06-2020][INFO] Verificação da rota '/admin/users' 
+[22:49:12:193400 10-06-2020][INFO] Verificação da rota '/admin/users/create' 
+[22:49:12:194200 10-06-2020][INFO] Verificação da rota '/admin/users/:id' 
+[22:49:12:195100 10-06-2020][INFO] Verificação da rota '/admin/users/:id/delete' 
+[22:49:12:195700 10-06-2020][INFO] Verificação da rota '/admin/users/:id/edit' 
+[22:49:12:196500 10-06-2020][INFO] Verificação da rota '/admin/zzz' 
+[22:49:12:197500 10-06-2020][INFO] Verificação da rota '/dev/docs' 
+[22:49:12:198100 10-06-2020][INFO] Verificação da rota '/dev/docs/:page' 
+[22:49:12:198900 10-06-2020][INFO] Verificação da rota '/dev' 
+[22:49:12:199900 10-06-2020][INFO] Verificação da rota '/dev/manutencao' 
+[22:49:12:200800 10-06-2020][INFO] Verificação da rota '/dev/models' 
+[22:49:12:201300 10-06-2020][INFO] Verificação da rota '/dev/models/initialize' 
+[22:49:12:202100 10-06-2020][INFO] Verificação da rota '/dev/modules' 
+[22:49:12:202500 10-06-2020][INFO] Verificação da rota '/dev/modules/:action/:key' 
+[22:49:12:203600 10-06-2020][INFO] Verificação da rota '/dev/repository' 
+[22:49:12:204200 10-06-2020][INFO] Verificação da rota '/dev/repository/:repository' 
+[22:49:12:204600 10-06-2020][INFO] Verificação da rota '/dev/repository/:repository/:id/view' 
+[22:49:12:205000 10-06-2020][INFO] Verificação da rota '/dev/repository/:repository/:id/delete' 
+[22:49:12:205300 10-06-2020][INFO] Verificação da rota '/dev/repository/:repository/:id/edit' 
+[22:49:12:205600 10-06-2020][INFO] Verificação da rota '/dev/repository/sheet/:repository' 
+[22:49:12:206600 10-06-2020][INFO] Verificação da rota '/dev/tools' 
+[22:49:12:207600 10-06-2020][INFO] Verificação da rota '/dev/tools/modules' 
+[22:49:12:210100 10-06-2020][INFO] Verificação da rota '/dev/tools/repository' 
+[22:49:12:211800 10-06-2020][INFO] Verificação da rota '/dev/users' 
+[22:49:12:212300 10-06-2020][INFO] Verificação da rota '/dev/users/create' 
+[22:49:12:212600 10-06-2020][INFO] Verificação da rota '/dev/users/:id' 
+[22:49:12:213000 10-06-2020][INFO] Verificação da rota '/dev/users/:id/delete' 
+[22:49:12:213400 10-06-2020][INFO] Verificação da rota '/dev/users/:id/edit' 
+[22:49:12:214100 10-06-2020][INFO] Verificação da rota '/dev/zzz' 
+[22:49:12:215000 10-06-2020][INFO] Verificação da rota '/badge' 
+[22:49:12:215500 10-06-2020][INFO] Verificação da rota '/badge/edit' 
+[22:49:12:216200 10-06-2020][INFO] Verificação da rota '/404' 
+[22:49:12:217300 10-06-2020][INFO] Verificação da rota '/forgot' 
+[22:49:12:217700 10-06-2020][INFO] Verificação da rota '/forgot/reset/:code' 
+[22:49:12:218500 10-06-2020][INFO] Verificação da rota '/' 
+[22:49:12:218900 10-06-2020][INFO] Rota encontrada com sucesso! 

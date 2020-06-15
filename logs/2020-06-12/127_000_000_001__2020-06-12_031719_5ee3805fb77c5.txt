@@ -1,0 +1,16 @@
+[15:17:19:758700 12-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[15:17:19:759800 12-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[15:17:19:760700 12-06-2020][INFO] Configuracao inicializada 
+[15:17:19:761900 12-06-2020][INFO] Constantes fundamentais registradas 
+[15:17:19:763200 12-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[15:17:19:764200 12-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[15:17:19:765100 12-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[15:17:19:765600 12-06-2020][PROC] URL Domain Fix (fix-A) '/new/matematica/jogos' 
+[15:17:19:765900 12-06-2020][PROC] URL Domain Fix (fix-B) '/new/matematica/jogos' 
+[15:17:19:766100 12-06-2020][PROC] URL Domain Fix (fix-C) '/matematica/jogos' 
+[15:17:19:767200 12-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/matematica/jogos' | platform='' | url='/matematica/jogos' | parameters[0]='' | parameters[1]='matematica' | parameters[2]='jogos' 
+[15:17:19:767600 12-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[15:17:19:768000 12-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[15:17:19:768200 12-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/matematica/jogos' <<< 
+[15:17:19:783700 12-06-2020][INFO] Controladoras encontradas: 27 
+[15:17:19:794100 12-06-2020][SUCCESS] Rota encontrada com sucesso! [/matematica/jogos] 

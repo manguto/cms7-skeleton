@@ -4,8 +4,10 @@ namespace application\core;
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Files;
-use manguto\cms7\libraries\Exception;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\ProcessResult; 
+use manguto\cms7\libraries\Strings;
+use manguto\cms7\libraries\Sessions;
+use manguto\cms7\libraries\Logger;
 
 class Controller
 {
@@ -17,6 +19,7 @@ class Controller
     // ####################################################################################################
     public function __construct()
     {
+        Logger::info('Controladora mae inicializada - '.__METHOD__);        
         $this->access = new Access();
         $this->route = new Route();
     }
@@ -27,22 +30,26 @@ class Controller
      */
     public function Run()
     {
-        $controllers = self::GetControllers();
+        Logger::info('Execucao da controladora mae - '.__METHOD__);        
+        {
+            $rawURL = Strings::removeRepeatedOccurrences('/', $this->route->getRawURL());
+            Logger::info("URL (ROTA) SOLICITADA >>> '".$this->route->getURL()."' <<<");
+        }        
+        {
+            $controllers = self::GetControllers();
+            Logger::info('Controladoras encontradas: '.sizeof($controllers));
+        }        
+        
         foreach ($controllers as $controller) {
+            Logger::info('Verificando a controladora: '.str_replace(APP_APPLICATION_DIR, '', $controller));
             $controller::RouteMatchCheck($this->route);
         }
-        // die($this->route->clearURL($this->route->getRawURL()));
-        // die($this->route->getRawURL());
-        // die(getcwd());
-
-        $throwException = true;
-        $msg = "Não foi possível encontrar uma rota para o endereço solicitado ('{$this->route->getRawURL()}').";
-        if ($throwException) {
-            ProcessResult::setError($msg);
-            Controller::HeaderLocation('/');
-        } else {
-            throw new Exception($msg);
-        }
+        
+        $msgError = "Não foi possível encontrar uma rota para o endereço solicitado ($rawURL).";
+        ProcessResult::setWarning($msgError);
+        Logger::error($msgError);
+        Logger::info('Redirecionamento para página de erro (404) solicitado...');
+        Controller::HeaderLocation('/404');
     }
 
     // ####################################################################################################
@@ -56,7 +63,8 @@ class Controller
     {
         $return = [];
         {
-            $filenames = Diretorios::obterArquivosPastas(APP_CONTROL_DIR, true, true, false, [
+            //deb(APP_CONTROLLERS_DIR);
+            $filenames = Diretorios::obterArquivosPastas(APP_CONTROLLERS_DIR, true, true, false, [
                 'php'
             ]);
             // deb($filenames,0);
@@ -93,23 +101,13 @@ class Controller
     static function GetCallableClassName(string $filename): string
     {
         $return = $filename;
-        $return = str_replace(APP_ROOT, '', $return);
+        $return = str_replace(APP_DIRECTORY, '', $return);
         $return = str_replace('.php', '', $return);
+        $return = ServerHelp::fixds($return,'\\');
         return $return;
     }
 
-    // ####################################################################################################
-    static function PrivativeZone()
-    {}
-
-    // ####################################################################################################
-    static function PrivativeAdminZone()
-    {}
-
-    // ####################################################################################################
-    static function PrivativeDevZone()
-    {}
-
+  
     // ####################################################################################################
 
     /**
@@ -118,8 +116,12 @@ class Controller
      * @param bool $die
      */
     static function HeaderLocation(string $route = '/', bool $die = true)
-    {
-        $location = ServerHelp::fixURLseparator('../' . URL_ROOT . $route);
+    {          
+        {//save iteration! - salva a iteracao para continuacao
+            Sessions::set('APP_ITERATION',APP_ITERATION);
+        }
+        $location = ServerHelp::fixURLseparator('../' . APP_URL_ROOT . $route);
+        Logger::info("Redirecionamento via GET solicitado para '$location'");
         header("location:/" . $location);
         if ($die) {
             die();
@@ -134,8 +136,12 @@ class Controller
      */
     static function headerLocationPost(string $URLAbsolute, array $variables = [],bool $die=true)
     {
-        $url = URL_ROOT . $URLAbsolute;
-
+        {//save iteration! - salva a iteracao para continuacao
+            Sessions::set('APP_ITERATION',APP_ITERATION);
+        }
+        
+        $url = APP_URL_ROOT . $URLAbsolute;
+        
         $inputs = '';
         foreach ($variables as $key => $value) {
 
@@ -173,11 +179,12 @@ class Controller
                 </script>";
         
         echo $html;
-        
+        Logger::info("Redirecionamento via POST solicitado para '$url'");
         if($die){
             exit();
         }
     }
+       
     // ####################################################################################################
     // ####################################################################################################
     // ####################################################################################################

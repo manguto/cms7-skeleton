@@ -1,0 +1,33 @@
+[14:03:12:268000 12-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[14:03:12:268900 12-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[14:03:12:269500 12-06-2020][INFO] Configuracao inicializada 
+[14:03:12:270000 12-06-2020][INFO] Constantes fundamentais registradas 
+[14:03:12:271500 12-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[14:03:12:273400 12-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[14:03:12:274300 12-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[14:03:12:274800 12-06-2020][PROC] URL Domain Fix (fix-A) '/new/logout' 
+[14:03:12:275100 12-06-2020][PROC] URL Domain Fix (fix-B) '/new/logout' 
+[14:03:12:275300 12-06-2020][PROC] URL Domain Fix (fix-C) '/logout' 
+[14:03:12:276300 12-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/logout' | platform='' | url='/logout' | parameters[0]='' | parameters[1]='logout' 
+[14:03:12:276700 12-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[14:03:12:277100 12-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[14:03:12:277300 12-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/logout' <<< 
+[14:03:12:292600 12-06-2020][INFO] Controladoras encontradas: 26 
+[14:03:12:302400 12-06-2020][SUCCESS] Rota encontrada com sucesso! 
+[14:03:12:303600 12-06-2020][INFO] Redirecionamento via GET solicitado para '../new' 
+[14:03:12:331100 12-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[14:03:12:331700 12-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[14:03:12:332100 12-06-2020][INFO] Configuracao inicializada 
+[14:03:12:332600 12-06-2020][INFO] Constantes fundamentais registradas 
+[14:03:12:334200 12-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[14:03:12:335400 12-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[14:03:12:335800 12-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[14:03:12:336200 12-06-2020][PROC] URL Domain Fix (fix-A) '/new/' 
+[14:03:12:336500 12-06-2020][PROC] URL Domain Fix (fix-B) '/new/' 
+[14:03:12:336800 12-06-2020][PROC] URL Domain Fix (fix-C) '/' 
+[14:03:12:337800 12-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/' | platform='' | url='/' | parameters[0]='' 
+[14:03:12:338200 12-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[14:03:12:338600 12-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[14:03:12:339200 12-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/' <<< 
+[14:03:12:354000 12-06-2020][INFO] Controladoras encontradas: 26 
+[14:03:12:365500 12-06-2020][SUCCESS] Rota encontrada com sucesso! 

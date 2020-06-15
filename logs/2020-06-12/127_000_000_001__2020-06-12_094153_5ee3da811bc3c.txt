@@ -1,0 +1,34 @@
+[21:41:53:121400 12-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[21:41:53:122300 12-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[21:41:53:122800 12-06-2020][INFO] Configuracao inicializada 
+[21:41:53:123200 12-06-2020][INFO] Constantes fundamentais registradas 
+[21:41:53:124200 12-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[21:41:53:125400 12-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[21:41:53:126400 12-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[21:41:53:127000 12-06-2020][PROC] URL Domain Fix (fix-A) '/new/' 
+[21:41:53:127700 12-06-2020][PROC] URL Domain Fix (fix-B) '/new/' 
+[21:41:53:128000 12-06-2020][PROC] URL Domain Fix (fix-C) '/' 
+[21:41:53:129100 12-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/' | platform='' | url='/' | parameters[0]='' 
+[21:41:53:129600 12-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[21:41:53:129900 12-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[21:41:53:130200 12-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/' <<< 
+[21:41:53:144900 12-06-2020][INFO] Controladoras encontradas: 27 
+[21:41:53:145200 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerHome 
+[21:41:53:145900 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerUsers 
+[21:41:53:146900 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerZzz 
+[21:41:53:147800 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerDocs 
+[21:41:53:148700 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerHome 
+[21:41:53:149700 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerManutencao 
+[21:41:53:150700 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerModels 
+[21:41:53:151700 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerModules 
+[21:41:53:152600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerRepository 
+[21:41:53:153600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerTools 
+[21:41:53:154500 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerToolsModules 
+[21:41:53:155300 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerToolsRepository 
+[21:41:53:156500 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerUsers 
+[21:41:53:157700 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerZzz 
+[21:41:53:158600 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerBadge 
+[21:41:53:159500 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerErrors 
+[21:41:53:160300 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerForgot 
+[21:41:53:161500 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerHome 
+[21:41:53:162400 12-06-2020][SUCCESS] Rota encontrada com sucesso! [/] 

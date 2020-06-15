@@ -1,5 +1,27 @@
 <footer class="container-fluid text-center no-print {#APP_PLATFORM#}">
 	<div class="container">
-		<a href="mailto:{#APP_EMAIL#}" class="link">{#APP_EMAIL#}</a>
+		<div class="row">
+			<div class="col-12 content">
+				<a href="mailto:{#APP_EMAIL#}" class="link">{#APP_EMAIL#}</a>
+			</div>
+		</div>		
 	</div>
 </footer>
+<div class="container_large" style="margin-top: 20px; padding: 0 20px;">
+	<div class="row">
+		<div class="col-12" id="logger"></div>
+	</div>
+</div>
+<style>
+#logger * {
+	text-align: left;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.post('logs/index.php', function(data) {
+			$('#logger').html('<pre>' + data + '</pre>');
+			//$('#logger').html(data);
+		});
+	});
+</script>

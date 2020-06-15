@@ -8,7 +8,7 @@ define("APP_ABREV", "SIS");
 
 define("APP_TITLE", APP_ABREV . " | " . APP_SHORT_NAME);
 
-define("APP_URL_BASE", "http://sis.com");
+define("APP_DOMAIN", "http://sis.com");
 
 define("APP_EMAIL", "contato@sis.com");
 

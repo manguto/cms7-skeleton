@@ -46,7 +46,7 @@ class User_module extends Model implements ModelDatabase
             $return[] = $user_module->getModule();
         }
         { // adicionar o proprio sistema em questao
-            $return[] = APP_FOLDERNAME;
+            $return[] = APP_BASENAME;
         }
         return $return;
     }
@@ -59,9 +59,10 @@ class User_module extends Model implements ModelDatabase
     static function getUserModulesHomeMenu(): array
     {
         $return = [];
+        //if (Sessions::isset(User::SESSION . '_modules')) {
         if (Sessions::isset(User::SESSION . '_modules')) {
             foreach (Sessions::get(User::SESSION . '_modules') as $module) {
-                if ($module != APP_FOLDERNAME) {
+                if ($module != APP_BASENAME) {
                     $return[] = [
                         'href' => "http://{$_SERVER['HTTP_HOST']}/" . $module,
                         'html' => strtoupper($module)

@@ -1,0 +1,39 @@
+[23:37:19:909300 12-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+[23:37:19:910400 12-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
+[23:37:19:911100 12-06-2020][INFO] Configuracao inicializada 
+[23:37:19:911400 12-06-2020][INFO] Constantes fundamentais registradas 
+[23:37:19:912600 12-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
+[23:37:19:913700 12-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
+[23:37:19:915900 12-06-2020][INFO] Rota inicializado - application\core\Route::__construct 
+[23:37:19:916500 12-06-2020][PROC] URL Domain Fix (fix-A) '/new/matematica/jogo/operacoes' 
+[23:37:19:916900 12-06-2020][PROC] URL Domain Fix (fix-B) '/new/matematica/jogo/operacoes' 
+[23:37:19:917300 12-06-2020][PROC] URL Domain Fix (fix-C) '/matematica/jogo/operacoes' 
+[23:37:19:918800 12-06-2020][INFO] Parametros da Rota => method='GET' | raw_url='/new/matematica/jogo/operacoes' | platform='' | url='/matematica/jogo/operacoes' | parameters[0]='' | parameters[1]='matematica' | parameters[2]='jogo' | parameters[3]='operacoes' 
+[23:37:19:919500 12-06-2020][INFO] Execucao da aplicacao - application\core\Application::Run 
+[23:37:19:920000 12-06-2020][INFO] Execucao da controladora mae - application\core\Controller::Run 
+[23:37:19:920300 12-06-2020][INFO] URL (ROTA) SOLICITADA >>> '/matematica/jogo/operacoes' <<< 
+[23:37:19:950700 12-06-2020][INFO] Controladoras encontradas: 27 
+[23:37:19:951600 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerHome 
+[23:37:19:953200 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerUsers 
+[23:37:19:954500 12-06-2020][INFO] Verificando a controladora: controllers\backend\ControllerZzz 
+[23:37:19:955600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerDocs 
+[23:37:19:956900 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerHome 
+[23:37:19:958000 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerManutencao 
+[23:37:19:959100 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerModels 
+[23:37:19:960400 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerModules 
+[23:37:19:961400 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerRepository 
+[23:37:19:962600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerTools 
+[23:37:19:963600 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerToolsModules 
+[23:37:19:964700 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerToolsRepository 
+[23:37:19:967300 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerUsers 
+[23:37:19:969000 12-06-2020][INFO] Verificando a controladora: controllers\devend\ControllerZzz 
+[23:37:19:970700 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerBadge 
+[23:37:19:972000 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerErrors 
+[23:37:19:973100 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerForgot 
+[23:37:19:974300 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerHome 
+[23:37:19:975300 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerLogin 
+[23:37:19:976400 12-06-2020][INFO] Verificando a controladora: controllers\frontend\ControllerZzz 
+[23:37:19:977400 12-06-2020][INFO] Verificando a controladora: modules\clean\ControllerClean 
+[23:37:19:978800 12-06-2020][INFO] Verificando a controladora: modules\compesa\ControllerCompesa 
+[23:37:19:981100 12-06-2020][INFO] Verificando a controladora: modules\matematica\controllers\ControllerMatematica 
+[23:37:19:983500 12-06-2020][SUCCESS] Rota encontrada com sucesso! [/matematica/jogo/operacoes] 

@@ -7,23 +7,25 @@
 <title>{#APP_TITLE#}</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!------------------------------------------------------------------------------------- css -->
-<link rel="icon" href="{#URL_ROOT#}public/img/icons/favicon.png" type="image/png" sizes="16x16" />
-<link rel="stylesheet" href="{#URL_ROOT#}public/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="{#URL_ROOT#}public/css/bootstrap/table/bootstrap-table.min.css">
-<link rel="stylesheet" type="text/css" href="{#URL_ROOT#}public/css/lib.css" />
-<link rel="stylesheet" type="text/css" href="{#URL_ROOT#}public/css/style.css" />
-<link rel="stylesheet" type="text/css" href="{#URL_ROOT#}public/css/print.css" media="print" />
+<link rel="icon" href="{#APP_URL_ROOT#}public/img/icons/favicon.png" type="image/png" sizes="16x16" />
+<link rel="stylesheet" href="{#APP_URL_ROOT#}public/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="{#APP_URL_ROOT#}public/css/bootstrap/table/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css" href="{#APP_URL_ROOT#}public/css/print/print.css" media="print" />
+<!------------------------------------------------------------------------ css auto-load -->
+{loop="manguto\cms7\libraries\Diretorios::obterArquivosPastas('public/css',false,true,false,['css'])"}
+<link rel="stylesheet" type="text/css" href="{#APP_URL_ROOT#}{$value}" /> 
+{/loop}
 <!------------------------------------------------------------------------------ javascript -->
-<script src="{#URL_ROOT#}public/js/jquery/jquery-3.5.0.js"></script>
-<script src="{#URL_ROOT#}public/js/popper/popper.min.js"></script>
-<script src="{#URL_ROOT#}public/js/bootstrap/bootstrap.min.js"></script>
-<script src="{#URL_ROOT#}public/js/bootstrap/table/bootstrap-table.min.js"></script>
-<script src="{#URL_ROOT#}public/js/bootstrap/table/bootstrap-table-pt-BR.min.js"></script>
-<script src="{#URL_ROOT#}public/js/001_lib.js"></script>
-<script src="{#URL_ROOT#}public/js/002_lib_form.js"></script>
-<script src="{#URL_ROOT#}public/js/010_scripts.js"></script>
-<script src="{#URL_ROOT#}public/js/011_scripts_process_results.js"></script>
-<script src="{#URL_ROOT#}public/js/020_ready.js"></script>
+<script src="{#APP_URL_ROOT#}public/js/jquery/jquery-3.5.0.js"></script>
+<script src="{#APP_URL_ROOT#}public/js/popper/popper.min.js"></script>
+<script src="{#APP_URL_ROOT#}public/js/bootstrap/bootstrap.min.js"></script>
+<script src="{#APP_URL_ROOT#}public/js/bootstrap/table/bootstrap-table.min.js"></script>
+<script src="{#APP_URL_ROOT#}public/js/bootstrap/table/bootstrap-table-pt-BR.min.js"></script>
+<!------------------------------------------------------------------------ js auto-load -->
+{loop="manguto\cms7\libraries\Diretorios::obterArquivosPastas('public/js',false,true,false,['js'])"}
+<script src="{#APP_URL_ROOT#}{$value}"></script>
+{/loop}
 </head>
 <!----------------------------------------------------------------------------------- html -->
 <body>
+<div id="log"></div>
