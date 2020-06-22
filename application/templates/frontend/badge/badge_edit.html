@@ -1,0 +1,106 @@
+ {include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+<section>
+	<!--info_oldPlace-->
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1>Dados Pessoais</h1>
+				<hr />
+				<br />
+			</div>
+		</div>
+		<form method="post">
+			<div class="row">
+				<div class="col-5">
+					<label for="name">Nome:</label>
+					<input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome" value="{$user->getName()}" required="required">
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-4">
+					<label for="email">E-mail:</label>
+					<input type="text" class="form-control check" id="email" name="email" placeholder="Digite o seu e-mail" value="{$user->getEmail()}" required="required">
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-3">
+					<label for="phone">Telefone(s):</label>
+					<input type="phone" class="form-control" id="phone" name="phone" placeholder="Digite o seu telefone" value="{$user->getPhone()}" required="required">
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col-3">
+					<input type="checkbox" id="password_change" name="password_change" />
+					&nbsp;
+					<label for="password_change">Modificar Senha</label>										
+					<div id="password_change_fields" style="display: none;">
+						<label for="password_actual">Senha atual:</label>
+						<input type="password" class="form-control" id="password_actual" name="password_actual" value="">
+						<br />
+						<label for="password_new">Nova senha:</label>
+						<input type="password" class="form-control" id="password_new" name="password_new" value="" style="margin-bottom: 10px;">						
+						<label for="password_confirmation">Confirmação de nova senha:</label>
+						<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" value="">
+						<br />
+					</div>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 text-right">					
+					<a href="javascript:void(0)" onclick="history.back();" class="btn btn-danger ml-2">Cancelar</a>
+					<input type="button" class="btn btn-success ml-2" value="Salvar" onclick="submitForm()">
+					<input type="submit" class="btn btn-success ml-2" value="Salvar" style="display:none" id="salvar">
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<style>
+
+</style>
+<script>
+	function show_password_change_fields() {
+		$('#password_change_fields').show();
+		$('#password_change_fields input').each(function() {
+			$(this).attr('required','required');
+		});
+	}
+	function hide_password_change_fields() {
+		$('#password_change_fields input').each(function() {
+			$(this).val('');
+			$(this).attr('required',false);
+		});
+		$('#password_change_fields').hide();
+	}
+	
+	function submitForm(){		
+		if($('#password_change').is(":checked")){
+			var pa = $('#password_actual'); 
+			var pn = $('#password_new'); 
+			var pc = $('#password_confirmation');
+			
+			
+			if(pn.val()!=pc.val()){
+				alert('A confirmação de senha não confere com a nova senha! \nPreencha novamente ambos os campos com o mesmo valor,\ne tente novamente!');
+				pn.val('');
+				pc.val('');
+				pn.focus();
+				return false;
+			}
+		}
+		$('#salvar').click();
+		//$('form').submit();
+	}
+
+	$(document).ready(function() {
+
+		$('#password_change').change(function() {
+			if (this.checked) {
+				show_password_change_fields();
+			} else {
+				hide_password_change_fields();
+			}
+		});
+	});
+</script>
+{include="../_general/footer"} {include="../_general/close"}

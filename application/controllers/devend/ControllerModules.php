@@ -14,14 +14,14 @@ class ControllerModules extends Controller
     {
         $route->get('/dev/modules', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             ViewModules::modules();
         });
 
         $route->get('/dev/modules/:action/:key', function ($action, $key) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             User_module::externalUserModuleUpdate($action, $key);
             Controller::HeaderLocation('/dev/modules');

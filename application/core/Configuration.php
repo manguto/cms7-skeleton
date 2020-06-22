@@ -80,7 +80,7 @@ class Configuration
             {
                 $APP_ITERATION = Sessions::get('APP_ITERATION',false,true);
                 if($APP_ITERATION === false){
-                    $APP_ITERATION = date('Y-m-d_his',APP_TIMESTAMP).'_'.APP_UNIQID;
+                    $APP_ITERATION = date('Ymd-His',APP_TIMESTAMP).'-'.APP_UNIQID;
                 }
             }
             define("APP_ITERATION", $APP_ITERATION);            

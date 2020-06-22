@@ -1,11 +1,11 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container">
 		<div class="row mb-4">
 			<div class="col-12">
-				<a href="/dev/repository" title="Clique para visualizar os repositórios do sistema." class="clean"><h1>Repositório do Sistema</h1></a>
-				<a href="/dev/repository/{$repository}" title="Clique para visualizar o repositório completo." class="clean"><h2>{$repositoryNameShow}</h2></a>
+				<a href="{#APP_URL_ROOT#}dev/repository" title="Clique para visualizar os repositórios do sistema." class="clean"><h1>Repositório do Sistema</h1></a>
+				<a href="{#APP_URL_ROOT#}dev/repository/{$repository}" title="Clique para visualizar o repositório completo." class="clean"><h2>{$repositoryNameShow}</h2></a>
 			</div>
 		</div>
 		<div class="row pl-1">
@@ -25,8 +25,8 @@
 					</tbody>
 				</table>
 				<br />
-				<a href="/dev/repository/{$repository}/{$register.id}/delete" class="btn btn-outline-danger float-right ml-2" onclick="return confirm('Deseja realmente excluir este registro?')">EXCLUIR</a>
-				<a href="/dev/repository/{$repository}/{$register.id}/edit" class="btn btn-outline-warning float-right ml-2">EDITAR</a>				
+				<a href="{#APP_URL_ROOT#}dev/repository/{$repository}/{$register.id}/delete" class="btn btn-outline-danger float-right ml-2" onclick="return confirm('Deseja realmente excluir este registro?')">EXCLUIR</a>
+				<a href="{#APP_URL_ROOT#}dev/repository/{$repository}/{$register.id}/edit" class="btn btn-outline-warning float-right ml-2">EDITAR</a>				
 			</div>
 			
 		</div>
@@ -58,4 +58,4 @@ table.table td.valor {
 		$('table.table').bootstrapTable();
 	});
 </script>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}

@@ -1,16 +1,16 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container">
 		<div class="row mb-4">
 			<div class="col-12">
-				<a href="/dev/repository" title="Clique para visualizar os repositórios do sistema." class="clean"><h1>Repositório do Sistema</h1></a>
+				<a href="{#APP_URL_ROOT#}dev/repository" title="Clique para visualizar os repositórios do sistema." class="clean"><h1>Repositório do Sistema</h1></a>
 				<h2>{$repositoryNameShow} </h2>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<a href="/dev/repository/{$repository}/0/edit" class="float-right btn btn-sm btn-outline-primary" title="Clique para cadastrar um novo registro">CADASTRAR</a>
+				<a href="{#APP_URL_ROOT#}dev/repository/{$repository}/0/edit" class="float-right btn btn-sm btn-outline-primary" title="Clique para cadastrar um novo registro">CADASTRAR</a>
 				<br />
 				<br />
 				<form method="post">
@@ -85,4 +85,4 @@ table.list td input{
 		
 	});
 </script>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}

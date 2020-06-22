@@ -11,7 +11,7 @@ class Access
 
     public function __construct()
     {
-        Logger::info('Controle de acesso inicializado - '.__METHOD__);
+        Logger::info('Controle de acesso inicializado');
     }
 
     // ############################################################################################################################################
@@ -19,19 +19,22 @@ class Access
     // ############################################################################################################################################
     /**
      * verifica se as credenciais de usuario informadas sao validas
-     *
-     * @param string $login
+     * e retorna o id do usuario em caso afirmativo
+     * @param string $email
      * @param string $password
-     * @return bool
+     * @return bool|integer
      */
-    static function checkUserCredentials(string $login, string $password): bool
+    static function checkUserCredentials(string $email, string $password)
     {
-        $user = User::checkUserCredentials($login, $password);
-        if ($user !== false) {
-            self::setSessionUser_id($user->getId());
-            return true;
-        }else{
-            self::resetSession();
+        Logger::info("Verificação de credenciais para o login/senha ($email/**********).");
+        $user = User::checkUserCredentials($email, $password);
+        //deb($user);
+        if ($user !== false) {            
+            Logger::success("Verificação de credenciais realizada com sucesso! ($email)");
+            $user_id = $user->getId();
+            return $user_id;
+        }else{            
+            Logger::error("As credenciais informadas são inválidas (login: $email)!!!");
             return false;
         }        
     }
@@ -41,33 +44,45 @@ class Access
      * PORTEIRO - verifica se o usuario possui 
      * o perfil informado para liberacao do acesso
      * ou redireciona-o aa pagina de login. 
-     * @param string $profile [admin,dev,user]
-     * @return boolean
+     * @param array|string $profile [admin,dev,user]
      */
-    static function Concierge(string $profile){
-        if(self::checkUserProfiles([$profile]) == false){
-            Controller::HeaderLocation('/login');
+    static function Concierge($profiles){
+        if(is_string($profiles)){
+            $profiles = [$profiles];
+        }else if(!is_array($profiles)){
+            throw new Exception("O parâmetro da função ".__METHOD__." deve ser STRING ou ARRAY."); 
+        }
+        
+        Logger::info("CONCIERGE");
+        if(self::checkUserProfiles($profiles) == true){
+            Logger::success("ACESSO CONCEDIDO.");            
         }else{
-            return true;
+            Logger::warning("PERMISSÃO DE ACESSO NEGADA!");
+            Controller::HeaderLocation('/login');            
         }
     }
     // ############################################################################################################################################
     static function checkUserProfiles(array $required_profile_nickname_array)
     {
+        Logger::info("Verificacao dos perfis do usuario quanto ao(s) perfil(ís): '".implode("', '", $required_profile_nickname_array)."' => ");
         if (sizeof($required_profile_nickname_array) == 0) {
+            Logger::warning("Nenhum perfil informado para verificação. Acesso liberado (público).");
             return true;
         } else {
             if (self::checkUserLogged()) {
                 foreach ($required_profile_nickname_array as $required_profile_nickname) {
-                    $user = self::getSessionUser();
+                    $user = self::getSessionUser();                    
                     if($user->checkProfile($required_profile_nickname)===true){
+                        Logger::success("Perfil '$required_profile_nickname' encontrado com sucesso no usuario atual!");
                         return true;
                     }
                 }
             } else {
+                Logger::warning("Nenhum usuário logado no momento.");
                 return false;
             }
         }
+        Logger::warning("O usuário atual não possui nenhum dos perfis solicitados.");
         return false;
     }
 
@@ -81,19 +96,6 @@ class Access
     static function checkUserLogged(): bool
     {
         return Sessions::isset(User::SESSION);
-    }
-
-    // ############################################################################################################################################
-    
-    /**
-     * verifica se o usuario atual possui o perfil (apelido) informado
-     * @param string $profile_nickname
-     * @return bool
-     */
-    static function checkUserProfile(string $profile_nickname): bool
-    {
-        $user = self::getSessionUser();
-        return $user->checkProfile($profile_nickname, false);
     }
 
     // ############################################################################################################################################
@@ -147,9 +149,10 @@ class Access
     /*
      * remove registro de usuario logado no sistema
      */
-    static function resetSession()
+    static function unsetSessionUser()
     {
-        Sessions::Reset();        
+        Logger::info("Limpeza do usuario realizada (LOGOFF).");
+        Sessions::unset(User::SESSION);        
     }
 
     // ############################################################################################################################################

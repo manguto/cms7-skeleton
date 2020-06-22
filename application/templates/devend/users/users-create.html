@@ -1,13 +1,13 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<h2>Novo Usuário</h2>
 			</div>
 		</div>
-		<form action="/dev/users/create" method="post" class="mr-auto ml-auto">
+		<form action="/dev/user/create" method="post" class="mr-auto ml-auto">
 			<div class="row">
 				<div class="col-6">
 					<label for="name">Nome</label>
@@ -66,7 +66,7 @@ $(document).ready(function(){
 	
 });
 </script>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}
 
 
 

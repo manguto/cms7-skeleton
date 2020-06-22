@@ -11,7 +11,7 @@ function processResultHandler(){
 		var hideEffectTime = 1 * 1000; // seg
 	}
 	
-	var pra = $('#process-results-area');	
+	var pra = $('#process-result-area');	
 	var pra_t = pra.find('a.toggle');
 	var prs = pra.find('.process-result');
 
@@ -29,7 +29,7 @@ function processResultHandler(){
 			pra.find(".toggle_btn").show();
 		}
 		setTimeout(function() {
-			prs.find('.hide').hide(hideEffectTime);
+			pra.find('.process-result.hide').hide(hideEffectTime);
 		}, hideTime);
 	}
 	

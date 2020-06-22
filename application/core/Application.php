@@ -14,28 +14,29 @@ class Application
     
     public function __construct()
     {   
+        Logger::info(str_repeat('@', 80).' - START! ');
         // ######################################################        
         {   
             $this->configuration = new Configuration();
-        }   
-        // ######################################################
-        Logger::info(str_repeat('@', 150));
-        Logger::info('Applicacao inicializada - '.__METHOD__);
-        Logger::info('Configuracao inicializada');        
-        Logger::info('Constantes fundamentais registradas');
-        // ######################################################
+            Logger::info('Configuração inicializada!');
+        }           
+        // ######################################################        
         {
-            $this->controller = new Controller();        
+            $this->controller = new Controller();      
+            Logger::info('Controladora inicializada!');
         }
         // ######################################################
     }
 
     public function Run()
     {
-        Logger::info('Execucao da aplicacao - '.__METHOD__);
+        Logger::info('Execucao da aplicacao inicializada!');
         // ######################################################
-        $this->controller->Run();
+        {
+            $this->controller->Run();
+        }
         // ######################################################
+        
     }
 }
 

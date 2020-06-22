@@ -18,16 +18,19 @@ class Profile extends Model implements ModelDatabase
         [
             'name' => 'Desenvolvedor',
             'nickname' => 'dev',
+            'level' => '1',
             'obs' => ''
         ],
         [
             'name' => 'Administrador',
             'nickname' => 'admin',
+            'level' => '2',
             'obs' => ''
         ],
         [
             'name' => 'Usuário',
             'nickname' => 'user',
+            'level' => '3',
             'obs' => ''
         ]
     ];
@@ -42,6 +45,9 @@ class Profile extends Model implements ModelDatabase
         $this->SetAttribute($a);
         // ---------------------------------------------------
         $a = new ModelAttribute('nickname');
+        $this->SetAttribute($a);
+        // ---------------------------------------------------
+        $a = new ModelAttribute('level');
         $this->SetAttribute($a);
         // ---------------------------------------------------
         $a = new ModelAttribute('obs');
@@ -72,28 +78,6 @@ class Profile extends Model implements ModelDatabase
         }
     }
 
-    /**
-     * verifica se a 'nickname' deste perfil eh igual a informada
-     *
-     * @param string $nickname
-     * @param bool $throwException
-     * @throws Exception
-     * @return boolean
-     */
-    public function checkNickname(string $nickname, bool $throwException = false): bool
-    {
-        if (Profile::checkNicknameExist($nickname, $throwException) && $this->getNickname() == trim($nickname)) {
-            $return = true;
-        } else {
-            if ($throwException) {
-                throw new Exception("A chave de Perfil informada ('$nickname') não foi encontrada no sistema.");
-            } else {
-                $return = false;
-            }
-        }
-        return $return;
-    }
-    
     
     public function __toString()
     {

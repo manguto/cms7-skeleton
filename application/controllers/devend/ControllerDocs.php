@@ -14,12 +14,12 @@ class ControllerDocs extends Controller
     static function RouteMatchCheck(Route $route)
     {
         $route->get('/dev/docs', function () {
-            Access::CheckUserProfiles(["developer"]);
+            Access::CheckUserProfiles(["dev"]);
             View::PageDevend('docs', self::docs_parameters());
         });
 
         $route->get('/dev/docs/:page', function ($page) {
-            Access::CheckUserProfiles(["developer"]);            
+            Access::CheckUserProfiles(["dev"]);            
             //View::PageDevend('docs_page', self::docs_page_parameters($page));
             View::PageDevend('docs/docs_page', get_defined_vars());
         });

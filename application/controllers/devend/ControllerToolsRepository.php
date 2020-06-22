@@ -19,7 +19,7 @@ class ControllerToolsRepository extends ControllerTools
     {
         $route->get('/dev/tools/repository', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
 
             { // inicializacao dos modelos existentes
@@ -110,7 +110,7 @@ class ControllerToolsRepository extends ControllerTools
 
         $route->post('/dev/tools/repository/save', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             {
                 // deb($_POST,0);

@@ -16,7 +16,7 @@ class ControllerManutencao extends Controller
     {
         $route->get('/dev/manutencao', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             {
                 $emManutencao = EmManutencao::EmFuncionamento();
@@ -26,7 +26,7 @@ class ControllerManutencao extends Controller
 
         $route->post('/dev/manutencao', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             {
                 if (isset($_POST['motivo'])) {

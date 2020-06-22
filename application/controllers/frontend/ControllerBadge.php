@@ -15,12 +15,12 @@ class ControllerBadge extends Controller
     {
         // ===================================================================================
         $route->get('/badge', function () {
-            Access::CheckUserProfiles(["user"]);
+            Access::Concierge("user");
             ViewBadge::badge();
         });
         // ===================================================================================
         $route->get('/badge/edit', function () {
-            Access::CheckUserProfiles(["user"]);
+            Access::Concierge("user");
             { // verifica se a pg esta sendo recarregada por conta de um erro nos dados do formulario
                 $user = Sessions::get('ControlBadge', false, true);
                 if ($user == false) {
@@ -31,7 +31,7 @@ class ControllerBadge extends Controller
         });
         // ===================================================================================
         $route->post('/badge/edit', function () {
-            Access::CheckUserProfiles(["user"]);
+            Access::Concierge("user");
             if (User::checkUpdate($_POST)) {
                 Controller::HeaderLocation('/badge');
             } else {

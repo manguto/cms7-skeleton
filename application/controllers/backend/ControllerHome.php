@@ -12,15 +12,11 @@ class ControllerHome extends Controller
     static function RouteMatchCheck(Route $route)
     {
         $route->get('/admin', function () {
-            Access::CheckUserProfiles([
-                "admin"
-            ]);
+            Access::Concierge("admin");
             View::PageBackend('home');
         });
     }
 
-    static function teste()
-    {}
 }
 
 ?>

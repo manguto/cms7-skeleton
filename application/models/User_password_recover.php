@@ -9,17 +9,19 @@ use manguto\cms7\libraries\Safety;
 use manguto\cms7\libraries\Email;
 use manguto\cms7\libraries\Exception;
 use application\core\View;
+use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Logger;
 
 class User_password_recover extends Model
 {
-    
+
     use ModelStart;
     use ModelRepository;
 
     // prazo de validade da solicitacao de reset de senha (2 horas)
     const deadline = 60 * 60 * 2;
 
-    const link_base = APP_URL . '/forgot/reset';
+    const link_base = APP_DOMAIN . APP_URL_ROOT . 'forgot/reset';
 
     const code_separator = '-';
 
@@ -32,6 +34,7 @@ class User_password_recover extends Model
     private function defineAttributes()
     {
         
+
         // ---------------------------------------------------
         $a = new ModelAttribute('email');
         $this->SetAttribute($a);
@@ -67,53 +70,97 @@ class User_password_recover extends Model
     }
 
     // ####################################################################################################
-    public function setObjectData($email)
+    /**
+     * inicializa o procedimento de recuperacao de senha via e-mail
+     * @param string $email
+     */
+    static function ProcessInitialization(string $email)
     {
-        $this->setEmail($email);
-        $this->save();
-        // ----------------------------------- test!
-        $user = User::checkEmailExist($email);
+        Logger::proc("Solicitação de recuperação de senha inicializada para o e-mail: '$email' => ".__METHOD__);
+        $upr = new User_password_recover();
+        {
+            $emailTestResult = $upr->checkEmail($email);
+            //deb($test_result,0); deb($result);
+        }
+        if ($emailTestResult === true) {
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            $email_result = $upr->sendEmail();
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            if ($email_result === true) {
+                $msg = '';
+                $msg .= "Prezado(a),<br/>";
+                $msg .= "Foi enviada uma mensagem de e-mail para '$email', com as informações necessárias para a realização da sua solicitação.<br/>";
+                $msg .= "Verifique a respectiva caixa de entrada, e siga as instruções contidas nesta mensagem.<br/>";
+                $msg .= "Att,<br/>" . APP_FULL_NAME;
+                ProcessResult::setSuccess($msg);
+            } else {
+                ProcessResult::setError($email_result);
+            }
+        } else {
+            ProcessResult::setError($emailTestResult);
+        }
+    }
+
+    // ####################################################################################################
+    /**
+     * testa se o email existe e define o codigo e o link de recuperacao
+     * caso contrario
+     * retorna falso
+     *
+     * @param string $email
+     * @return boolean|string
+     */
+    public function checkEmail(string $email)
+    {    
+        {// ----------------------------------- test!
+            Logger::info("Verificação de e-mail existente...");
+            $user = User::checkEmailExist($email);
+        }        
         if ($user !== false) {
+            Logger::success("E-mail '$email' encontrado com sucesso! ");
+            $this->setEmail($email);
             $this->setUser_id($user->getId());
             $this->generateCode();
             $this->generateLink();
             $this->save();
-            $return = true;
-        } else {            
+            return true;
+        } else {
+            Logger::error("E-mail não encontrado ($email).");
             $return = "Não foi possível enviar o e-mail com as instruções de recuperação de senha.<br/>";
             $return .= "Tente novamente em alguns instantes.<br/>";
             $return .= "Obrigado!<br/>";
-        }
-        return $return;
+            return $return;
+        }        
     }
 
     // ####################################################################################################
     public function sendEmail()
-    {
-        //parametros
-        $user = new User($this->getUser_id());        
-        $from = APP_EMAIL;
-        $to = $this->getEmail();
-        $subject = APP_SHORT_NAME . " - Solicitação de Redefinição de Senha ({$this->getEmail()})";        
-        $content = $this->getEmailContent($user);        
-        // -------------------------------------------------------------------
-        $return = Email::Enviar($from, $to, '', '', $subject, $content);
-        // -------------------------------------------------------------------
-        return $return;
+    {   
+        {// parametros
+            $user = new User($this->getUser_id());
+            $from = APP_EMAIL;
+            $to = $this->getEmail();
+            $subject = APP_SHORT_NAME . " - Solicitação de Redefinição de Senha ({$this->getEmail()})";
+            $content = $this->getEmailContent($user);
+        }
+        return Email::Enviar($from, $to, '', '', $subject, $content,APP_AMS_PASSWORD);        
     }
 
     // ####################################################################################################
-    private function getEmailContent($user):string{
-        //parameters
+    private function getEmailContent($user): string
+    {
+        // parameters
         $parameters = [
             "user" => $user,
             "link" => $this->getLink(),
-            "deadline" => round(User_password_recover::deadline/60,0)
+            "deadline" => round(User_password_recover::deadline / 60, 0)
         ];
-        $return = View::PageOther('email', 'email_forgot', $parameters, true);
+        $return = View::PageExtra('email_forgot', $parameters, true);
         return $return;
     }
-    
+
     // ####################################################################################################
     /**
      * Gera o link para ser utilizado quando da atualizacao da senha
@@ -162,15 +209,15 @@ class User_password_recover extends Model
     {
         try {
             $masc = Safety::decrypt($code, self::secret_key);
-            
+
             if (strpos($masc, User_password_recover::code_separator) !== false) {
                 $code_array = explode(User_password_recover::code_separator, $masc);
                 if (sizeof($code_array) == 2) {
                     $id = array_shift($code_array);
                     $user_id = array_shift($code_array);
                     $result = (new User_password_recover())->search(" \$id==$id && \$user_id==$user_id && \$code=='$code' ");
-                    $User_password_recover = array_shift($result); //<<< User_password_recover
-                    if ($User_password_recover!==NULL) {
+                    $User_password_recover = array_shift($result); // <<< User_password_recover
+                    if ($User_password_recover !== NULL) {
                         { // ultimas verificacaoes (status e deadline)
                             $return = [];
                             $status = $User_password_recover->checkStatus();
@@ -187,26 +234,26 @@ class User_password_recover extends Model
                         } else {
                             $return = trim(implode('<hr/>', $return));
                         }
-                    } else {                        
-                        $return = "Não foi encontrado nenhum registro de recuperação de senha para o código informado ('$code => $masc').<br/>";                        
+                    } else {
+                        $return = "Não foi encontrado nenhum registro de recuperação de senha para o código informado ('$code => $masc').<br/>";
                     }
                 } else {
-                    $return = "Os parâmetros do código informado ('$code => $masc') não se encontram no formato correto.<br/>";                    
+                    $return = "Os parâmetros do código informado ('$code => $masc') não se encontram no formato correto.<br/>";
                 }
             } else {
-                $return = "O código informado ('$code => $masc') não se encontra no formato adequado.<br/>";                
+                $return = "O código informado ('$code => $masc') não se encontra no formato adequado.<br/>";
             }
         } catch (Exception $e) {
             $return = $e->getMessage();
         }
-        
-        //verifica se houve algum erro e incrementa a mensagem
-        if(is_string($return)){
+
+        // verifica se houve algum erro e incrementa a mensagem
+        if (is_string($return)) {
             $return .= "<br/>";
             $return .= "<br/>";
-            $return .= "Entre em contate com o administrador!<br/>";            
+            $return .= "Entre em contate com o administrador!<br/>";
         }
-        
+
         return $return;
     }
 
@@ -227,7 +274,7 @@ class User_password_recover extends Model
                 $User_password_recover->loadReferences(false);
                 // define upr como utilizado!
                 $User_password_recover->setForgotUsed();
-                
+
                 { // atualiza a senha do usuario
                     $user = $User_password_recover->getUser();
                     $user->setPassword($password);
@@ -278,7 +325,7 @@ class User_password_recover extends Model
             $showNow = date('H:i d/m/Y', $timestampNow);
             $showEnd = date('H:i d/m/Y', $timestampEnd);
         }
-        
+
         if ($timestampNow > $timestampEnd) {
             $return = "O prazo limite para atualização de senha foi ultrapassado ($showEnd). <br/>Realize uma nova solicitação, e tente novamente!<br/><br/>";
         } else {

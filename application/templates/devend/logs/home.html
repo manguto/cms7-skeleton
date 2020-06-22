@@ -1,0 +1,32 @@
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+
+
+<section class="container-fluid text-left">
+	<!--info_oldPlace-->
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2>Logs</h2>
+				<hr />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">				
+				Selecione uma data para visualizar os registros da mesma:
+				<br />
+				<br />
+				<ul>
+					{loop="$logs"}
+					<li>
+						<a href="{#APP_URL_ROOT#}dev/logs/{$key}" class="link">{$value['show']} | {$value['size']} IPs encontrado(s)</a>
+					</li>
+					{/loop}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+{include="../devend/logs/_css"}
+{include="../devend/logs/_js"}
+{include="../_general/footer"} {include="../_general/close"}
+

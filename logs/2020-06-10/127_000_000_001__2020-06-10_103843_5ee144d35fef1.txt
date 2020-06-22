@@ -1,7 +1,0 @@
-[22:38:43:406300 10-06-2020][INFO] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-[22:38:43:407900 10-06-2020][INFO] Applicacao inicializada - application\core\Application::__construct 
-[22:38:43:409900 10-06-2020][INFO] Configuracao inicializada 
-[22:38:43:411100 10-06-2020][INFO]  - Constantes fundamentais registradas 
-[22:38:43:414600 10-06-2020][INFO] Controladora mae inicializada - application\core\Controller::__construct 
-[22:38:43:416500 10-06-2020][INFO] Controle de acesso inicializado - application\core\Access::__construct 
-[22:38:43:417600 10-06-2020][INFO] Gerenciamento de rota (solicitada) inicializado - application\core\Route::__construct 

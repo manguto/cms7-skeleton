@@ -9,14 +9,14 @@ class ViewBadge extends View
 
     static function badge()
     {
-        View::PageFrontend('badge', [
+        View::PageFrontend('badge/badge', [
             'user' => Access::getSessionUser()
         ]);
     }
 
     static function badge_edit($user)
     {
-        View::PageFrontend("badge_edit", [
+        View::PageFrontend("badge/badge_edit", [
             'user' => $user
         ]);
     }

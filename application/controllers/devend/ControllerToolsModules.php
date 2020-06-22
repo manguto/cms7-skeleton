@@ -13,14 +13,14 @@ class ControllerToolsModules extends ControllerTools
     {
         $route->get('/dev/tools/modules', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             View::PageDevend('tools_modules', get_defined_vars());
         });
 
         $route->post('/dev/tools/modules', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             // deb($_POST);
             {

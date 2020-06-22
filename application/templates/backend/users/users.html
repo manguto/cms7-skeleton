@@ -1,0 +1,49 @@
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+<section>
+	<!--info_oldPlace-->
+	<div class="container">
+		<h2>Lista de Usuários</h2>
+		<br />
+		<a href="{#APP_URL_ROOT#}admin/users/create" class='btn btn-sm btn-success float-right'>Cadastrar Usuário</a>
+		<br />
+		<br />
+		<br />
+		<table class="table table-bordered table-striped table-hover">
+			<thead class='thead-light'>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nome</th>
+					<th scope="col">E-mail</th>
+					<th scope="col">Administrador</th>
+					<th scope="col" style="width: 250px;">Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop="$users"}
+				<tr>
+					<th scope="row">{$value->getid()}</th>
+					<td style="text-align: left;">{$value->getname()}</td>
+					<td>{$value->getemail()}</td>
+					<td>{if="$value->checkProfile('admin')"}Sim{else}Não{/if}</td>
+					<td>
+						<a href="{#APP_URL_ROOT#}admin/users/{$value->getid()}" class='btn btn-success btn-sm '>Visualizar</a>
+						<span>
+							{if="$value->checkProfile('admin')==false"}
+							<a href="{#APP_URL_ROOT#}admin/users/{$value->getid()}/edit" class='btn btn-warning btn-sm'>Editar</a>
+							{/if}
+						</span>
+						<span>
+							{if="$value->checkProfile('admin')==false"}
+							<a href="{#APP_URL_ROOT#}admin/users/{$value->getid()}/delete" class='btn btn-danger btn-sm ' onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
+							{/if}
+						</span>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+	</div>
+</section>
+<style>
+</style>
+{include="../_general/footer"} {include="../_general/close"}

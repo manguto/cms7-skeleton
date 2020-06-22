@@ -8,10 +8,12 @@ define("APP_ABREV", "SIS");
 
 define("APP_TITLE", APP_ABREV . " | " . APP_SHORT_NAME);
 
-define("APP_DOMAIN", "http://sis.com");
+define("APP_DOMAIN", "http://l.manguto.com");
 
 define("APP_EMAIL", "contato@sis.com");
 
 define("APP_EMAIL_ADMIN", "admin@sis.com");
+
+define("APP_AMS_PASSWORD", "amburana");
 
 ?>

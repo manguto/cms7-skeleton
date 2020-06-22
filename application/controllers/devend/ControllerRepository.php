@@ -15,21 +15,21 @@ class ControllerRepository extends Controller
     {
         $route->get('/dev/repository', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             ViewRepository::repository();
         });
 
         $route->get('/dev/repository/:repository', function ($repository) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             ViewRepository::repository_view($repository);
         });
 
         $route->get('/dev/repository/:repository/:id/view', function ($repository, $id) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             // deb($repository,0); deb($id);
             {
@@ -47,7 +47,7 @@ class ControllerRepository extends Controller
 
         $route->get('/dev/repository/:repository/:id/delete', function ($repository, $id) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             // deb($repository,0); deb($id);
             {
@@ -66,7 +66,7 @@ class ControllerRepository extends Controller
 
         $route->get('/dev/repository/:repository/:id/edit', function ($repository, $id) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             // deb($repository,0); deb($id);
             {
@@ -83,7 +83,7 @@ class ControllerRepository extends Controller
 
         $route->post('/dev/repository/:repository/:id/edit', function ($repository, $id) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             // deb($repository,0); deb($id);
             // deb($_POST);
@@ -114,7 +114,7 @@ class ControllerRepository extends Controller
         // ..................................................................
         $route->get('/dev/repository/sheet/:repository', function ($repository) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             ViewRepository::repository_sheet_view($repository);
         });

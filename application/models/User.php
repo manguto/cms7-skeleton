@@ -7,10 +7,12 @@ use manguto\cms7\model\ModelAttribute;
 use manguto\cms7\model\ModelStart;
 use manguto\cms7\database\repository\ModelRepository;
 use manguto\cms7\database\ModelDatabase;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\Sessions;
 use manguto\cms7\libraries\Numbers;
 use application\core\Access;
+use manguto\cms7\libraries\Logger;
+use manguto\cms7\libraries\Variables;
 
 class User extends Model implements ModelDatabase
 {
@@ -21,21 +23,18 @@ class User extends Model implements ModelDatabase
     const default = [
         [
             'name' => 'Desenvolvedor',
-            'login' => 'dev',
             'password' => 'ved',
             'email' => 'dev@sis.com',
             'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Administrador',
-            'login' => 'adm',
             'password' => 'mad', // 7538ebc37ad0917853e044b9b42bd8a4
             'email' => 'adm@sis.com',
             'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Usuário',
-            'login' => 'user',
             'password' => 'user',
             'email' => 'user@sis.com',
             'phone' => '(XX) X.XXXX-XXXX'
@@ -45,18 +44,11 @@ class User extends Model implements ModelDatabase
     const SESSION = "User";
 
     const FORGOT_EMAIL = "UserEmail";
-
-    /**
-     * !IMPORTANT
-     * Função para definicao do atributos do modelo!
-     */
+    
     private function defineAttributes()
     {
         // ---------------------------------------------------
         $a = new ModelAttribute('name');
-        $this->SetAttribute($a);
-        // ---------------------------------------------------
-        $a = new ModelAttribute('login');
         $this->SetAttribute($a);
         // ---------------------------------------------------
         $a = new ModelAttribute('password');
@@ -92,31 +84,41 @@ class User extends Model implements ModelDatabase
     // ############################################################################################################################################
 
     /**
-     * verifica se existe algum usuario com o login / password informados
+     * verifica se existe algum usuario com o email / password informados
      * retornando-o caso afirmativo e caso contrario 'false'
      *
-     * @param string $login
+     * @param string $email
      * @param string $password
      * @throws Exception
-     * @return boolean|mixed
+     * @return boolean|User
      */
-    static function checkUserCredentials(string $login, string $password)
+    static function checkUserCredentials(string $email, string $password)
     {
-        $return = false;
-        // usuario existe?
-        $login__search = (new User())->search(" \$login=='$login' ");
-        $n = count($login__search);
+        {
+            // existe algum usuario com o e-mail informado?        
+            $email__search = (new User())->search(" \$email=='$email' ");        
+            $n = count($email__search);
+            
+        }
+        
         if ($n == 1) {
+            Logger::info("Foi encontrado $n usuário com o e-mail '$email'.");
             // usuario e senha correta?
-            $login_and_password__search = (new User())->search(" \$login=='$login' && \$password=='" . User::password_crypt($password) . "' ");
-            $m = count($login_and_password__search);
+            $email_and_password__search = (new User())->search(" \$email=='$email' && \$password=='" . User::password_crypt($password) . "' ");
+            $m = count($email_and_password__search);
             if ($m == 1) {
-                $return = array_shift($login_and_password__search);
+                $return = array_shift($email_and_password__search);
             } else if ($m > 1) {
-                throw new Exception("Foram encontrados mais de um usuário com o mesmo login e senha. Contate o administrador.");
+                throw new Exception("Foram encontrados mais de um usuário com o mesmo email e senha. Contate o administrador.");
+            } else {
+                Logger::error("A senha informada para o e-mail '$email' não procede. Acesso negado!");
+                $return = false;
             }
         } else if ($n > 1) {
-            throw new Exception("Foram encontrados mais de um usuários com o mesmo login. Contate o administrador.");
+            throw new Exception("Foram encontrados mais de um usuários com o mesmo email. Contate o administrador.");
+        } else {
+            Logger::error("Nenhum usuário encontrado com o e-mail '$email'.");
+            $return = false;
         }
         return $return;
     }
@@ -129,7 +131,10 @@ class User extends Model implements ModelDatabase
      */
     public function getProfiles(): array
     {
-        return User_profile::getUserProfiles($this->getId());
+        $return = User_profile::getUserProfiles($this->getId());
+        //deb($return,0);
+        Logger::info("Perfil(is) do usuario atual (".implode(', ', $return).") => ");
+        return $return;
     }
   
 
@@ -140,13 +145,38 @@ class User extends Model implements ModelDatabase
      * @param string $profileNickname
      * @return bool
      */
-    public function checkProfile(string $profileNickname): bool
+    public function checkProfile(string $wantedProfileNickname): bool
     {
-        $profiles = $this->getProfiles();
-        foreach ($profiles as $profile) {
-            if ($profile->checkNickname($profileNickname, false)) {
+        $wantedProfile_array = (new Profile())->search(" \$nickname=='$wantedProfileNickname' ");
+        //deb($wantedProfile);
+        if(sizeof($wantedProfile_array)==0){
+            throw new Exception("Não foi encontrado nenhum perfil como termo informado: '$wantedProfileNickname'.");
+        }
+        $wantedProfile = array_shift($wantedProfile_array);
+        $wantedProfileLevel = $wantedProfile->getLevel();
+        //deb($wantedProfileLevel);
+        Logger::info("Perfil alvo => nickname:'$wantedProfileNickname' | level:'$wantedProfileLevel'.");        
+        $profileTemp_array = $this->getProfiles();
+        Logger::info("Quantidade de Perfís do usuario: ".sizeof($profileTemp_array));
+        foreach ($profileTemp_array as $profileTemp) {            
+            {
+                $profileTempNickname = $profileTemp->getNickname();
+                $profileTempLevel = $profileTemp->getLevel();
+            }
+            
+            Logger::info("Perfil (temp) => nickname:'{$profileTemp->getNickname()}' | level:'$profileTempLevel'.");
+            
+            if ($wantedProfileNickname == $profileTempNickname)  {
+                Logger::success("O usuário atual possui o perfil solicitado ('$wantedProfileNickname').");
                 return true;
             }
+            
+            if($profileTempLevel <= $wantedProfileLevel){                
+                Logger::success("O perfil atual em análise do usuário, possui NÍVEL MENOR OU IGUAL ao do perfil solicitado ($profileTempLevel <= $wantedProfileLevel).");
+                return true;
+            }
+            
+            Logger::warning("O perfil atual em análise do usuário, NÃO possui NÍVEL MENOR OU IGUAL ao do perfil solicitado ($profileTempLevel > $wantedProfileLevel).");
         }
         return false;
     }
@@ -163,7 +193,7 @@ class User extends Model implements ModelDatabase
                 }
             }
             { // verificacao de alteracao de senha
-                $password_change = POST('password_change', false);
+                $password_change = $_POST['password_change'] ?? false;
             }
         }
         // =============================================================================
@@ -177,58 +207,26 @@ class User extends Model implements ModelDatabase
             { // password check
                 if ($password_change !== false) {
                     { // parameters
-                        $password_actual = POST('password_actual', false, false);
-                        $password_new = POST('password_new', false, false);
-                        $password_confirmation = POST('password_confirmation', false, false);
+                        $password_actual = Variables::POST('password_actual', false, false);
+                        $password_new = Variables::POST('password_new', false, false);
+                        $password_confirmation = Variables::POST('password_confirmation', false, false);
                     }
                     $user->verifyPasswordUpdate($password_actual, $password_new, $password_confirmation);
                 }
             }
             // deb($user);
             $user->save();            
-            ProcessResult::setSuccess('Alteração de dados realizada com sucesso!');
+            Alert::setSuccess('Alteração de dados realizada com sucesso!');
             $return = true;
         } catch (Exception $e) {
-            ProcessResult::setError($e);
+            //deb($e);
+            Alert::setDanger($e);
             Sessions::set('ControlBadge', $user);
             $return = false;
         }
         return $return;
     }
-
-    // ############################################################################################################################################
-
-    /**
-     * Verifica se existe algum usuario com o login informado.
-     * Caso haja alguma excecao, basta informar o 'id' do usuario
-     * no parametro correspondente.
-     *
-     * @param string $login
-     * @param string $exception__user_id
-     * @throws Exception
-     * @return bool
-     */
-    static function checkLoginExist(string $login, string $exception__user_id = ''): bool
-    {
-        { // query
-            {
-                if (trim($exception__user_id) != '') {
-                    $exception__user_id = " && \$id!=" . intval($exception__user_id) . " ";
-                }
-                $query = " \$login=='$login' " . $exception__user_id;
-            }
-        }
-        $result = (new User())->search($query);
-        $n = sizeof($result);
-        if ($n == 1) {
-            return true;
-        } else if ($n == 0) {
-            return false;
-        } else {
-            throw new Exception("Foram encontrados $n usuários com o mesmo login. Contate o administrador.");
-        }
-    }
-
+    
     // ############################################################################################################################################
 
     /**
@@ -276,17 +274,6 @@ class User extends Model implements ModelDatabase
             throw new Exception("Preencha o nome e tente novamente.");
         }
 
-        { // login
-            $login = trim($this->getLogin());
-            $id = $this->getId();
-            if ($login == '') {
-                throw new Exception("Preencha o login.");
-            }
-            if (User::checkLoginExist($login, $id)) {
-                throw new Exception("O login '$login' já se encontra em uso. Preencha outro valor e tente novamente.");
-            }
-        }
-
         { // email
             $email = trim($this->getEmail());
             $id = $this->getId();
@@ -311,27 +298,27 @@ class User extends Model implements ModelDatabase
 
         { // --- ERROR VERIFICATION
             if ($current_pass === '') {
-                $error_array[] = 'Digite a senha atual.';
+                $error_array[] = 'Digite a senha atual. Tente novamente!';
             }
 
             if (User::password_crypt($current_pass) !== $this->getPassword()) {
-                $error_array[] = 'A senha atual não está correta.';
+                $error_array[] = 'A senha atual não está correta. Tente novamente!';
             }
 
             if ($new_pass === '') {
-                $error_array[] = 'A nova senha não pode ser vazia.';
+                $error_array[] = 'A nova senha não pode ser vazia. Tente novamente!';
             }
 
             if ($new_pass_confirm === '') {
-                $error_array[] = 'A confirmação da nova senha não pode ser vazia.';
+                $error_array[] = 'A confirmação da nova senha não pode ser vazia. Tente novamente!';
             }
 
             if ($new_pass !== $new_pass_confirm) {
-                $error_array[] = 'A confirmação da nova senha não confere.';
+                $error_array[] = 'A confirmação da nova senha não confere. Tente novamente!';
             }
 
             if (User::password_crypt($new_pass) === $this->getPassword()) {
-                $error_array[] = 'A sua nova senha não pode ser igual a senha atual.';
+                $error_array[] = 'A sua nova senha não pode ser igual a senha atual. Tente novamente!';
             }
         }
 
@@ -369,13 +356,25 @@ class User extends Model implements ModelDatabase
     // ############################################################################################################################################
     public function __toString()
     {
+        {
+            $profiles = $this->getProfiles();
+            if(sizeof($profiles)==1){
+                $profile = array_shift($profiles);
+                $profileTitle = 'Perfil:';
+                $profiles = "$profile";
+            }else{
+                $profileTitle = 'Perfís:';
+                $profiles = [];
+                foreach ($profiles as $profile) $profiles[]="$profile";
+                $profiles=implode(', ', $profiles);
+            }
+        }
         $return = "
         <ul class='list list-striped list-bordered-bottom'>
-            <li>Nome: <b>{$this->getName()}</b></li>
-            <li>Login: <b>{$this->getLogin()}</b></li>
+            <li>Nome: <b>{$this->getName()}</b></li>            
             <li>E-mail: <b>{$this->getEmail()}</b></li>
             <li>Telefone(s): <b>{$this->getPhone()}</b></li>
-            <li>" . (sizeof($this->getProfiles()) == 1 ? 'Perfil' : 'Perfís') . ": <b>".implode(', ',$this->getProfilesStr())."</b></li>
+            <li>$profileTitle <b>$profiles</b></li>
         </ul>";
         return $return;
     }

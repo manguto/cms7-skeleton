@@ -23,25 +23,20 @@ use manguto\cms7\libraries\ServerHelp;
     define("APP_SERVER_ROOT_DIR", $cte);
     //deb(APP_SERVER_ROOT_DIR);
 }
+
 // ####################################################################################################
 {  
     {
         $cte = dirname(__DIR__, 2) . DS;
-    }
-    define("APP_DIR_COMPLETE", $cte);
-    //deb(APP_DIR);
-}
-// ####################################################################################################
-{  
-    {
-        $cte = str_replace(APP_SERVER_ROOT_DIR, '', APP_DIR_COMPLETE);
+        $cte = str_replace(APP_SERVER_ROOT_DIR, '', $cte);
     }
     /*
-     * caminho relativo ao dominio
+     * caminho relativo a partir do dominio
      */
     define("APP_DIR_RELATIVE", $cte);
     //deb(APP_DIR_RELATIVE);
 }
+
 // ####################################################################################################
 {   
     $APP_DIRECTORY = ''; 
@@ -86,6 +81,20 @@ use manguto\cms7\libraries\ServerHelp;
      */
     define("APP_URL_ROOT", $cte);
     //deb(APP_URL_ROOT);
+}
+// ####################################################################################################
+{
+    {
+        $cte = 'http://'.$_SERVER['HTTP_HOST'] . APP_URL_ROOT;
+        $cte = str_replace('\\', '/', $cte);
+        //deb($cte);
+    }
+    /**
+     * endereco url do aplicativo
+     * @var string
+     */
+    define("APP_URL_HOST", $cte);
+    //deb(APP_URL_HOST);
 }
 // ####################################################################################################
 {

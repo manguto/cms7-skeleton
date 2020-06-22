@@ -1,24 +1,21 @@
-{include="../_general/open"} {include="../_general/header"} {include="../_general/nav"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"} 
 <section class="container-fluid text-left">
-	{include="../_general/section_top"}
+	<!--info_oldPlace-->
 	<div class="container">
-		<div class="row mt-3 mb-5">
-			<div class="col-12">
-				<div style="margin:20px 35%;">
+		<div class="row mt-1 mb-5">
+			<div class="col-4"></div>
+			<div class="col-4 alert alert-success ml-3 mt-3 pb-4 pr-4">
+				<h4 class="alert-heading mt-2">Entrar</h4>
 				<form action="{#APP_URL_ROOT#}login" method="post">
-					<h2>Entrar</h2>
 					<br />
-					<label for="login">
-						<b>Login:</b>
-					</label>
-					<input type="text" id="login" name="login" value="" class="form-control" required="required" autofocus="autofocus" placeholder="Digite o seu login...">
 					<br />
-					<label for="senha">
-						<b>Senha:</b>
-					</label>
-					<input type="password" id="senha" name="password" value="" class="form-control" required="required" placeholder="Digite a sua senha...">
+					<label for="email"> E-mail: </label>
+					<input type="text" id="email" name="email" value="" class="form-control" required="required" autofocus="autofocus" placeholder="Digite o seu e-mail...">
+					<br />
+					<label for="password"> Senha: </label>
+					<input type="password" id="password" name="password" value="" class="form-control" required="required" placeholder="Digite a sua senha...">
 					<span class="lost_password">
-						<a href="/forgot" title="Clique para saber como recuperar o seu acesso." class="float-right mt-2">Esqueceu a sua senha?</a>
+						<a href="{#APP_URL_ROOT#}forgot" title="Clique para saber como recuperar o seu acesso." class="float-right mt-2">Esqueceu a sua senha?</a>
 					</span>
 					<br />
 					<br />
@@ -26,10 +23,9 @@
 					<input type="submit" value="Entrar" class="btn btn-success float-right">
 					<br />
 					<br />
-					<br />
 				</form>
-				</div>
 			</div>
+			<div class="col-4"></div>
 		</div>
 	</div>
 </section>

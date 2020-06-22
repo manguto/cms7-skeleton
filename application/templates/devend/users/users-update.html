@@ -1,13 +1,13 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<h2>Editar Usuário</h2>
 			</div>
 		</div>
-		<form action="/dev/users/{$user->getid()}/edit" method="post" class="mr-auto ml-auto">
+		<form action="/dev/user/{$user->getid()}/edit" method="post" class="mr-auto ml-auto">
 			<div class="row">
 				<div class="col-12">
 					<label for="name">Nome</label>
@@ -46,7 +46,7 @@
 			</div>
 			<div class="row mt-3">
 				<div class="col-12 text-right">
-					<a href="/dev/users" class="btn btn-danger mr-2">Cancelar</a>
+					<a href="{#APP_URL_ROOT#}dev/users" class="btn btn-danger mr-2">Cancelar</a>
 					<button type="submit" class="btn btn-success">SALVAR</button>
 				</div>
 			</div>
@@ -63,4 +63,4 @@ form .row>div {
 
 	});
 </script>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}

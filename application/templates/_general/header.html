@@ -1,24 +1,66 @@
 <header class="container-fluid text-center no-print {#APP_PLATFORM#}">
 	<div class="container">
 		<div class="row">
-			<div class="col-10 text-left">				
+			<div id="title" class="col-9 text-left">
 				<h1>
-					<a id="title" href='{#APP_URL_ROOT#}' title="{#APP_SHORT_NAME#}"> {#APP_SHORT_NAME#} </a>
-				</h1>				
+					<a href='{#APP_URL_ROOT#}' title="{#APP_SHORT_NAME#}"> {#APP_SHORT_NAME#} </a>
+				</h1>
 			</div>
-			<div class="col-2">
-				{if="application\core\Access::checkUserLogged()==false"}
-				<a href="{#APP_URL_ROOT#}login" class="float-right ml-1" title="Clique para efetuar o login no sistema (LOGIN).">Entrar</a>
-				{else}
-				<a href="{#APP_URL_ROOT#}badge" class="float-right ml-1" title="Clique para alterar os seus dados.">{func="application\core\Access::getSessionUserAttribute('name')"}</a>
-				<br/>									
-				<a href="{#APP_URL_ROOT#}dev" class="float-right ml-2" title='Acessar a plataforma de DESENVOLVIMENTO'>DEV</a>
-				<a href="{#APP_URL_ROOT#}admin" class="float-right ml-2" title='Acessar a plataforma ADMINISTRATIVA'>ADM</a>					
-				<a href="{#APP_URL_ROOT#}" class="float-right ml-2" title='Acessar a plataforma do SITE'>SITE</a>
-				<br/>			
-				<a href="{#APP_URL_ROOT#}logout" class="float-right ml-2" title="Sair do sistema (LOGOUT).">Sair</a>				
-				{/if}
+			<div class="col-3 text-right">
+
+				<div class="row">
+					<div class="col-12 user-menu">
+						{if="application\core\Access::checkUserLogged()==false"}
+						<a href="{#APP_URL_ROOT#}login" class="float-right ml-1 login" title="Clique para efetuar o login no sistema (LOGIN).">
+							<img src="public/img/icons/login.png" class="icon icon-24" />
+						</a>
+						{else}
+						<a href="{#APP_URL_ROOT#}logout" class="float-right ml-1 logout" title="Sair do sistema (LOGOUT).">
+							<img src="{#APP_URL_ROOT#}public/img/icons/logout.png" class="icon icon-16" />
+						</a>
+						<a id="user_name" href="{#APP_URL_ROOT#}badge" class="float-right ml-1" title="Clique para alterar os seus dados pessoais."> {func="application\core\Access::getSessionUserAttribute('name')"} </a>
+						{/if}
+					</div>
+
+
+					<div class="col-12 platform-menu">
+						{if="application\core\Access::checkUserLogged()!=false"}
+						<span>
+							{if="application\core\Access::checkUserProfiles(['dev'])"}
+							<a href="{#APP_URL_ROOT#}dev" class="float-right ml-2" title='Acessar a plataforma de DESENVOLVIMENTO'>
+								<img src="{#APP_URL_ROOT#}public/img/icons/devend.png" class="icon icon-24" />
+							</a>
+							{/if}
+							<!--  -->
+							{if="application\core\Access::checkUserProfiles(['dev','admin'])"}
+							<a href="{#APP_URL_ROOT#}admin" class="float-right ml-2" title='Acessar a plataforma ADMINISTRATIVA'>
+								<img src="{#APP_URL_ROOT#}public/img/icons/backend.png" class="icon icon-24" />
+							</a>
+							{/if}
+							<!--  -->
+							{if="application\core\Access::checkUserProfiles(['dev','admin','user'])"}
+							<a href="{#APP_URL_ROOT#}" class="float-right ml-2" title='Acessar o SITE'>
+								<img src="{#APP_URL_ROOT#}public/img/icons/frontend.png" class="icon icon-24" />
+							</a>
+							{/if}
+						</span>
+						{/if}
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </header>
+
+<nav class="container-fluid text-left no-print">
+	<div class="container">
+		<div class="row pt-1 pb-2">
+			<div id="main-menu" class="col-10">{include="_menu"}</div>
+			<div id="user-menu" class="col-2 text-right">
+				<a href="javascript:history.back(0);" class='float-right back' title="Clique para voltar à página anterior.">
+					<img src="{#APP_URL_ROOT#}public/img/icons/back.png" class="icon icon-24" />
+				</a>
+			</div>
+		</div>
+	</div>
+</nav>

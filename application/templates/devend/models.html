@@ -1,6 +1,6 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container">
 		<div class="row" style='border-bottom: dotted 1px #ddd;'>
 			<div class="col-12">
@@ -9,7 +9,7 @@
 		</div>
 		<div class="row p-2 pt-4 pb-4 mb-4" style='border-bottom: dotted 1px #ddd;'>
 		 	<div class="col-12">		 		
-		 		<a href="/dev/models/initialize" class="btn btn-sm btn-primary">Inicializar/Atualizar</a>
+		 		<a href="{#APP_URL_ROOT#}dev/models/initialize" class="btn btn-sm btn-primary">Inicializar/Atualizar</a>
 		 		<br />
 		 		<small>Inicializar e/ou atualizar os repositórios dos módulos do sistema.</small>		 		
 		 	</div>
@@ -255,4 +255,4 @@
 	
 	
 </script>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}

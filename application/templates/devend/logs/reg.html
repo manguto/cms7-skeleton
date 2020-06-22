@@ -1,0 +1,33 @@
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+
+<section class="container-fluid text-left">
+	<!--info_oldPlace-->
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h4>Logs</h4>
+				<h3>{$day}</h3>
+				<h2>{$ip}</h2>
+				<hr />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">				
+				Selecione um Registro:
+				<br />
+				<br />
+				<ul>
+					{loop="$logs"}
+					<li>
+						<a href="{#APP_URL_HOST#}logs/{$day}/{$ip}/{$key}" class="link" target="_blank">{$value['show']} | {$value['size']}kb</a>
+					</li>
+					{/loop}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+{include="../devend/logs/_css"}
+{include="../devend/logs/_js"}
+{include="../_general/footer"} {include="../_general/close"}
+

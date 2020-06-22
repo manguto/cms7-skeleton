@@ -1,15 +1,15 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
 	<script>
 		$(document).ready(function() {
 
 		});
 	</script>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container usuarios">
 		<h2>Lista de Usuários</h2>
 		<br />
-		<a href="/dev/users/create" class='btn btn-success btn-sm float-right'>Cadastrar Usuário</a>
+		<a href="{#APP_URL_ROOT#}dev/user/create" class='btn btn-success btn-sm float-right'>Cadastrar Usuário</a>
 		<br />
 		<br />
 		<table class='table table-bordered table-striped table-hover' data-sort-name="id" data-sort-order="asc" data-pagination="true" data-search="true">
@@ -34,9 +34,9 @@
 					<td>{if="$value->checkProfile('admin') == TRUE"}Sim{else}Não{/if}</td>
 					<td>{if="$value->checkProfile('dev') == TRUE"}Sim{else}Não{/if}</td>
 					<td>
-						<a href="/dev/users/{$value->getid()}" class='btn btn-sm btn-success mb-2 mr-2'>Visualizar</a>
-						<a href="/dev/users/{$value->getid()}/edit" class='btn btn-sm btn-warning mb-2 mr-2'>Editar</a>
-						<a href="/dev/users/{$value->getid()}/delete" class='btn btn-sm btn-danger mb-2 mr-2' onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
+						<a href="{#APP_URL_ROOT#}dev/user/{$value->getid()}" class='btn btn-sm btn-success mb-2 mr-2'>Visualizar</a>
+						<a href="{#APP_URL_ROOT#}dev/user/{$value->getid()}/edit" class='btn btn-sm btn-warning mb-2 mr-2'>Editar</a>
+						<a href="{#APP_URL_ROOT#}dev/user/{$value->getid()}/delete" class='btn btn-sm btn-danger mb-2 mr-2' onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</a>
 					</td>
 				</tr>
 				{/loop}
@@ -64,4 +64,4 @@
 		}, 200);
 	});
 </script>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}

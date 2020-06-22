@@ -1,0 +1,42 @@
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+<section id="badge">
+	<!--info_oldPlace-->
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1>Dados Pessoais</h1>
+				<hr />
+				<br />
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="col-12">
+					<div class="title">Nome:</div>					
+					<div class="value">{$user->getName()}</div>					
+					<br/>
+					<div class="title">E-mail:</div>
+					<div class="value">{$user->getEmail()}</div>					
+					<br/>
+					<div class="title">Telefone:</div>
+					<div class="value">{$user->getPhone()}</div>					
+					<br/>
+					<br/>												
+					<a href="{#APP_URL_ROOT#}badge/edit" class="btn btn-warning mt-2 float-right" title="Clique aqui para modificar os seus dados pessoais">Modificar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<style>
+#badge .title{
+	font-size: 14px;
+}
+#badge .value{
+	font-size: 22px;
+	padding-left: 5px;
+}
+</style>
+{include="../_general/footer"} {include="../_general/close"}

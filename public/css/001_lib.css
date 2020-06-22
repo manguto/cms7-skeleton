@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-/* ######################################################################################################################## */
+/* ################################################################################################################## GERAL */
+/* ################################################################################################################## GERAL */
+/* ################################################################################################################## GERAL */
 html {
 	background: #fff;
 }
@@ -20,96 +22,299 @@ body * {
 	
 }
 
-body #log{
-	display: none;
-}
-
-body div.container {
-	padding: 5px 10px;
-}
-
-body #log {
-	position: absolute;
-	opacity: 0.5;
-	background: #ffa;
-	padding: 10px 20px;
-	margin: 10px 20px;
-	z-index: 1;
-}
-
 div {
-	font-size: 12px;
-}
-
-a {
-	color: #800;
-}
-
-a:hover {
-	color: #f00;
-	text-shadow: 0px 1px 1px #aaa;
-	text-decoration: none;
+	
 }
 
 h1, h2, h3, h4, h5 {
 	
 }
 
-/* ######################################################################################################################## */
+a {
+	color: #050;
+}
+
+a:hover {
+	color: #f00;
+	text-shadow: 0px 1px 3px #ccc;
+	text-decoration: none;
+}
+
+table {
+	
+}
+
+form {
+	
+}
+
+label {
+	cursor: pointer;
+}
+
+/* ####################################### IMAGES */
+/* ####################################### IMAGES */
+/* ####################################### IMAGES */
+
+.icon {
+	
+}
+
+.icon.icon-16 {
+	width: 16px;
+}
+
+.icon.icon-24 {
+	width: 24px;
+}
+
+.icon.icon-32 {
+	width: 32px;
+}
+
+.icon.icon-64 {
+	width: 64px;
+}
+
+/*icones de links 'onMouseHouver' */
+a .icon:hover {
+	filter: invert(11%) sepia(100%) saturate(6146%) hue-rotate(3deg) brightness(99%) contrast(117%);
+}
+
+
+.image {
+	margin:0;
+	padding: 0;
+}
+
+.image-48 {
+	width: 48px;
+}
+
+.image-64 {
+	width: 64px;
+}
+.image-128 {
+	width: 128px;
+}
+
+/* ####################################### LISTAS */
+/* ####################################### LISTAS */
+/* ####################################### LISTAS */
+
+/* ##################### UL */
+/* ##################### UL */
+/* ##################### UL */
+
+ul.list {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 0px 0px 0px 0px;
+	list-style: none;
+}
+
+ul.list li {
+	margin-left: 0px;
+	padding: 7px 14px 7px 14px;
+}
+
+ul.list.list-bordered li {
+	border: solid 1px #dddddd;
+}
+
+ul.list.list-bordered-top li {
+	border-top: solid 1px #dddddd;
+}
+
+ul.list.list-bordered-bottom li {
+	border-bottom: solid 1px #dddddd;
+}
+
+ul.list.list-striped li:nth-of-type(odd) {
+	background: #f5f5f5;
+}
+
+ul.list.list-striped li:nth-of-type(even) {
+	background: #fefefe;
+}
+
+ul.list.list-hover li:hover {
+	background: #f0f0f0;
+}
+
+/* ##################### OL */
+/* ##################### OL */
+/* ##################### OL */
+
+ol.list {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+ol.list li {
+	padding: 7px 14px 7px 14px;
+	border-radius: 3px;
+}
+
+ol.list.list-bordered li {
+	border: solid 1px #dddddd;
+}
+
+ol.list.list-bordered-top li {
+	border-top: solid 1px #dddddd;
+}
+
+ol.list.list-bordered-bottom li {
+	border-bottom: solid 1px #dddddd;
+}
+
+ol.list.list-striped li:nth-of-type(odd) {
+	background: #f5f5f5;
+}
+
+ol.list.list-striped li:nth-of-type(even) {
+	background: #fefefe;
+}
+
+ol.list.list-hover li:hover {
+	background: #f0f0f0;
+}
+
+
+/* ################################################################################################### REGIOES */
+/* ################################################################################################### REGIOES */
+/* ################################################################################################### REGIOES */
+
+/* ################################################################################# COMUM */
+header, nav, section, footer {
+	border-bottom: solid 1px #f5f5f5;
+	background: #fefefe;
+	margin-bottom: 2px;
+}
+
+/* ######################################################### HEADER */
 header {
 	
 }
 
+header #title {
+	
+}
+
+header #title h1 {
+	
+}
+
+header #title h1 a {
+	
+}
+
+header #user-menu {
+	
+}
+
+header #user-menu #user_name {
+	font-size: 14px;
+}
+
+header #platform-menu {
+	
+}
+
+header #platform-menu a {
+	
+}
+
+header #platform-menu a img {
+	
+}
+
+/* ############################################################ NAV */
 nav {
 	
 }
+nav #main-menu{
+	
+}
+nav #user-menu{
+	
+}
+nav #user-menu a.back{
+	
+}
+nav #user-menu a.login{
+	
+}
+nav #user-menu a.logout{
+	
+}
+nav #user-menu a.back img{
+	
+}
 
+
+/* ########################################################### INFO */
+div#info {
+	
+}
+
+div#info #alert-area {
+	
+}
+
+div#info #alert-area {
+	padding-top: 20px;
+}
+
+div#info #alert-area a.toggle {
+	position: absolute;
+	margin: -17px 15px 0px 0px;
+	right: 0;
+	z-index: 999;
+	font-size: 9px;
+	color: #ccc;
+}
+
+div#info #alert-area a.toggle:hover {
+	color: #555;
+}
+
+div#info #alert-area .alert {
+	padding: 15px 15px 15px 20px;
+	margin: 0px 0px 5px 0px;
+	font-size: 12px;
+}
+
+/* ########################################################## MAIN */
 section {
-	min-height: 500px;
+	min-height: 480px;
+	padding-bottom:20px;
 }
 
-/* ################################################################### process results */
-#alert-area {
-	
-}
-
-#process-result-area {
-	
-}
-
-#process-result-area a.toggle {
-	font-size:10px;
-	color:#ccc;
-}
-
-#process-result-area .process-result {
-	
-}
-
-#process-result-area .process-result .alert {
-	
-}
-
-/* ################################################################### process results */
+/* ######################################################### FOOTER */
 footer {
 	
 }
 
 footer .content {
-	padding:20px 0px;
-}
-
-header, nav, section, footer {
-	/*border-bottom: solid 2px rgba(0,0,0, 0);/**/
-	/*background: rgba(100, 100, 100, 0.1); /**/
-	background: #fff;
-	margin-bottom: 2px;
+	padding: 20px 0px;
+	font-size:12px;
+	line-height: 130%;
 }
 
 /* ######################################################################################################################## */
-/*header>div.container, nav>div.container, section>div.container, footer>div.container {
-	border-right: solid 1px #eee;
-	border-bottom: solid 1px #eee;
-}/**/
-
 /* ######################################################################################################################## */
+/* ######################################################################################################################## */
+
+/* ################################################################################################### AJUDA INICIO >>> */
+/* ################################################################################################### AJUDA INICIO >>> */
+/* ################################################################################################### AJUDA INICIO >>> */
+
+/* ############################################################################### IMAGENS */
+
+/* ######## Alterar a cor da imagem (https://codepen.io/sosuke/pen/Pjoqqp) */
+/* Ex.VERMELHO =>	filter: invert(11%) sepia(100%) saturate(6146%) hue-rotate(3deg) brightness(99%) contrast(117%); */
+
+/* ###################################################################################################### AJUDA FIM <<< */
+/* ###################################################################################################### AJUDA FIM <<< */
+/* ###################################################################################################### AJUDA FIM <<< */

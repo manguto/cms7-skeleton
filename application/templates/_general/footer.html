@@ -2,26 +2,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 content">
-				<a href="mailto:{#APP_EMAIL#}" class="link">{#APP_EMAIL#}</a>
+				<a href="{#APP_URL_ROOT#}" class="" target="_blank" title="Clique para acessar a página principal">
+					{#APP_ABREV#} - {#APP_FULL_NAME#}
+				</a>
+				<br/>
+				<a href="mailto:{#APP_EMAIL#}" class="link" title="Clique para enviar uma mensagem de e-mail para {#APP_EMAIL#}">
+					{#APP_EMAIL#} <img src="{#APP_URL_ROOT#}public/img/icons/email.png" class="icon icon-24" style="margin-bottom:2px;"/>
+				</a>
 			</div>
 		</div>		
 	</div>
 </footer>
-<div class="container_large" style="margin-top: 20px; padding: 0 20px;">
-	<div class="row">
-		<div class="col-12" id="logger"></div>
-	</div>
-</div>
-<style>
-#logger * {
-	text-align: left;
-}
-</style>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$.post('logs/index.php', function(data) {
-			$('#logger').html('<pre>' + data + '</pre>');
-			//$('#logger').html(data);
-		});
-	});
-</script>

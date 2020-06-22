@@ -3,7 +3,7 @@ namespace application\controllers\frontend;
 
 use application\core\Controller;
 use application\core\Route;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Alert;
 use application\core\Access;
 use application\core\View;
 
@@ -13,24 +13,35 @@ class ControllerLogin extends Controller
     static function RouteMatchCheck(Route $route)
     {
         $route->get('/login', function () {
-            Access::resetSession();
+            Access::unsetSessionUser();
             View::PageFrontend("login");
         });
 
         $route->post('/login', function () {
 
-            if (Access::checkUserCredentials(($_POST['login'] ?? false), ($_POST['password'] ?? false))) {
-                ProcessResult::setSuccess('Credenciais validadas com sucesso! <br/>Bem Vindo(a)!');
+            {//TESTE DE CREDENCIAIS!
+                {
+                    $email = $_POST['email'] ?? false;
+                    $password = $_POST['password'] ?? false;
+                }
+                $user_id = Access::checkUserCredentials($email,$password);
+                //deb($user_id);
+            }
+            if ($user_id!==false) {
+                Access::setSessionUser_id($user_id);
+                $user = Access::getSessionUser();
+                Alert::setSuccess('Credenciais validadas com sucesso! <br/>Bem Vindo(a) '.$user->getName().'!');                
                 Controller::HeaderLocation('/');
             } else {
-                ProcessResult::setError('As credenciais informadas são inválidas!<br/>Tente novamente.');
-                Access::resetSession();
+                Access::unsetSessionUser();
+                Alert::setDanger('As credenciais informadas não são válidas!<br/>Por favor, tente novamente!');                
                 Controller::HeaderLocation('/login');
             }
         });
 
         $route->get('/logout', function () {
-            Access::resetSession();
+            Access::unsetSessionUser();
+            Alert::setSuccess('Saída realizada com sucesso!');
             Controller::HeaderLocation("/");
         });
     }

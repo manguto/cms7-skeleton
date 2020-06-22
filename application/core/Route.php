@@ -22,7 +22,7 @@ class Route
 
     public function __construct()
     {
-        Logger::info('Rota inicializado - '.__METHOD__);
+        Logger::info('Rota inicializado');
 
         // obtem o metodo solicitado pela rota
         $this->method = strtoupper(ServerHelp::getRequestMethod());

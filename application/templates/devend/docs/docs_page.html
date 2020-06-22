@@ -1,11 +1,11 @@
-{include="_general/open"} {include="_general/header/header"}
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
-	<div class="container mt-0 mb-0 pt-0 pb-0">{include="_general/_section_top"}</div>
+	<!--info_oldPlace-->
 	<div class="container text-right mb-3 pb-2" style="border-bottom: solid 1px #eee;">
-		<a href="/dev/docs" class="clear">Documentações</a> - {$pageTitle}		
+		<a href="{#APP_URL_ROOT#}dev/docs" class="clear">Documentações</a> - {$pageTitle}		
 	</div>
 	<div class="container docs">
 		{include="$include"}				
 	</div>
 </section>
-{include="_general/_footer/footer"} {include="_general/close"}
+{include="../_general/footer"} {include="../_general/close"}

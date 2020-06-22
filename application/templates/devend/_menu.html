@@ -1,19 +1,19 @@
-{if="application\core\Access::checkUserLogged()"}
-	
-{/if}
+{if="application\core\Access::checkUserProfiles(['dev'])"}
 
-{if="application\core\Access::checkUserProfile('dev')"}
-	<!-- <a href='/dev' class='btn btn-light mr-3' title="Home">Home</a> -->	
+	<!-- <a href='{#APP_URL_ROOT#}dev' class='btn btn-light mr-3' title="Home">Home</a> -->	
 	
-	<!-- <a href='/dev/docs' class='btn btn-sm btn-light mr-1' title="Documentações para implementação do Sistema">Documentos</a>  -->			
-	<!-- <a href='/dev/models' class='btn btn-sm btn-light mr-1' title="Modelos do Sistema">Modelos</a> -->	
-	<!--<a href='/dev/repository' class='btn btn-sm btn-light mr-1' title="Repositórios do Sistema">Repositórios</a> -->		
-	<a href='/dev/tools' class='btn btn-sm btn-light mr-1' title="Ferramentas de suporte ao Desenvolvimento">Ferramentas</a>
+	<!-- <a href='{#APP_URL_ROOT#}dev/docs' class='btn btn-sm btn-light mr-1' title="Documentações para implementação do Sistema">Documentos</a>  -->			
+	<!-- <a href='{#APP_URL_ROOT#}dev/models' class='btn btn-sm btn-light mr-1' title="Modelos do Sistema">Modelos</a> -->	
+	<!--<a href='{#APP_URL_ROOT#}dev/repository' class='btn btn-sm btn-light mr-1' title="Repositórios do Sistema">Repositórios</a> -->		
+	<!-- <a href='{#APP_URL_ROOT#}dev/tools' class='btn btn-sm btn-light mr-1' title="Ferramentas de suporte ao Desenvolvimento">Ferramentas</a> -->
 
-	<a href='/dev/users' class='btn btn-sm btn-light mr-1' title="Usuários do Sistema">Usuários</a>
-	<a href='/dev/modules' class='btn btn-sm btn-light mr-1' title="Módulos Externos do Sistema">Módulos</a>
-	<!-- <a href='/dev/log' class='btn btn-sm btn-light mr-1' title="Registros de acesso ao Sistema">Registros</a> -->	
-	<a href='/dev/sync' class='btn btn-sm btn-warning mr-1' title="Sincronização de arquivos da Base com os da Produção e vice-versa.">Produção x Base (Sincronização)</a>
-	<a href='/dev/manutencao' class='btn btn-sm btn-danger mr-1' title="Controle de Acesso - MANUTENÇÃO">Manutenção</a>
+	<a href='{#APP_URL_ROOT#}dev/users' class='btn btn-sm btn-light mr-1' title="Usuários do Sistema">Usuários</a>
+	<a href='{#APP_URL_ROOT#}dev/profiles' class='btn btn-sm btn-light mr-1' title="Perfis do Sistema">Perfis</a>
+	<a href='{#APP_URL_ROOT#}dev/logs' class='btn btn-sm btn-light mr-1' title="Registros do Sistema">Logs</a>
+	
+	<!-- <a href='{#APP_URL_ROOT#}dev/modules' class='btn btn-sm btn-light mr-1' title="Módulos Externos do Sistema">Módulos</a> -->
+	<!-- <a href='{#APP_URL_ROOT#}dev/log' class='btn btn-sm btn-light mr-1' title="Registros de acesso ao Sistema">Registros</a> -->	
+	<!-- <a href='{#APP_URL_ROOT#}dev/sync' class='btn btn-sm btn-warning mr-1' title="Sincronização de arquivos da Base com os da Produção e vice-versa.">Produção x Base (Sincronização)</a> -->
+	<!-- <a href='{#APP_URL_ROOT#}dev/manutencao' class='btn btn-sm btn-danger mr-1' title="Controle de Acesso - MANUTENÇÃO">Manutenção</a> -->
 		
 {/if}

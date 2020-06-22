@@ -13,7 +13,7 @@ class ControllerZzz extends Controller
     {
         $route->get('/dev/zzz', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             ViewZzz::PageDevend('zzz');
         });

@@ -1,16 +1,18 @@
 <?php
 namespace application\core;
 
+use manguto\cms7\libraries\Logger;
+
 class View
 {
 
-    const FRONTEND_DIR = APP_TPL_DIR . 'frontend' . DS;
+    const FRONTEND_TEMPLATE_DIR = APP_TPL_DIR . 'frontend' . DS;
 
-    const BACKEND_DIR = APP_TPL_DIR . 'backend' . DS;
+    const BACKEND_TEMPLATE_DIR = APP_TPL_DIR . 'backend' . DS;
 
-    const DEVEND_DIR = APP_TPL_DIR . 'dev' . DS;
+    const DEVEND_TEMPLATE_DIR = APP_TPL_DIR . 'devend' . DS;
 
-    const OTHERS_DIR = APP_TPL_DIR;
+    const EXTRA_TEMPLATE_DIR = APP_TPL_DIR . '_extra' . DS;
 
     const MODULES_DIR = '..' . DS . '..' . DS . 'modules' . DS;
 
@@ -19,34 +21,34 @@ class View
     // ####################################################################################################
     static function PageFrontend(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::FRONTEND_DIR);
+        $page = new Page(self::FRONTEND_TEMPLATE_DIR);
         $page->loadTpl($templateFilename, $parameters);
-        return $page->run($toString);
+        return self::PageRun($page, $toString);
     }
 
     static function PageBackend(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::BACKEND_DIR);
+        $page = new Page(self::BACKEND_TEMPLATE_DIR);
         $page->loadTpl($templateFilename, $parameters);
-        return $page->run($toString);
+        return self::PageRun($page, $toString);
     }
 
     static function PageDevend(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::DEVEND_DIR);
+        $page = new Page(self::DEVEND_TEMPLATE_DIR);
         $page->loadTpl($templateFilename, $parameters);
-        return $page->run($toString);
+        return self::PageRun($page, $toString);
     }
 
-    static function PageOther(string $templateFilename, array $parameters = [], bool $toString = false)
+    static function PageExtra(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::OTHERS_DIR);
+        $page = new Page(self::EXTRA_TEMPLATE_DIR);
         $page->loadTpl($templateFilename, $parameters);
-        return $page->run($toString);
+        return self::PageRun($page, $toString);
     }
 
     // ####################################################################################################
-    // ####################################################################################################
+    // ####################################################################################### MODULE PAGES
     // ####################################################################################################
     
     static function PageFrontendModule(string $templateFilename, array $parameters = [], bool $toString = false)
@@ -64,6 +66,14 @@ class View
         return self::PageDevend(self::MODULES_DIR . $templateFilename, $parameters, $toString);
     }
 
+    // ####################################################################################################
+    // ##################################################################################### STATIC PRIVATE
+    // ####################################################################################################
+    static private function PageRun(Page $page, bool $toString)
+    {
+        Logger::success(str_repeat('@', 70) . ' - END! ' . APP_ITERATION);
+        return $page->run($toString);
+    }
     // ####################################################################################################
     // ####################################################################################################
     // ####################################################################################################

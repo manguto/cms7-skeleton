@@ -11,12 +11,12 @@ class ControllerHome extends Controller
 
     static function RouteMatchCheck(Route $route)
     {
+        // ##################################################
         $route->get('/dev', function () {
-            Access::CheckUserProfiles([
-                "developer"
-            ]);
-            View::PageDevend('index');
-        });
+            Access::Concierge("dev");
+            View::PageDevend('home');
+        });        
+        // ##################################################
     }
 }
 

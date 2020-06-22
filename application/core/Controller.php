@@ -4,7 +4,7 @@ namespace application\core;
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Files;
-use manguto\cms7\libraries\ProcessResult; 
+use manguto\cms7\libraries\Alert; 
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Sessions;
 use manguto\cms7\libraries\Logger;
@@ -19,7 +19,7 @@ class Controller
     // ####################################################################################################
     public function __construct()
     {
-        Logger::info('Controladora mae inicializada - '.__METHOD__);        
+        Logger::info('Controladora mae inicializada');        
         $this->access = new Access();
         $this->route = new Route();
     }
@@ -30,7 +30,7 @@ class Controller
      */
     public function Run()
     {
-        Logger::info('Execucao da controladora mae - '.__METHOD__);        
+        Logger::info('Execucao da controladora mãe');        
         {
             $rawURL = Strings::removeRepeatedOccurrences('/', $this->route->getRawURL());
             Logger::info("URL (ROTA) SOLICITADA >>> '".$this->route->getURL()."' <<<");
@@ -41,15 +41,17 @@ class Controller
         }        
         
         foreach ($controllers as $controller) {
-            Logger::info('Verificando a controladora: '.str_replace(APP_APPLICATION_DIR, '', $controller));
+            //Logger::info('Verificando a controladora: '.str_replace(APP_APPLICATION_DIR, '', $controller));
             $controller::RouteMatchCheck($this->route);
         }
         
-        $msgError = "Não foi possível encontrar uma rota para o endereço solicitado ($rawURL).";
-        ProcessResult::setWarning($msgError);
-        Logger::error($msgError);
-        Logger::info('Redirecionamento para página de erro (404) solicitado...');
-        Controller::HeaderLocation('/404');
+        {//rota nao encontrada!!!
+            $msgError = "Não foi possível encontrar uma rota para o endereço solicitado ($rawURL).";
+            Alert::setWarning($msgError);
+            Logger::error($msgError);
+            Logger::info('Redirecionamento para página de erro (404) solicitado...');
+            Controller::HeaderLocation('/404');
+        }        
     }
 
     // ####################################################################################################
@@ -121,7 +123,7 @@ class Controller
             Sessions::set('APP_ITERATION',APP_ITERATION);
         }
         $location = ServerHelp::fixURLseparator('../' . APP_URL_ROOT . $route);
-        Logger::info("Redirecionamento via GET solicitado para '$location'");
+        Logger::info("Redirecionamento via GET solicitado para a URL: '$location'");
         header("location:/" . $location);
         if ($die) {
             die();
@@ -179,7 +181,7 @@ class Controller
                 </script>";
         
         echo $html;
-        Logger::info("Redirecionamento via POST solicitado para '$url'");
+        Logger::info("Redirecionamento via POST solicitado para a URL: '$url'");
         if($die){
             exit();
         }

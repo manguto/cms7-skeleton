@@ -11,7 +11,7 @@ $(document).ready(function() {
 	ajudaPopupsVerificacao();
 	
 	//gerencia a exibicao/ocultacao das msgs do ProcessResult
-	processResultHandler();	
+	AlertHandler();	
 
 	//exibicao ocultacao do botao voltar
 	backButtonHandler();

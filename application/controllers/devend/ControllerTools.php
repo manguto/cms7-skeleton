@@ -13,7 +13,7 @@ class ControllerTools extends Controller
     {
         $route->get('/dev/tools', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             View::PageDevend('tools');
         });

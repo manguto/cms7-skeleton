@@ -1,0 +1,62 @@
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+<section id="users">
+	<div class="container">
+		<div class="row mb-3">
+			<div class="col-12">
+				<h2>Lista de Usuários</h2>
+				<h4>(temporário - em desenvolvimento)</h4>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<form method="post">
+					<textarea id="users" name="users">{$users}</textarea>
+					<br />
+					<input type="submit" value="SALVAR" class="btn btn-success float-right">
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<b>Ajuda!</b>
+				<br />
+				<label for="password">Senha:</label>
+				<input type="text" id="password" value="" style="font-size: 12px; width: 25%;">
+				<input type="button" class="btn btn-sm btn-primary" value="Cifrar" onclick="encrypt()" />
+			</div>
+		</div>
+
+	</div>
+
+</section>
+<style>
+#users {
+	
+}
+
+#users textarea {
+	width: 100%;
+	padding: 10px;
+	font-size: 12px;
+	height: 200px;
+	overflow: visible;
+	font-family: monospace;
+}
+</style>
+<script>
+	function encrypt() {
+		p = $('#password').val();
+
+		$.post('{#APP_URL_ROOT#}dev/users/encrypt', {
+			'password' : p
+		}, function(data) {
+			$('#password').val(data);
+		});
+	}
+
+	$(document).ready(function() {
+
+	});
+</script>
+{include="../_general/footer"} {include="../_general/close"}

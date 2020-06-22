@@ -16,7 +16,7 @@ class ControllerLog extends Controller
     {
         $route->get('/dev/log', function () {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             Controller::HeaderLocation('/dev/log/dia/' . date(Logs::formato_data_arquivo_diario));
             exit();
@@ -24,7 +24,7 @@ class ControllerLog extends Controller
 
         $route->get('/dev/log/dia/:day', function ($day) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             {
                 // deb($day);
@@ -42,7 +42,7 @@ class ControllerLog extends Controller
 
         $route->get('/dev/log/ano/:ano', function ($ano) {
             Access::CheckUserProfiles([
-                "developer"
+                "dev"
             ]);
             {
                 $ano_ant = intval($ano) - 1;
