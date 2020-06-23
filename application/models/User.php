@@ -24,19 +24,19 @@ class User extends Model implements ModelDatabase
         [
             'name' => 'Desenvolvedor',
             'password' => 'ved',
-            'email' => 'dev@sis.com',
+            'email' => 'dev',
             'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Administrador',
             'password' => 'mad', // 7538ebc37ad0917853e044b9b42bd8a4
-            'email' => 'adm@sis.com',
+            'email' => 'adm',
             'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Usuário',
             'password' => 'user',
-            'email' => 'user@sis.com',
+            'email' => 'user',
             'phone' => '(XX) X.XXXX-XXXX'
         ]
     ];

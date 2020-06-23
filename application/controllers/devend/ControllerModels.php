@@ -22,7 +22,7 @@ class ControllerModels extends Controller
         });
         // ----------------------------------------------------------------------
         $route->get('/dev/models/initialize', function () {
-            //Access::Concierge(["dev"]);
+            Access::Concierge(["dev"]);
             ModelHelper::Initializer();
             Controller::HeaderLocation('/dev');
         });

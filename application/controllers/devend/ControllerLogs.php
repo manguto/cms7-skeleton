@@ -14,11 +14,13 @@ class ControllerLogs extends Controller
 
     const logsDir = 'logs' . DS;
 
+    const privative_access = false;
+    
     static function RouteMatchCheck(Route $route)
     {
         // ##################################################
         $route->get('/dev/logs', function () {
-            Access::Concierge("dev");
+            if(self::privative_access) Access::Concierge("dev");
             {
                 $logs = self::getHistory();
             }
@@ -26,7 +28,7 @@ class ControllerLogs extends Controller
         });
         // ##################################################
         $route->get('/dev/logs/:day', function ($day) {
-            Access::Concierge("dev");
+            if(self::privative_access) Access::Concierge("dev");
             {
                 $logs = self::getHistory($day);                
             }
@@ -34,7 +36,7 @@ class ControllerLogs extends Controller
         });
         // ##################################################
         $route->get('/dev/logs/:day/:ip', function ($day,$ip) {
-            Access::Concierge("dev");
+            if(self::privative_access) Access::Concierge("dev");
             {
                 $logs = self::getHistory($day,$ip);
                 //deb($logs);
@@ -97,6 +99,7 @@ class ControllerLogs extends Controller
                 'size'=>$size,
             ];
         }
+        arsort($return);
         // deb($return);
         return $return;
     }

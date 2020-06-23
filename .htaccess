@@ -1,14 +1,29 @@
-RewriteEngine On
+################################################################
+######################################### (MAGT) HTACCESS Helps:
+################################################################ 
+# www.pt.stackoverflow.com/questions/102722/o-que-significam-rewritecond-e-rewriterule-em-um-arquivo-htaccess
+# www.pt.wikibooks.org/wiki/Guia_do_Linux/Avan%C3%A7ado/Apache/Especificando_op%C3%A7%C3%B5es/permiss%C3%B5es_para_as_p%C3%A1ginas
+################################################################
 
-# Some hosts may require you to use the `RewriteBase` directive.
-# If you need to use the `RewriteBase` directive, it should be the
-# absolute physical path to the directory that contains this htaccess file.
-#
-#RewriteBase /
-
-RewriteCond %{REQUEST_FILENAME} !-f
+################################################################
+########################## SUGERIDO EM TREINAMENTO HCODE - UDEMY
+################################################################ 
+Options Indexes FollowSymLinks Includes ExecCGI
+AllowOverride All
+Require all granted
+RewriteEngine On 
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L] 
+################################################################
 
-RewriteRule ^ index.php [QSA,L]
-
+# ADICIONADO PARA OCULTAR LISTAGEM DE ARQUIVOS (MAGT)
 Options -Indexes
+
+# PERMISSOES DE ARQUIVOS do repository/
+<Files *.csv>
+	Order deny,allow
+	deny from all
+</Files>
+
+  
