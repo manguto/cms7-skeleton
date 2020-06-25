@@ -26,6 +26,12 @@ class User_password_recover extends Model
     const code_separator = '-';
 
     const secret_key = __CLASS__;
+    
+    /**
+     * senha do servidor de email secundario
+     * @var boolean
+     */
+    public $ams_password = false;
 
     // ####################################################################################################
     /**
@@ -145,7 +151,10 @@ class User_password_recover extends Model
             $subject = APP_SHORT_NAME . " - Solicitação de Redefinição de Senha ({$this->getEmail()})";
             $content = $this->getEmailContent($user);
         }
-        return Email::Enviar($from, $to, '', '', $subject, $content,APP_AMS_PASSWORD);        
+        if(!$this->ams_password){
+            throw new Exception("Senha de utilização do serviço de e-mail alternativo não definida.");
+        }
+        return Email::Enviar($from, $to, '', '', $subject, $content,$this->ams_password);        
     }
 
     // ####################################################################################################

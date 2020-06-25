@@ -14,6 +14,4 @@ define("APP_EMAIL", "contato@sis.com");
 
 define("APP_EMAIL_ADMIN", "admin@sis.com");
 
-define("APP_AMS_PASSWORD", "amburana");
-
 ?>
