@@ -4,7 +4,7 @@ namespace application\models;
 use manguto\cms7\libraries\Exception;
 use manguto\cms7\model\Model;
 use manguto\cms7\model\ModelAttribute;
-use manguto\cms7\model\ModelStart;
+use manguto\cms7\model\ModelSetup;
 use manguto\cms7\database\repository\ModelRepository;
 use manguto\cms7\database\ModelDatabase;
 use manguto\cms7\libraries\Alert;
@@ -17,25 +17,25 @@ use manguto\cms7\libraries\Variables;
 class User extends Model implements ModelDatabase
 {
 
-    use ModelStart;
+    use ModelSetup;
     use ModelRepository;
 
     const default = [
         [
             'name' => 'Desenvolvedor',
-            'password' => 'ved',
+            'password' => '29e0461b02c078c89c7b2ac0b29fbfaf', //reflex
             'email' => 'dev',
             'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Administrador',
-            'password' => 'mad', // 7538ebc37ad0917853e044b9b42bd8a4
-            'email' => 'adm',
+            'password' => 'ee10c315eba2c75b403ea99136f5b48d', //mirror
+            'email' => 'admin',
             'phone' => '(XX) X.XXXX-XXXX'
         ],
         [
             'name' => 'Usuário',
-            'password' => 'user',
+            'password' => 'ee11cbb19052e40b07aac0ca060c23ee', //user
             'email' => 'user',
             'phone' => '(XX) X.XXXX-XXXX'
         ]
@@ -70,11 +70,12 @@ class User extends Model implements ModelDatabase
      */
     public function setPassword(string $value)
     {
-        if (trim($value) == '') {
+        $value = trim($value);
+        if ($value == '') {
             throw new Exception("A senha de usuário não pode ser vazia.");
         } else {
-            // crypt?
-            if (Numbers::is_valid_md5($value) == false) {
+            // cifra apenas caso jah nao esteja cifrado (formato md5)?
+            if (!Numbers::is_valid_md5($value)) {
                 $value = User::password_crypt($value);
             }
             parent::setPassword($value);
@@ -131,7 +132,9 @@ class User extends Model implements ModelDatabase
      */
     public function getProfiles(): array
     {
-        $return = User_profile::getUserProfiles($this->getId());
+        $user_id = $this->getId();
+        //deb($user_id);
+        $return = User_profile::getUserProfiles($user_id);
         //deb($return,0);
         Logger::info("Perfil(is) do usuario atual (".implode(', ', $return).") => ");
         return $return;

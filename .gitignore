@@ -5,8 +5,11 @@
 .buildpath
 ########################################### IGNORAR PASTAS E ARQUIVOS
 .settings/
-repository/
 cache/
 vendor/
 ########################################### IGNORAR APENAS OS ARQUIVOS DAS PASTAS
 application/modules/*
+cache/*
+logs/*
+repository/*
+

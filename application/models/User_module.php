@@ -5,13 +5,13 @@ use manguto\cms7\model\Model;
 use manguto\cms7\database\ModelDatabase;
 use manguto\cms7\database\repository\ModelRepository;
 use manguto\cms7\model\ModelAttribute;
-use manguto\cms7\model\ModelStart;
+use manguto\cms7\model\ModelSetup;
 use manguto\cms7\libraries\Sessions;
 
 class User_module extends Model implements ModelDatabase
 {
     
-    use ModelStart;
+    use ModelSetup;
     use ModelRepository;
 
     /**

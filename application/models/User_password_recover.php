@@ -4,7 +4,7 @@ namespace application\models;
 use manguto\cms7\model\Model;
 use manguto\cms7\model\ModelAttribute;
 use manguto\cms7\database\repository\ModelRepository;
-use manguto\cms7\model\ModelStart;
+use manguto\cms7\model\ModelSetup;
 use manguto\cms7\libraries\Safety;
 use manguto\cms7\libraries\Email;
 use manguto\cms7\libraries\Exception;
@@ -15,7 +15,7 @@ use manguto\cms7\libraries\Logger;
 class User_password_recover extends Model
 {
 
-    use ModelStart;
+    use ModelSetup;
     use ModelRepository;
 
     // prazo de validade da solicitacao de reset de senha (2 horas)

@@ -5,12 +5,13 @@ use manguto\cms7\model\Model;
 use manguto\cms7\database\ModelDatabase;
 use manguto\cms7\database\repository\ModelRepository;
 use manguto\cms7\model\ModelAttribute;
-use manguto\cms7\model\ModelStart;
+use manguto\cms7\model\ModelSetup;
+use manguto\cms7\libraries\Exception;
 
 class User_profile extends Model implements ModelDatabase
 {
     
-    use ModelStart;
+    use ModelSetup;
     use ModelRepository;
 
     const default = [
@@ -54,13 +55,18 @@ class User_profile extends Model implements ModelDatabase
     static function getUserProfiles(int $user_id):array{
         $return = [];
         $user_profiles = (new User_profile())->search(" \$user_id==$user_id ");
+        //deb($user_profiles);
         if(count($user_profiles)>0){
             foreach ($user_profiles as $user_profile){
-                $return[$user_profile->getId()] = new Profile($user_profile->getId());
+                $profile_id = $user_profile->getProfile_id();
+                $return[$profile_id] = new Profile($profile_id);
             }
         }
         return $return;
     }
 }
+
+
+
 
 ?>

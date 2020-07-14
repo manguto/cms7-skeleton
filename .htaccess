@@ -8,9 +8,9 @@
 ################################################################
 ########################## SUGERIDO EM TREINAMENTO HCODE - UDEMY
 ################################################################ 
-Options Indexes FollowSymLinks Includes ExecCGI
-AllowOverride All
-Require all granted
+# Options Indexes FollowSymLinks Includes ExecCGI
+# AllowOverride All
+# Require all granted
 RewriteEngine On 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -25,5 +25,4 @@ Options -Indexes
 	Order deny,allow
 	deny from all
 </Files>
-
   

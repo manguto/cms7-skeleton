@@ -5,12 +5,12 @@ use manguto\cms7\model\Model;
 use manguto\cms7\database\ModelDatabase;
 use manguto\cms7\database\repository\ModelRepository;
 use manguto\cms7\model\ModelAttribute;
-use manguto\cms7\model\ModelStart;
+use manguto\cms7\model\ModelSetup;
 
 class Zzz extends Model implements ModelDatabase
 {
     //metodos basicos 
-    use ModelStart;
+    use ModelSetup;
     
     //tipo de armazenamento (Repository, Mysql, MysqlPDO, etc.)
     use ModelRepository;    
@@ -38,5 +38,6 @@ class Zzz extends Model implements ModelDatabase
         // ---------------------------------------------------
     }
 }
+
 
 ?>

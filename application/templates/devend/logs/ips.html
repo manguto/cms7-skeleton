@@ -6,13 +6,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h4>Logs</h4>
-				<h2>Dia: {$day}</h2>
+				<h2>
+					<a href="{#APP_URL_ROOT#}dev/logs">Logs</a> | 
+					<a href="{#APP_URL_ROOT#}dev/logs/{$day}">{$day}</a>
+				</h2>
 				<hr />
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12">				
+			<div class="col-12">
 				Selecione um IP:
 				<br />
 				<br />
@@ -27,7 +29,7 @@
 		</div>
 	</div>
 </section>
-{include="../devend/logs/_css"}
-{include="../devend/logs/_js"}
-{include="../_general/footer"} {include="../_general/close"}
+{include="../devend/logs/_css"} {include="../devend/logs/_js"} {include="../_general/footer"} {include="../_general/close"}
+
+
 

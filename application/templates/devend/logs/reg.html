@@ -4,16 +4,18 @@
 	<!--info_oldPlace-->
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
-				<h4>Logs</h4>
-				<h3>Dia: {$day}</h3>
-				<h2>IP: {$ip}</h2>
+			<div class="col-12">				
+				<h2>
+					<a href="{#APP_URL_ROOT#}dev/logs">Logs</a> | 
+					<a href="{#APP_URL_ROOT#}dev/logs/{$day}">{$day}</a> | 
+					<a href="{#APP_URL_ROOT#}dev/logs/{$day}/{$ip}">{$ip}</a>
+				</h2>
 				<hr />
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12">				
-				Selecione um Registro:
+				Selecione um Registro para acessar o conteúdo:
 				<br />
 				<br />
 				<ul>
@@ -30,4 +32,5 @@
 {include="../devend/logs/_css"}
 {include="../devend/logs/_js"}
 {include="../_general/footer"} {include="../_general/close"}
+
 

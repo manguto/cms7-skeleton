@@ -5,6 +5,7 @@ use manguto\cms7\libraries\Sessions;
 use application\models\User;
 use manguto\cms7\libraries\Exception;
 use manguto\cms7\libraries\Logger;
+use manguto\cms7\libraries\Alert;
 
 class Access
 {
@@ -54,11 +55,12 @@ class Access
         }
         
         Logger::info("CONCIERGE");
-        if(self::checkUserProfiles($profiles) == true){
-            Logger::success("ACESSO CONCEDIDO.");            
+        if(self::checkUserProfiles($profiles) == true){            
+            Logger::success("ACESSO PERMITIDO");            
         }else{
-            Logger::warning("PERMISSÃO DE ACESSO NEGADA!");
-            Controller::HeaderLocation('/login');            
+            Logger::warning("ACESSO NEGADO. O USUÁRIO NÃO POSSUI O PERFIL NECESSÁRIO!!!");
+            Alert::setWarning('Acesso negado! Contate o Administrador!');
+            Controller::HeaderLocation('/');          
         }
     }
     // ############################################################################################################################################

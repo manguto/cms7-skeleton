@@ -4,7 +4,6 @@ namespace application\core;
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Files;
-use manguto\cms7\libraries\Alert; 
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Sessions;
 use manguto\cms7\libraries\Logger;
@@ -30,12 +29,13 @@ class Controller
      */
     public function Run()
     {
-        Logger::info('Execucao da controladora mãe');        
+                
         {
-            $rawURL = Strings::removeRepeatedOccurrences('/', $this->route->getRawURL());
-            Logger::info("URL (ROTA) SOLICITADA >>> '".$this->route->getURL()."' <<<");
+            $rawURL = Strings::removeRepeatedOccurrences('/', $this->route->getRawURL());            
+            $URL = $this->route->getURL();
+            Logger::info("URL (rota) solicitada: '$URL'.");
         }        
-        {
+        {   
             $controllers = self::GetControllers();
             Logger::info('Controladoras encontradas: '.sizeof($controllers));
         }        
@@ -46,11 +46,12 @@ class Controller
         }
         
         {//rota nao encontrada!!!
-            $msgError = "Não foi possível encontrar uma rota para o endereço solicitado ($rawURL).";
-            Alert::setWarning($msgError);
-            Logger::error($msgError);
-            Logger::info('Redirecionamento para página de erro (404) solicitado...');
-            Controller::HeaderLocation('/404');
+            $msg = "Não foi possível encontrar a página solicitada (<a href='$rawURL'>$URL</a>).";
+            //Alert::setWarning($msgError);
+            Logger::error($msg);
+            //Logger::info('Redirecionamento para página de erro (404) solicitado...');
+            //Controller::HeaderLocation('/404');
+            View::PageFrontend("_404",['msg'=>$msg]);
         }        
     }
 

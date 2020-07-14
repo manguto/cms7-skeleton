@@ -1,0 +1,42 @@
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
+<section id="users_profiles">
+	<div class="container">
+		<div class="row mb-3">
+			<div class="col-12">
+				<h2>Lista de Usuários x Perfis</h2>
+				<h4>(temporário - em desenvolvimento)</h4>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<form method="post">
+					<textarea id="user_profile" name="user_profile">{$users_profiles}</textarea>
+					<br />
+					<input type="submit" value="SALVAR" class="btn btn-success float-right">
+				</form>
+			</div>
+		</div>
+	</div>
+
+</section>
+<style>
+#users_profiles {
+	
+}
+
+#users_profiles textarea {
+	width: 100%;
+	padding: 10px;
+	font-size: 12px;
+	height: 200px;
+	overflow: visible;
+	font-family: monospace;
+}
+</style>
+<script>
+	$(document).ready(function() {
+
+	});
+</script>
+{include="../_general/footer"} {include="../_general/close"}

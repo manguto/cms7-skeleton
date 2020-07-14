@@ -4,12 +4,12 @@ namespace application\models;
 use manguto\cms7\model\Model;
 use manguto\cms7\model\ModelAttribute;
 use manguto\cms7\database\repository\ModelRepository;
-use manguto\cms7\model\ModelStart;
+use manguto\cms7\model\ModelSetup;
 
 class EmManutencao extends Model
 {
 
-    use ModelStart;
+    use ModelSetup;
     use ModelRepository; 
 
     /**
