@@ -19,6 +19,8 @@ class Route
     private $url;
 
     private $parameters;
+    
+    public $route_found = false;
 
     public function __construct()
     {
@@ -152,6 +154,8 @@ class Route
         }
         // ######################################################################
         Logger::success("Rota encontrada com sucesso! [$controller_route_masked]",$variables);
+        $this->route_found = true;
+        // ######################################################################
         return $variables;
     }
 
