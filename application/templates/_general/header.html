@@ -12,7 +12,7 @@
 					<div class="col-12 user-menu">
 						{if="application\core\Access::checkUserLogged()==false"}
 						<a href="{#APP_URL_ROOT#}login" class="float-right ml-1 login" title="Clique para efetuar o login no sistema (LOGIN).">
-							<img src="public/img/icons/login.png" class="icon icon-24" />
+							<img src="{#APP_URL_ROOT#}public/img/icons/login.png" class="icon icon-24" />
 						</a>
 						{else}
 						<a href="{#APP_URL_ROOT#}logout" class="float-right ml-1 logout" title="Sair do sistema (LOGOUT).">
