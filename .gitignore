@@ -1,15 +1,15 @@
 ########################################### NÃO IGNORAR OS ARQUIVOS
-!repository/.htaccess
+!_repository/.htaccess
+!modules/xxx/
 ########################################### IGNORAR OS ARQUIVOS
-.project
 .buildpath
+.project
 ########################################### IGNORAR PASTAS E ARQUIVOS
 .settings/
-cache/
+_cache/
 vendor/
 ########################################### IGNORAR APENAS OS ARQUIVOS DAS PASTAS
-application/modules/*
-cache/*
-logs/*
-repository/*
-
+modules/*
+_cache/*
+_logs/*
+_repository/*

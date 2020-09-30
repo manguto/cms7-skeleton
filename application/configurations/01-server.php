@@ -2,7 +2,19 @@
 use manguto\cms7\libraries\ServerHelp;
 // ####################################################################################################
 {
+    
+    //define a constante que informa se a fase de desenvolvimento esta ativa (debug's)
+    define('DEVELOPMENT',true);
+    
+    //realiza o refresh dos templates 'cacheados' 
+    define('PAGE_REFRESH_CACHE',true);
+    
+}
+// ####################################################################################################
+{
+    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     date_default_timezone_set('America/Recife');
+    
 }
 // ####################################################################################################
 {

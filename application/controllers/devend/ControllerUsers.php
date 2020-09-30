@@ -20,7 +20,7 @@ class ControllerUsers extends Controller
         $route->get('/dev/users', function () {
             Access::Concierge("dev");
             {   
-                $users = Files::obterConteudo(self::filename);
+                $users = Files::getContent(self::filename);
                 $users = utf8_encode($users);
             }
             ViewUsers::get_dev_users_raw($users);
@@ -40,7 +40,7 @@ class ControllerUsers extends Controller
             $users = $_POST['users'];
             //debc($users);
             if($users!==false){
-                Files::escreverConteudo(self::filename, utf8_decode($users));
+                Files::writeContent(self::filename, utf8_decode($users));
                 Alert::setSuccess("Usuários salvos com sucesso!");
             }else{
                 Alert::setWarning("Parâmetros não informados.");

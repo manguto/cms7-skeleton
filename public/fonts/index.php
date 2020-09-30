@@ -157,7 +157,7 @@ class Fonts{
 }
 
 /**
- * START!
+ * Init!
  */
 $Fonts = new Fonts();
 $Fonts->Start();

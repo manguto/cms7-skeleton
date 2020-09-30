@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/manguto/cms7.git",
-                "reference": "dd2ec5a06aeff100e774c31aef12f0646012cc90"
+                "reference": "474bbe56c3e5cb58306aa2a48a2dd286ef7de1af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/manguto/cms7/zipball/dd2ec5a06aeff100e774c31aef12f0646012cc90",
-                "reference": "dd2ec5a06aeff100e774c31aef12f0646012cc90",
+                "url": "https://api.github.com/repos/manguto/cms7/zipball/474bbe56c3e5cb58306aa2a48a2dd286ef7de1af",
+                "reference": "474bbe56c3e5cb58306aa2a48a2dd286ef7de1af",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 }
             ],
             "description": "Content management system suport libraries.",
-            "time": "2020-05-05T00:00:33+00:00"
+            "time": "2020-09-16T19:35:10+00:00"
         }
     ],
     "packages-dev": [],

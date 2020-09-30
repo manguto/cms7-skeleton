@@ -43,7 +43,7 @@ class ControllerToolsRepository extends ControllerTools
                 $repository_array = [];
                 foreach ($repository_filename_array as $repository_filename) {
                     {
-                        $repository_content = utf8_encode(Files::obterConteudo($repository_filename));
+                        $repository_content = utf8_encode(Files::getContent($repository_filename));
                     }
                     {
                         $tablename = Files::getBaseName($repository_filename, false);

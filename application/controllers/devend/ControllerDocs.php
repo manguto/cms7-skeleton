@@ -55,7 +55,7 @@ class ControllerDocs extends Controller
             $pageTitle = ucfirst($page);
         }
         {
-            // $pageContent = Files::obterConteudo(APP_PATH.'docs/'.$page.'.html');
+            // $pageContent = Files::getContent(APP_PATH.'docs/'.$page.'.html');
             $include = "../../../../../$folder/$page";
         }
         return get_defined_vars();

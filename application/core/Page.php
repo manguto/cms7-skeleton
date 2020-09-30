@@ -23,8 +23,8 @@ class Page
     // controla a reutilizacao do cache
     private $parameters;
 
-    // define se deve ser utilizado o arquivo em cache ou reutilizado (fase de testes => TRUE)
-    const REFRESH_CACHE = true;
+    // utilizar arquivo existente ou atualizar? (fase de testes => TRUE)
+    const REFRESH_CACHE = PAGE_REFRESH_CACHE;
 
     // ####################################################################################################
     // ####################################################################################################
@@ -87,7 +87,7 @@ class Page
             return $return;
         } else {
             print $return;
-            exit();
+            //exit(); //removed in 2020-09-29
         }
     }
 
@@ -102,7 +102,7 @@ class Page
             if (! file_exists($tpl_filename_path)) {
                 throw new Exception("O template informado ('{$this->tpl_filename}') não foi encontrado no diretório solicitado ('{$this->tpl_dir}').");
             } else {
-                $return = Files::obterConteudo($tpl_filename_path);
+                $return = Files::getContent($tpl_filename_path);
             }
         }
         return $return;
@@ -122,7 +122,7 @@ class Page
     private function saveTplCache(string $content)
     {
         // save
-        Files::escreverConteudo($this->getTplFilename(), $content);
+        Files::writeContent($this->getTplFilename(), $content);
     }
 
     // ####################################################################################################
@@ -167,7 +167,7 @@ class Page
     private function deleteTplCache()
     {
         // delete
-        Files::excluir($this->getTplFilename());
+        Files::delete($this->getTplFilename());
     }
     // ####################################################################################################
     // ####################################################################################################

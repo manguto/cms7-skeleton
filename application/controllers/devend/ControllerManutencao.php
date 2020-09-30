@@ -4,7 +4,7 @@ namespace application\controllers\devend;
 use application\core\Access;
 use application\core\Controller;
 use application\core\Route;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Alert;
 use application\models\EmManutencao;
 use application\views\frontend\ViewZzz;
 use application\core\View;
@@ -36,7 +36,7 @@ class ControllerManutencao extends Controller
                     $emManutencao = new EmManutencao();
                     $emManutencao->setMotivo($_POST['motivo']);
                     $emManutencao->save();
-                    ProcessResult::setSuccess("Manutenção ativada com sucesso!");
+                    Alert::setSuccess("Manutenção ativada com sucesso!");
                     Controller::HeaderLocation('/dev/manutencao');
                 } else {
                     // DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO!
@@ -45,7 +45,7 @@ class ControllerManutencao extends Controller
                     $emManutencao = new EmManutencao($_POST['id']);
                     $emManutencao->setStatus('inativa');
                     $emManutencao->save();
-                    ProcessResult::setSuccess("Manutenção desativada com sucesso!");
+                    Alert::setSuccess("Manutenção desativada com sucesso!");
                     Controller::HeaderLocation('/dev/manutencao');
                 }
                 $emManutencao = EmManutencao::EmFuncionamento();

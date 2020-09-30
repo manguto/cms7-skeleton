@@ -12,7 +12,7 @@ class Access
 
     public function __construct()
     {
-        Logger::info('Controle de acesso inicializado');
+        Logger::info('Controle de Acesso inicializado');
     }
 
     // ############################################################################################################################################

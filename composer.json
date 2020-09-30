@@ -17,7 +17,7 @@
 			"application\\models\\" : "application/models/",
 			"application\\views\\" : "application/views/",
 			"application\\libraries\\" : "application/libraries/",
-			"application\\modules\\" : "application/modules/"
+			"modules\\" : "modules/"
 		},
 		"files" : [
 			"application/functions/functions.php"

@@ -13,7 +13,7 @@ class ViewRepository extends View
     static function repository()
     {
         {
-            $repositorios = Diretorios::obterArquivosPastas('repository', false, true, false, [
+            $repositorios = Diretorios::obterArquivosPastas(APP_REPOSITORY_DIR, false, true, false, [
                 'csv'
             ]);
             sort($repositorios);

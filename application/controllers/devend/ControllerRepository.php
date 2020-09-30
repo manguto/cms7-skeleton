@@ -2,7 +2,7 @@
 namespace application\controllers\devend;
 
 use application\core\Access;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Alert;
 use application\views\devend\ViewRepository;
 use manguto\cms7\libraries\Exception;
 use application\core\Controller;
@@ -58,7 +58,7 @@ class ControllerRepository extends Controller
                 $register = new $repositoryNameCall($id);
                 // deb($register);
                 $register->delete();
-                ProcessResult::setSuccess("Registro removido com sucesso.");
+                Alert::setSuccess("Registro removido com sucesso.");
                 Controller::HeaderLocation("/dev/repository/$repository");
                 exit();
             }
@@ -104,7 +104,7 @@ class ControllerRepository extends Controller
                 $register->save();
                 // deb($register);
                 $id = $register->getId();
-                ProcessResult::setSuccess($msg);
+                Alert::setSuccess($msg);
                 // Controller::HeaderLocation("/dev/repository/$repository/$id/view");
                 Controller::HeaderLocation("/dev/repository/$repository");
                 exit();

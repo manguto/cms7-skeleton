@@ -9,7 +9,7 @@ use manguto\cms7\libraries\Safety;
 use manguto\cms7\libraries\Email;
 use manguto\cms7\libraries\Exception;
 use application\core\View;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\Logger;
 
 class User_password_recover extends Model
@@ -100,12 +100,12 @@ class User_password_recover extends Model
                 $msg .= "Foi enviada uma mensagem de e-mail para '$email', com as informações necessárias para a realização da sua solicitação.<br/>";
                 $msg .= "Verifique a respectiva caixa de entrada, e siga as instruções contidas nesta mensagem.<br/>";
                 $msg .= "Att,<br/>" . APP_FULL_NAME;
-                ProcessResult::setSuccess($msg);
+                Alert::setSuccess($msg);
             } else {
-                ProcessResult::setError($email_result);
+                Alert::setError($email_result);
             }
         } else {
-            ProcessResult::setError($emailTestResult);
+            Alert::setError($emailTestResult);
         }
     }
 

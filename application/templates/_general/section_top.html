@@ -5,9 +5,9 @@
 		</div>
 		<div class="col-12">
 			<div id="process-result-area">
-				{if="sizeof(manguto\cms7\libraries\ProcessResult::GET())>0"}
+				{if="sizeof(manguto\cms7\libraries\Alert::GET())>0"}
 				<a href='javascript:void(0)' title='Exibir/Ocultar mensagens apresentadas.' class="toggle">Exibir/Ocultar Mensagens</a>
-				{loop="manguto\cms7\libraries\ProcessResult::GET(true)"}
+				{loop="manguto\cms7\libraries\Alert::GET(true)"}
 				<div class="process-result {$value['row_class']} mb-0 mt-0">
 					<div class="alert mb-1 {$value['col_class']}">{$value['msg']}</div>
 				</div>

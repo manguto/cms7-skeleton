@@ -15,11 +15,7 @@ class Controller
 
     private $route_controller = false;
    
-
-    /**
-     * texto presente nos arquivos das controladoras modelos (nao interpretar)
-     * @var array
-     */
+    // texto presente nos arquivos das controladoras modelos (nao interpretar)     
     const ModelControllerFilenameTags = [
         'xxx',
         'yyy',
@@ -28,52 +24,57 @@ class Controller
 
     // ####################################################################################################
     public function __construct()
-    {
-        Logger::info('Controladora mae inicializada');
+    {   
+        Logger::info('Controladora Geral inicializacao');
         $this->access = new Access();
         $this->route = new Route();
     }
 
     // ####################################################################################################
     /**
-     * inicia os procedimentos da classe!
+     * executa os procedimentos fundamentais 
+     * para a montagem da estrutura da aplicacao 
+     * com o tratamento de excecao.
      */
     public function Run()
     {
+        Logger::info('Controladora Geral execucao');
         {//tratamento da rota solicitada
             $rawURL = Strings::removeRepeatedOccurrences('/', $this->route->getRawURL());
             $URL = $this->route->getURL();
-            Logger::info("URL (rota) solicitada: '$URL'.");
+            //$URL = substr($URL, 1);
+            Logger::info("Rota solicitada \"$URL\"");
         }
         {//levantamento das controladoras existentes
+            //Logger::info('Procurando controladoras...');
             $controllers = self::GetControllers();
-            //deb($controllers);
-            Logger::info('Controladoras encontradas: ' . sizeof($controllers));
+            //deb($controllers,0);
+            $nc = sizeof($controllers);
+            Logger::info("$nc controladoras encontradas");
         }
+        //deb(getcwd(),0);
         {//verificacao quanto a existencia de um controladora responsavel para a rota
             foreach ($controllers as $controller) {
-                Logger::info('Verificando a controladora: ' . str_replace(APP_APPLICATION_DIR, '', $controller));
+                Logger::info("Testando a controladora '$controller'");
                 $controller::RouteMatchCheck($this->route);
-            }
-        }
-        {//verificacao e procedimento quanto a rotas não tratadas!
-            
-            // rota nao encontrada!!!
-            if($this->route->route_found==false){ 
-                $msg = "Não foi possível encontrar a página solicitada (<a href='$rawURL'>$URL</a>).";
-                // Alert::setWarning($msgError);
+                if($this->route->route_found==true){
+                    Logger::success('Controladora executada: ' . basename($controller));
+                    break;
+                }
+            }            
+        }        
+        {//verificacao e procedimento quanto a rotas não tratadas!            
+            // rota nao encontrada?
+            if($this->route->route_found==false){                
+                $msg = "A página solicitada não foi encontrada (<a href='$rawURL'>$URL</a>).";
                 Logger::error($msg);
-                // Logger::info('Redirecionamento para página de erro (404) solicitado...');
-                // Controller::HeaderLocation('/404');
                 View::PageFrontend("_404", [
                     'msg' => $msg
                 ]);
             }
         }
-
-        
     }
-
+   
     // ####################################################################################################
 
     /**
@@ -96,7 +97,7 @@ class Controller
             ]);
             foreach ($modules_files as $module_file) {
 
-                $file_content = Files::obterConteudo($module_file);
+                $file_content = Files::getContent($module_file);
                 // verifica se o aruqivo eh um arquivo de controle
                 if (strpos($file_content, ' extends Controller') !== false) {
                     // adicao a lista de arquivos de controle
@@ -155,7 +156,7 @@ class Controller
     {
         { // save iteration! - salva a iteracao para continuacao
             Sessions::set('APP_ITERATION', APP_ITERATION);
-        }
+        }        
         $location = ServerHelp::fixURLseparator('../' . APP_URL_ROOT . $route);
         Logger::info("Redirecionamento via GET solicitado para a URL: '$location'");
         header("location:/" . $location);

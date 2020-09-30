@@ -1,7 +1,58 @@
-//###########################################################################
-//############################## FUNCOES para UTILIZACAO EM FORMULARIOS e CIA
-//###########################################################################
-//###########################################################################
+//#########################################################################################################
+//############################## FUNCOES para UTILIZACAO EM FORMULARIOS e CIA #############################
+//#########################################################################################################
+
+
+//obtem o parametro de interesse dos campos obrigatorios (required)
+function getRequiredFieldProperties(form_selector='form',property_name='id'){
+	var required_fields_props = new Array();
+	var k = 0;
+	$(form_selector+' *').each(function(){
+		//campo obrigatorio?
+		if($(this).prop('required')){	       
+			var id = $(this).prop(property_name);
+			if(''+id+''!=''){
+				//console.log('campo obrigatorio encontrado: '+id);
+				required_fields_props[k]=id;				
+			}else{ 
+				alert('\n\nATENÇÃO! \nFoi encontrado um campo obrigatório sem um identificador ("id").\n\n'+$(this).prop('outerHTML'));				
+			}
+			k++;
+	    }
+	});
+	return required_fields_props;
+}
+
+//#########################################################################################################
+
+//verifica campos obrigatorios e coloca flag no titulo (label) do mesmo
+function flagRequiredFields(){
+	var required_fields_names = getRequiredFieldProperties('form','name');
+	var flag = " <sup style='cursor:pointer; color:#d00;' title='Campo Obrigatório'>*</sup>";
+	$('label').each(function(){
+		var label_for = $(this).prop('for');		
+		var i;
+		for (i = 0; i < required_fields_names.length; ++i) {
+		    var name = required_fields_names[i];		    	    
+		    if(label_for==name){
+		    	var label = $(this);
+		    	var title = label.html();
+		    	
+		    	{//verificacao para impedimento de preenchimento recorrente
+		    		var n = title.indexOf('*');
+		    		if(n<0){
+		    			label.append(flag);		
+		    		}else{
+		    			console.log('Campo '+title+' já sinalizado.');
+		    		}
+		    	}
+		    			    	
+		    }
+		}		
+	});
+}
+
+//#########################################################################################################
 
 //verifica todos os campos INPUT com a classe 'clickCopy' para que quando CLICADOS o seu conteudo seja COPIADO
 function verify_clickCopy_inputFields(){
@@ -13,7 +64,7 @@ function verify_clickCopy_inputFields(){
 		$(this).blur();
 	}).prop('title','CLIQUE PARA COPIAR O CONTEUDO');
 }
-// ###########################################################################
+// #########################################################################################################
 // verifica todos os campos INPUT com a classe 'overMascUnmasc' para que quando
 // o mouse estiver sobre, o conteudo seja revelado
 function verify_overMascUnmasc_inputFields(){
@@ -27,7 +78,7 @@ function verify_overMascUnmasc_inputFields(){
 		input.attr('type', 'password');		
 	});
 }
-// ###########################################################################
+// #########################################################################################################
 function combo_ordenar(selector,asc=true,reset=true){
 	var select = $(selector);
 	select.html(select.find('option').sort(function(x, y) {
@@ -65,7 +116,7 @@ function combo_ordenar(selector,asc=true,reset=true){
 	}
 	
 }
-// ###########################################################################
+// #########################################################################################################
 /**
  * PRIVADO - NÃO CHAMAR DIRETAMENTE!
  * 
@@ -155,7 +206,7 @@ function PRIVADO___combo_filtrar_acao(combo_selector,campos){
 	});	/**/
 	
 }
-// ###########################################################################
+// #########################################################################################################
 /**
  * FILTRA UM CAMPO COM BASE NOS ATRIBUTOS REFERENCIAIS DO MESMO "xxxxx_id",
  * BUSCANDO OS COMBOS REFERENCIADOS ("#xxxx_id") e OCULTADO AS OPCOES QUE
@@ -207,6 +258,6 @@ function combo_filtrar(combo_alvo_selector,campos=[]){
 }
 		
 
-// ###########################################################################
-// ###########################################################################
-// ###########################################################################
+// #########################################################################################################
+// #########################################################################################################
+// #########################################################################################################

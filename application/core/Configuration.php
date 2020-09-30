@@ -6,17 +6,22 @@ use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Numbers;
 use manguto\cms7\libraries\Sessions;
+use manguto\cms7\libraries\Logger;
 
 class Configuration
 {
 
     const configuration_dir = 'application/configurations/';
 
+    const app_configuration_filename = 'config.php';
+
     /**
      * inicializacao da configuracoes
      */
     public function __construct()
     {
+        Logger::info('Configuração inicializacao');
+        
         $this->loadConfigurations();
 
         $this->automaticConstants();
@@ -27,15 +32,21 @@ class Configuration
      */
     private function loadConfigurations()
     {
-        // obtem os arquivos configuracionais e os ordena
-        $configFilenameArray = Diretorios::obterArquivosPastas(ServerHelp::fixds(self::configuration_dir), true, true, false, [
-            'php'
-        ]);
-        // ordena os arquivos conforme as numeracoes dos arquivos
-        sort($configFilenameArray);
-        // carregamento dos arquivos de conf
-        foreach ($configFilenameArray as $configFilename) {
-            require_once $configFilename;
+        { // carregamento dos arquivos internos da aplicacao
+            // obtem os arquivos configuracionais e os ordena
+            $configFilenameArray = Diretorios::obterArquivosPastas(ServerHelp::fixds(self::configuration_dir), true, true, false, [
+                'php'
+            ]);
+            // ordena os arquivos conforme as numeracoes dos arquivos
+            sort($configFilenameArray);
+            // carregamento dos arquivos de conf
+
+            foreach ($configFilenameArray as $configFilename) {
+                require_once $configFilename;
+            }
+        }
+        { // carregamento do arquivo de configuracao da aplicacao
+            require_once ServerHelp::fixds(self::app_configuration_filename);
         }
     }
 
@@ -76,27 +87,29 @@ class Configuration
             define('APP_USER_IP_MASKED', $APP_USER_IP_MASKED);
         }
         // ####################################################################################################
-        {// iteracao
+        { // iteracao
             {
-                $APP_ITERATION = Sessions::get('APP_ITERATION',false,true);
-                if($APP_ITERATION === false){
-                    $APP_ITERATION = date('Ymd-His',APP_TIMESTAMP).'-'.APP_UNIQID;
+                $APP_ITERATION = Sessions::get('APP_ITERATION', false, true);
+                if ($APP_ITERATION === false) {
+                    $APP_ITERATION = date('Ymd-His', APP_TIMESTAMP) . '-' . APP_UNIQID;
                 }
             }
-            define("APP_ITERATION", $APP_ITERATION);            
+            define("APP_ITERATION", $APP_ITERATION);
         }
         // ####################################################################################################
         // ####################################################################################################
-        // ####################################################################################################        
-        { // DEBUG CONSTANTS!                        
-            /*foreach (get_defined_constants() as $cteName => $cteValue) {
-                if (strpos($cteName, 'APP_') !== false) {
-                    echo "<b>$cteName</b>";
-                    deb($cteValue, 0);
-                    echo "<hr/>";
-                }
-            }
-            die('');/**/
+        // ####################################################################################################
+        { // DEBUG CONSTANTS!
+            /*
+             * foreach (get_defined_constants() as $cteName => $cteValue) {
+             * if (strpos($cteName, 'APP_') !== false) {
+             * echo "<b>$cteName</b>";
+             * deb($cteValue, 0);
+             * echo "<hr/>";
+             * }
+             * }
+             * die('');/*
+             */
         }
     }
 }

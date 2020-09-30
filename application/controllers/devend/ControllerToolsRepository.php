@@ -5,7 +5,7 @@ use application\core\Access;
 use application\core\View;
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\Files;
-use manguto\cms7\libraries\ProcessResult;
+use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\CSV;
 use manguto\cms7\model\Model;
 use manguto\cms7\model\ModelHelper;
@@ -45,7 +45,7 @@ class ControllerToolsRepository extends ControllerTools
                 $repository_array = [];
                 foreach ($repository_filename_array as $repository_filename) {
                     {
-                        $repository_content = utf8_encode(Files::obterConteudo($repository_filename));
+                        $repository_content = utf8_encode(Files::getContent($repository_filename));
                     }
                     {
                         $tablename = Files::getBaseName($repository_filename, false);
@@ -136,9 +136,9 @@ class ControllerToolsRepository extends ControllerTools
                 }
             }
             if ($registrosSalvos > 0) {
-                ProcessResult::setSuccess("$registrosSalvos registro(s) salvo(s) com sucesso!");
+                Alert::setSuccess("$registrosSalvos registro(s) salvo(s) com sucesso!");
             } else {
-                ProcessResult::setWarning("Nenhum registro salvo ou afetado.");
+                Alert::setWarning("Nenhum registro salvo ou afetado.");
             }
             Controller::HeaderLocation("/dev/tools/repository#$tablename");
         });

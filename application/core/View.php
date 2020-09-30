@@ -1,7 +1,6 @@
 <?php
 namespace application\core;
 
-use manguto\cms7\libraries\Logger;
 
 class View
 {
@@ -14,7 +13,8 @@ class View
 
     const EXTRA_TEMPLATE_DIR = APP_TPL_DIR . '_extra' . DS;
 
-    const MODULES_DIR = '..' . DS . '..' . DS . 'modules' . DS;
+    //const MODULES_DIR = '..' . DS . '..' . DS . 'modules' . DS;
+    //const MODULES_DIR = APP_MODULES_DIR;
 
     // ####################################################################################################
     // ####################################################################################################
@@ -53,26 +53,33 @@ class View
     
     static function PageFrontendModule(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        return self::PageFrontend(self::MODULES_DIR . $templateFilename, $parameters, $toString);
+        return self::PageFrontend(self::GET_MODULES_DIR_REFERENCE() . $templateFilename, $parameters, $toString);
     }
 
     static function PageBackendModule(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        return self::PageBackend(self::MODULES_DIR . $templateFilename, $parameters, $toString);
+        return self::PageBackend(self::GET_MODULES_DIR_REFERENCE() . $templateFilename, $parameters, $toString);
     }
 
     static function PageDevendModule(string $templateFilename, array $parameters = [], bool $toString = false)
     {
-        return self::PageDevend(self::MODULES_DIR . $templateFilename, $parameters, $toString);
+        return self::PageDevend(self::GET_MODULES_DIR_REFERENCE() . $templateFilename, $parameters, $toString);
     }
 
     // ####################################################################################################
     // ##################################################################################### STATIC PRIVATE
     // ####################################################################################################
     static private function PageRun(Page $page, bool $toString)
-    {
-        Logger::success(str_repeat('@', 70) . ' - END! ' . APP_ITERATION);
+    {   
         return $page->run($toString);
+    }
+    // ####################################################################################################
+    /**
+     * obtem o endereço do diretorio dos modulos utilizando como referencia os diretorio dos templates (APP_TPL_DIR) 
+     * @return string
+     */
+    static private function GET_MODULES_DIR_REFERENCE():string{
+        return str_repeat('..'.DS, sizeof(explode(DS, APP_TPL_DIR))).str_replace(APP_TPL_DIR, '', APP_MODULES_DIR);        
     }
     // ####################################################################################################
     // ####################################################################################################

@@ -24,7 +24,7 @@ class Route
 
     public function __construct()
     {
-        Logger::info('Rota inicializado');
+        Logger::info('Controle de Rota inicializado');
 
         // obtem o metodo solicitado pela rota
         $this->method = strtoupper(ServerHelp::getRequestMethod());
@@ -39,11 +39,11 @@ class Route
         // carrega os parametros
         $this->parameters = self::explodeParameters($this->url);
 
-        {//log
+        /*{//log
             $vars = Arrays::arrayShowSingleLine(get_object_vars($this),'',' | ',true);
             //deb($vars);
             Logger::info("Parametros da Rota => $vars");
-        }
+        }/**/
         
     }
 
@@ -75,15 +75,15 @@ class Route
     {
         {
             $url = $this->raw_url;
-            Logger::proc("URL Domain Fix (fix-A) '$url'");
+            //Logger::proc("URL Domain Fix (fix-A) '$url'");
         }        
         {
             $url = self::fixURL($url);
-            Logger::proc("URL Domain Fix (fix-B) '$url'");
+            //Logger::proc("URL Domain Fix (fix-B) '$url'");
         }
         { // ajusta o dominio do (url) 
             $url = substr($url, strlen(APP_URL_ROOT) - 1);            
-            Logger::proc("URL Domain Fix (fix-C) '$url'");
+            //Logger::proc("URL Domain Fix (fix-C) '$url'");
         }
         //deb($url);
         return $url;
@@ -136,24 +136,32 @@ class Route
         // ######################################################################
         $variables = [];
         foreach ($controller_route_parameters as $controller_route_parameter_key => $controller_route_parameter_name) {
+            
+            //parametro (titulo ou valor)
             $route_parameter_name = $this->parameters[$controller_route_parameter_key];
 
-            { // testa se o parametro é variavel
-                $is_fixed_parameter = substr($controller_route_parameter_name, 0, 1) != ':';
-            }
-            if ($is_fixed_parameter) {
-                //verificacao se o parametro fixo "bate" com a rota em questao
+            //parametro estatico?
+            if (substr($controller_route_parameter_name, 0, 1) != ':') {                
+                //parametro estatico!
+                //parametro estatico!
+                //parametro estatico!                
+                //parametro estatico eh igual ao da rota em questao?
                 if ($controller_route_parameter_name != $route_parameter_name) {
+                    //a rota solicitada nao pertence ao objeto em questao
                     return false;
                 } else {
-                    // nao eh parametro e estah conforme a mascara da rota (fixPar1/:variablePar1/fixPar2)
+                    // parametro estah conforme a mascara da rota (staticPar1/:variablePar1/staticPar2)
+                    // continua o loop...                    
                 }
             } else {
+                //parametro variavel!
+                //parametro variavel!
+                //parametro variavel!
                 $variables[] = $route_parameter_name;
             }
         }
         // ######################################################################
-        Logger::success("Rota encontrada com sucesso! [$controller_route_masked]",$variables);
+        //Logger::success("Rota encontrada com sucesso! [$controller_route_masked]",$variables);
         $this->route_found = true;
         // ######################################################################
         return $variables;

@@ -12,7 +12,7 @@ use manguto\cms7\libraries\Files;
 class ControllerLogs extends Controller
 {
 
-    const logsDir = 'logs' . DS;
+    const logsDir = '_logs' . DS;
 
     //ESPECIFICACAO DA VISIBILIDADE DOS LOGS! (em producao => true)
     const privative_access = false;
@@ -47,6 +47,7 @@ class ControllerLogs extends Controller
             {
                 $logs = self::getHistory($day,$ip);
                 //deb($logs);
+                $logsDir = ControllerLogs::logsDir;
             }
             View::PageDevend('logs/reg', get_defined_vars());
         });

@@ -1,7 +1,7 @@
 {include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 
 <section class="container-fluid text-left">
-	<!--info_oldPlace-->
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-12">				
@@ -21,7 +21,7 @@
 				<ul>
 					{loop="$logs"}
 					<li>
-						<a href="{#APP_URL_HOST#}logs/{$day}/{$ip}/{$key}" class="link" target="_blank">{$value['show']} | {$value['size']}kb</a>
+						<a href="{#APP_URL_HOST#}{$logsDir}{$day}/{$ip}/{$key}" class="link" target="_blank">{$value['show']} | {$value['size']}kb</a>
 					</li>
 					{/loop}
 				</ul>

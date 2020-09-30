@@ -18,7 +18,7 @@ class ControllerProfiles extends Controller
         $route->get('/dev/profiles', function () {
             Access::Concierge("dev");
             {   
-                $profiles = Files::obterConteudo(self::filename);
+                $profiles = Files::getContent(self::filename);
                 $profiles = utf8_encode($profiles);
             }
             View::PageDevend("profiles/profiles_raw", get_defined_vars());            
@@ -30,7 +30,7 @@ class ControllerProfiles extends Controller
             $profiles = $_POST['profiles'];
             //debc($profiles);
             if($profiles!==false){
-                Files::escreverConteudo(self::filename, utf8_decode($profiles));
+                Files::writeContent(self::filename, utf8_decode($profiles));
                 Alert::setSuccess("Perfis salvos com sucesso!");
             }else{
                 Alert::setWarning("Parâmetros não informados.");
