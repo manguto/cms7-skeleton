@@ -55,7 +55,7 @@ class Controller
         //deb(getcwd(),0);
         {//verificacao quanto a existencia de um controladora responsavel para a rota
             foreach ($controllers as $controller) {
-                Logger::info("Testando a controladora '$controller'");
+                //Logger::info("Testando a controladora '$controller'");
                 $controller::RouteMatchCheck($this->route);
                 if($this->route->route_found==true){
                     Logger::success('Controladora executada: ' . basename($controller));

@@ -1,5 +1,14 @@
 <?php
+// ####################################################################################################
+// ####################################################################################################
+// ####################################################################################################
 
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+
+date_default_timezone_set('America/Recife');
+// ####################################################################################################
+// ####################################################################################################
+// ####################################################################################################
 function getIP():string{
     { // whether ip is from share internet
         if (! empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -36,7 +45,7 @@ function formatIP(string $ip_address,string $glue='-'):string
         $ip_formated = formatIP($ip);
     }
     $search = '_logs' . DIRECTORY_SEPARATOR . date('Y-m-d') . DIRECTORY_SEPARATOR . $ip_formated . DIRECTORY_SEPARATOR . '*.txt';
-    // die($search);
+    //die($search);
     $filename_array = glob($search);
     // die(var_dump($folder_array));
 }
@@ -50,6 +59,7 @@ function formatIP(string $ip_address,string $glue='-'):string
         $result = file_get_contents($last_log_filename);
         $result = utf8_encode($result);
     } else {
+        $last_log_filename = '';
         $result = 'Nenhum registro encontrado!';
     }
 }
@@ -76,11 +86,15 @@ function formatIP(string $ip_address,string $glue='-'):string
 <title><?php echo getIP(); ?> -> LAST LOGs!</title>
 </head>
 <body>
-<pre><?php echo $result; ?>
-		
-<a href='<?php echo $last_log_filename; ?>' target='_blank' style='text-decoration:none; color:#000; float:left;' title='ACESSAR O ARQUIVO'>[>]</a>
-</pre>
-	
+<pre><?php 
+
+echo $result; 
+
+if($last_log_filename!=''){
+    echo "<a href='$last_log_filename' target='_blank' style='text-decoration:none; color:#000; float:left;' title='ACESSAR O ARQUIVO'>[>]</a>";
+}
+?>
+</pre>	
 	<script type="text/javascript">
     setTimeout(function(){
     	document.location = 'log.php?t=<?php echo $t; ?>';

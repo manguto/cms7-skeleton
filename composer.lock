@@ -12,16 +12,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/manguto/cms7.git",
-                "reference": "474bbe56c3e5cb58306aa2a48a2dd286ef7de1af"
+                "reference": "1270d7c81660e52444ad9528a6750fdaac36bd0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/manguto/cms7/zipball/474bbe56c3e5cb58306aa2a48a2dd286ef7de1af",
-                "reference": "474bbe56c3e5cb58306aa2a48a2dd286ef7de1af",
+                "url": "https://api.github.com/repos/manguto/cms7/zipball/1270d7c81660e52444ad9528a6750fdaac36bd0d",
+                "reference": "1270d7c81660e52444ad9528a6750fdaac36bd0d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0.0"
+                "php": "^7.0.0",
+                "phpmailer/phpmailer": "~6.1"
             },
             "type": "library",
             "autoload": {
@@ -45,7 +46,69 @@
                 }
             ],
             "description": "Content management system suport libraries.",
-            "time": "2020-09-16T19:35:10+00:00"
+            "time": "2020-10-01T12:31:10+00:00"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v6.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
+                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.2",
+                "friendsofphp/php-cs-fixer": "^2.2",
+                "phpunit/phpunit": "^4.8 || ^5.7"
+            },
+            "suggest": {
+                "ext-mbstring": "Needed to send email in multibyte encoding charset",
+                "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+                "psr/log": "For optional PSR-3 debug logging",
+                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPMailer\\PHPMailer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-only"
+            ],
+            "authors": [
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2020-07-14T18:50:27+00:00"
         }
     ],
     "packages-dev": [],
