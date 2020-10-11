@@ -3,7 +3,7 @@ namespace application\core;
 
 use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Exception;
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 
 class Page
 {
@@ -102,7 +102,7 @@ class Page
             if (! file_exists($tpl_filename_path)) {
                 throw new Exception("O template informado ('{$this->tpl_filename}') não foi encontrado no diretório solicitado ('{$this->tpl_dir}').");
             } else {
-                $return = Files::getContent($tpl_filename_path);
+                $return = File::getContent($tpl_filename_path);
             }
         }
         return $return;
@@ -122,7 +122,7 @@ class Page
     private function saveTplCache(string $content)
     {
         // save
-        Files::writeContent($this->getTplFilename(), $content);
+        File::writeContent($this->getTplFilename(), $content);
     }
 
     // ####################################################################################################
@@ -167,7 +167,7 @@ class Page
     private function deleteTplCache()
     {
         // delete
-        Files::delete($this->getTplFilename());
+        File::delete($this->getTplFilename());
     }
     // ####################################################################################################
     // ####################################################################################################

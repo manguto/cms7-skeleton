@@ -3,7 +3,7 @@ namespace application\core;
 
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Sessions;
 use manguto\cms7\libraries\Logger;
@@ -97,7 +97,7 @@ class Controller
             ]);
             foreach ($modules_files as $module_file) {
 
-                $file_content = Files::getContent($module_file);
+                $file_content = File::getContent($module_file);
                 // verifica se o aruqivo eh um arquivo de controle
                 if (strpos($file_content, ' extends Controller') !== false) {
                     // adicao a lista de arquivos de controle

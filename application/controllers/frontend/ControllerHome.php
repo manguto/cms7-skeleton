@@ -17,6 +17,11 @@ class ControllerHome extends Controller
                 View::PageFrontend("home");
             });
             // ===============================================
+            $route->get('/log', function () {                
+                header('location:log.php');
+                exit();
+            });
+            // ===============================================
             $route->get('/reset', function () {                
                 Sessions::Reset();
                 View::PageFrontend("home");

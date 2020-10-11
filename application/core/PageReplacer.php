@@ -46,7 +46,9 @@ class PageReplacer
      */
     public function run(): string
     {
-        $content = $this->content;
+        { // realiza eventuais ajustes no conteudo
+            $this->fixContent();
+        }
 
         { // searchs
             $this->matches = [];
@@ -60,9 +62,15 @@ class PageReplacer
             }
         }
         { // replaces
-          // debc($this->matches,0);
+            
+            {// obtem o conteudo para substituicao dos padroes
+                $content = $this->content;
+                //deb($content);
+            }
+            
+            // debc($this->matches,0);
             foreach ($this->matches as $search => $replaces) {
-                foreach ($replaces as $replace){
+                foreach ($replaces as $replace) {
                     $content = Strings::str_replace_first($search, $replace, $content);
                 }
             }
@@ -112,18 +120,20 @@ class PageReplacer
      * @param string $replace
      */
     private function addMatch(string $search, string $replace)
-    {   
+    {
         $this->matches[$search][] = $replace;
-        
-        /*if (! isset($this->matches[$search])) {
-            $this->matches[$search] = $replace;
-        } else {
-            if ($this->matches[$search] != $replace) {
-                //debc($this->matches,0);
-                $errorMsg = "Foi encontrado um termo para substituição ($search) com correspondentes diferenciados.<br/>$search = " . $this->matches[$search] . "<br/>$search = $replace";
-                throw new Exception($errorMsg);
-            }
-        }/**/
+
+        /*
+         * if (! isset($this->matches[$search])) {
+         * $this->matches[$search] = $replace;
+         * } else {
+         * if ($this->matches[$search] != $replace) {
+         * //debc($this->matches,0);
+         * $errorMsg = "Foi encontrado um termo para substituição ($search) com correspondentes diferenciados.<br/>$search = " . $this->matches[$search] . "<br/>$search = $replace";
+         * throw new Exception($errorMsg);
+         * }
+         * }/*
+         */
     }
 
     // ####################################################################################################
@@ -138,6 +148,22 @@ class PageReplacer
         $return .= $code;
         $return .= ' ?>';
         return $return;
+    }
+
+    // ####################################################################################################
+
+    /**
+     * corrige
+     *
+     * @return mixed
+     */
+    private function fixContent()
+    {   
+        { // fixes
+            { // Wrong Automatic Identation (CRTL + F on Eclipse)
+                $this->content = str_replace('" }', '"}', $this->content);
+            }
+        }
     }
 
     // ####################################################################################################
@@ -167,7 +193,7 @@ class PageReplacer
             }
             { // substituicao (pseudo-php => php)
                 { // codigo para substituicao
-                    //$replace = "echo " . self::manguto_libraries_path . "Constants::isset_get(\"$match\",true); ";
+                  // $replace = "echo " . self::manguto_libraries_path . "Constants::isset_get(\"$match\",true); ";
                     $replace = "echo $match;";
                     $replace = self::phpWrap($replace);
                 }
@@ -216,7 +242,7 @@ class PageReplacer
             }
             { // substituicao (pseudo-php => php)
                 { // replace
-                    //$replace = "echo " . self::manguto_libraries_path . "Variables::isset_get(\"$match\",get_defined_vars(),true); ";
+                  // $replace = "echo " . self::manguto_libraries_path . "Variables::isset_get(\"$match\",get_defined_vars(),true); ";
                     $replace = "echo $$match;";
                     $replace = self::phpWrap($replace);
                 }
@@ -232,7 +258,7 @@ class PageReplacer
     // ####################################################################################################
     // ####################################################################################################
     private function searchIncludes()
-    {   
+    {
         { // regex pattern
             { // limites esq e dir
                 $left = '{include="';
@@ -379,7 +405,7 @@ class PageReplacer
         { // regex
             $matches = $this->getPatternMatches('/{\/if}/');
         }
-        foreach ($matches as $rawMatch) { 
+        foreach ($matches as $rawMatch) {
             { // condicao
                 $match = trim($rawMatch);
                 $match = str_replace('{/if}', '', $match);
@@ -415,7 +441,7 @@ class PageReplacer
             { // limites esq e dir
                 $left = '{loop="';
                 {
-                    $center = '[^}]+';                
+                    $center = '[^}]+';
                 }
                 $right = '"}';
             }

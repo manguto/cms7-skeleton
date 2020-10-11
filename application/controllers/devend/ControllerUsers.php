@@ -8,7 +8,7 @@ use manguto\cms7\libraries\Exception;
 use application\core\Controller;
 use application\core\Route;
 use application\views\devend\ViewUsers;
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 
 class ControllerUsers extends Controller
 {
@@ -20,7 +20,7 @@ class ControllerUsers extends Controller
         $route->get('/dev/users', function () {
             Access::Concierge("dev");
             {   
-                $users = Files::getContent(self::filename);
+                $users = File::getContent(self::filename);
                 $users = utf8_encode($users);
             }
             ViewUsers::get_dev_users_raw($users);
@@ -40,7 +40,7 @@ class ControllerUsers extends Controller
             $users = $_POST['users'];
             //debc($users);
             if($users!==false){
-                Files::writeContent(self::filename, utf8_decode($users));
+                File::writeContent(self::filename, utf8_decode($users));
                 Alert::setSuccess("Usuários salvos com sucesso!");
             }else{
                 Alert::setWarning("Parâmetros não informados.");

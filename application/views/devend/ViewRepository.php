@@ -4,7 +4,7 @@ namespace application\views\devend;
 use application\core\View;
 
 use manguto\cms7\libraries\Diretorios;
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 use manguto\cms7\libraries\Exception;
 
 class ViewRepository extends View
@@ -21,7 +21,7 @@ class ViewRepository extends View
             foreach ($repositorios as $key => $repositorio) {
                 // deb($repositorio);
                 
-                $repositoryname = Files::getBaseName($repositorio, false);
+                $repositoryname = File::getBaseName($repositorio, false);
                 
                 unset($repositorios[$key]);
                 $repositorios[$repositoryname] = [

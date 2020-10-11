@@ -1,25 +1,24 @@
 <?php
 
 
-// ###################################################################################
-// #################################################################### CONFIGURACOES
-// ###################################################################################
+// ####################################################################################################
+// ##################################################################################### CONFIGURACOES
+// ####################################################################################################
 
-define("APP_FULL_NAME", "APP");
+define("APP_FULL_NAME", "Controle de Acesso");
 
-define("APP_SHORT_NAME", "APP - HELP!");
+define("APP_SHORT_NAME", "Controle de Acesso à Unidade");
 
-define("APP_ABREV", "AAPH");
+define("APP_ABREV", "CAc");
 
 define("APP_TITLE", APP_ABREV . " | " . APP_SHORT_NAME);
 
-define("APP_DOMAIN", "http://app.com/");
+//define("APP_DOMAIN", "http://suporte.uast.ufrpe.br/tools/controle_acesso/");
+define("APP_DOMAIN", "http://l.manguto.com/controle_acesso/");
 
-define("APP_EMAIL", "email@app.com");
+define("APP_EMAIL", "marcos.torres@ufrpe.br");
 
-define("APP_EMAIL_ADMIN", "admin.email@app.com");
-
-define('APP_EMAIL_MSS_PASSWORD','****************');
+define("APP_EMAIL_ADMIN", "marcos.torres@ufrpe.br");
 
 // ######################################################################
 // ##################################################### BANCOS DE DADOS

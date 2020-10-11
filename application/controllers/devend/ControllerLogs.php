@@ -7,7 +7,7 @@ use application\core\Route;
 use application\core\View;
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 
 class ControllerLogs extends Controller
 {
@@ -96,7 +96,7 @@ class ControllerLogs extends Controller
                         $size = sizeof($n);
                     }else{
                         //quantidade de LINHAS
-                        $n = Files::getFileSize($path);
+                        $n = File::getFileSize($path);
                         $size = $n;
                     }                    
                 }

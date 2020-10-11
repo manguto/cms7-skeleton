@@ -4,7 +4,7 @@ namespace application\controllers\devend;
 use application\core\Access;
 use application\core\View;
 use manguto\cms7\libraries\Diretorios;
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\CSV;
 use manguto\cms7\model\Model;
@@ -43,10 +43,10 @@ class ControllerToolsRepository extends ControllerTools
                 $repository_array = [];
                 foreach ($repository_filename_array as $repository_filename) {
                     {
-                        $repository_content = utf8_encode(Files::getContent($repository_filename));
+                        $repository_content = utf8_encode(File::getContent($repository_filename));
                     }
                     {
-                        $tablename = Files::getBaseName($repository_filename, false);
+                        $tablename = File::getBaseName($repository_filename, false);
                     }
                     { // especificacao das colunas
                         $cols = explode(chr(10), trim($repository_content));

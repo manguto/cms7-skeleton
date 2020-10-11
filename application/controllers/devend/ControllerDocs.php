@@ -1,7 +1,7 @@
 <?php
 namespace application\controllers\devend;
 
-use manguto\cms7\libraries\Files;
+use manguto\cms7\libraries\File;
 use application\core\View;
 use application\core\Controller;
 use application\core\Route;
@@ -39,7 +39,7 @@ class ControllerDocs extends Controller
             ]);
 
             foreach ($htmls as $html) {
-                $filename = Files::getBaseName($html, false);
+                $filename = File::getBaseName($html, false);
                 $samples[$filename] = ucfirst($filename);
             }
         }
@@ -55,7 +55,7 @@ class ControllerDocs extends Controller
             $pageTitle = ucfirst($page);
         }
         {
-            // $pageContent = Files::getContent(APP_PATH.'docs/'.$page.'.html');
+            // $pageContent = File::getContent(APP_PATH.'docs/'.$page.'.html');
             $include = "../../../../../$folder/$page";
         }
         return get_defined_vars();
