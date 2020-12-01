@@ -1,23 +1,18 @@
-{include="../_general/open"} 
-{include="../_general/header"} {include="../_general/info"}
-
+{include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section class="container-fluid text-left">
-			
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<img src="{#APP_URL_ROOT#}public/img/icons/frontend.png" class="image image-64 float-right"/>
-				<h3>Bem vindo(a)</h3>
+				<img src="{#APP_URL_ROOT#}public/img/icons/frontend.png" class="image image-64 float-right" />
+				<h3>Bem vindos(as) ao</h3>
 				<h2>{#APP_FULL_NAME#}</h2>
 			</div>
 		</div>		
-		<div class="row">
-			<div class="col-12">
-				...
-			</div>
-		</div>
 	</div>
 </section>
-
-{include="../_general/footer"}
-{include="../_general/close"}
+<script type="text/javascript">
+$(document).ready(function(){
+	document.location='{#APP_URL_ROOT#}home';
+});
+</script>
+{include="../_general/footer"} {include="../_general/close"}

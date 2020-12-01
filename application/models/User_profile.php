@@ -49,11 +49,12 @@ class User_profile extends Model implements ModelDatabase
     
     /**
      * obtem os perfis do usuario informado
-     * @param int $user_id
+     * @param int|string $user_id
      * @return array
      */
-    static function getUserProfiles(int $user_id):array{
+    static function getUserProfiles($user_id):array{
         $return = [];
+        $user_id = intval($user_id);
         $user_profiles = (new User_profile())->search(" \$user_id==$user_id ");
         //deb($user_profiles);
         if(count($user_profiles)>0){

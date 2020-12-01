@@ -37,10 +37,10 @@ class ControllerUsers extends Controller
                 $user->SET_DATA($_POST);
                 $user->verifyFieldsToCreateUpdate();
                 $user->save();
-                Alert::setSuccess("Usuário salvo com sucesso!");
+                Alert::Success("Usuário salvo com sucesso!");
                 Controller::HeaderLocation("/admin/users");
             } catch (Exception $e) {
-                Alert::setDanger($e);
+                Alert::Error($e);
                 Controller::HeaderLocation("/admin/users/create");
             }
         });
@@ -56,7 +56,7 @@ class ControllerUsers extends Controller
             self::PrivateCrudPermission('delete', $id);
             $user = new User($id);
             $user->delete();
-            Alert::setSuccess("Usuário removido com sucesso!");
+            Alert::Success("Usuário removido com sucesso!");
             Controller::HeaderLocation("/admin/users");
         });
         // ##################################################
@@ -77,10 +77,10 @@ class ControllerUsers extends Controller
                 $user->SET_DATA($_POST);
                 $user->verifyFieldsToCreateUpdate();
                 $user->save();
-                Alert::setSuccess("Usuário atualizado com sucesso!");
+                Alert::Success("Usuário atualizado com sucesso!");
                 Controller::HeaderLocation("/admin/users");
             } catch (Exception $e) {
-                Alert::setDanger($e);
+                Alert::Error($e);
                 Controller::HeaderLocation("/admin/users/create");
             }
         });

@@ -132,9 +132,9 @@ class ControllerToolsRepository extends ControllerTools
                 }
             }
             if ($registrosSalvos > 0) {
-                Alert::setSuccess("$registrosSalvos registro(s) salvo(s) com sucesso!");
+                Alert::Success("$registrosSalvos registro(s) salvo(s) com sucesso!");
             } else {
-                Alert::setWarning("Nenhum registro salvo ou afetado.");
+                Alert::Warning("Nenhum registro salvo ou afetado.");
             }
             Controller::HeaderLocation("/dev/tools/repository#$tablename");
         });

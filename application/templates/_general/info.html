@@ -1,16 +1,15 @@
 <div id="info" class="container" style="border: none;">
 	<div class="row">
-
-		<div id="alert-area" class="col-12">
-			<a href='javascript:void(0)' title='Exibir/Ocultar mensagens apresentadas.' class="toggle no-print" style="display: none;"> Exibir/Ocultar mensagen(s) </a>
-			{loop="manguto\cms7\libraries\Alert::GET(true)"}
-			<div class="alert {$value['class']}">
-				{$value['msg']}
-			</div>
-			{/loop}
+		<div id="alert-area" class="col-12 pb-4">
+			{if="sizeof(manguto\cms7\libraries\Alert::GET())>0"}
+				<a href='javascript:void(0)' title='Exibir/Ocultar mensagens apresentadas.' class="toggle no-print"> Exibir/Ocultar mensagen(s) </a>
+				{loop="manguto\cms7\libraries\Alert::GET(true)"}
+				<div class="alert {$value['class']}">
+					{$value['msg']}
+				</div>
+				{/loop}
+			{/if}
 		</div>
-
 		<div id="log-area" class="col-12" style="display: none;"></div>
-
 	</div>
 </div>

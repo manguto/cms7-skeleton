@@ -2,19 +2,29 @@
 use manguto\cms7\libraries\ServerHelp;
 // ####################################################################################################
 {
-    
-    //define a constante que informa se a fase de desenvolvimento esta ativa (debug's)
-    define('DEVELOPMENT',true);
-    
-    //realiza o refresh dos templates 'cacheados' 
-    define('PAGE_REFRESH_CACHE',true);
-    
+    // em desenvolvimento?
+    define('DEVELOPMENT', false);
+}
+// ####################################################################################################
+{
+    // tratamento de eventos (erros, notices, exceptions...)
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
 }
 // ####################################################################################################
 {
     setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     date_default_timezone_set('America/Recife');
-    
+}
+// ####################################################################################################
+{
+    /**
+     * quantidade de niveis acima da pasta deste arquivo para a pasta raiz
+     *
+     * @var int
+     */
+    define('LEVELS_TO_ROOT_FOLDER', 2);
 }
 // ####################################################################################################
 {
@@ -26,99 +36,104 @@ use manguto\cms7\libraries\ServerHelp;
 }
 // ####################################################################################################
 {
-    define('APP_CWD',getcwd().DS);
-    //deb(APP_CWD);
+    define('APP_CWD', getcwd() . DS);
+    // deb(APP_CWD);
 }
 // ####################################################################################################
 {
     {
-        $cte = $_SERVER['DOCUMENT_ROOT'];
-        $cte = str_replace('/', DS, $cte);
-        $cte = str_replace('\\', DS, $cte);
-    }        
-    define("APP_SERVER_ROOT_DIR", $cte);
-    //deb(APP_SERVER_ROOT_DIR);
-}
-
-// ####################################################################################################
-{  
-    {
-        $cte = dirname(__DIR__, 2) . DS;
-        $cte = str_replace(APP_SERVER_ROOT_DIR, '', $cte);
+        $SERVER_DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+        $SERVER_DOCUMENT_ROOT = str_replace('/', DS, $SERVER_DOCUMENT_ROOT);
+        $SERVER_DOCUMENT_ROOT = str_replace('\\', DS, $SERVER_DOCUMENT_ROOT);
     }
-    /*
-     * caminho relativo a partir do dominio
-     */
-    define("APP_DIR_RELATIVE", $cte);
-    //deb(APP_DIR_RELATIVE);
+    define("APP_SERVER_ROOT_DIR", $SERVER_DOCUMENT_ROOT);
+    // deb(APP_SERVER_ROOT_DIR);
 }
 
 // ####################################################################################################
-{   
-    $APP_DIRECTORY = ''; 
-    //deb($APP_DIRECTORY);
+{
     /**
-     * raiz relativa da aplicacao a partir da raiz do servidor web
+     * caminho para a raiz do app
      *
      * @var string
      */
-    define("APP_DIRECTORY", $APP_DIRECTORY);
-    //deb(APP_DIRECTORY);
+    define('APP_PATH', dirname(__DIR__, LEVELS_TO_ROOT_FOLDER) . DS);
 }
 // ####################################################################################################
 {
-    
-    {
-        $cte = APP_DIR_RELATIVE;
-        $cte = str_replace('/', ' ', $cte);
-        $cte = str_replace('\\', ' ', $cte);
-        $cte = trim($cte);
-    }
     /**
-     * nome base do aplicativo relativo ao caminho (diretorios) do mesmo 
+     * nome da pasta do aplicativo
      *
      * @var string
      */
-    define("APP_BASENAME", $cte);
+    define('APP_FOLDER', basename(APP_PATH));
+    // deb(APP_FOLDER);
+}
+// ####################################################################################################
+{
+    /**
+     * caminho relativo do dominio aa raiz do aplicativo
+     *
+     * @var string
+     */
+    define("APP_RELATIVE_PATH", str_replace(APP_SERVER_ROOT_DIR, '', APP_PATH));
+}
+
+// ####################################################################################################
+{
+    /**
+     * caminho relativo do arquivo principal (index.php) até a raiz da aplicacao
+     *
+     * @var string
+     */
+    define("APP_ROOT_PATH", '');
+}
+// ####################################################################################################
+{
+    /**
+     * identificador unico no dominio para o aplicativo (baseado no caminho relativo do dominio ao diretorio do app)
+     *
+     * @var string
+     */    
+    define("APP_BASENAME", trim(ServerHelp::fixds(APP_RELATIVE_PATH,' ')));
     //deb(APP_BASENAME);
 }
 // ####################################################################################################
-{
-
-    if (APP_VIRTUAL_HOST==true) {
-        $cte = "";
-    } else {
-        $cte = ServerHelp::fixds(APP_DIR_RELATIVE, '/');
-    }
+{    
     /**
      * caminho base para insercao na url a partir do dominio
      *
      * @var string
-     */
-    define("APP_URL_ROOT", $cte);
+     */    
+    define("APP_URL_ROOT", APP_VIRTUAL_HOST ? '' : ServerHelp::fixds(APP_RELATIVE_PATH, '/'));
     //deb(APP_URL_ROOT);
 }
 // ####################################################################################################
-{
-    {
-        $cte = 'http://'.$_SERVER['HTTP_HOST'] . APP_URL_ROOT;
-        $cte = str_replace('\\', '/', $cte);
-        //deb($cte);
-    }
+{   
     /**
-     * endereco url do aplicativo
+     * endereco do aplicativo
+     *
      * @var string
      */
-    define("APP_URL_HOST", $cte);
+    define("APP_URL_HOST", 'http://'.ServerHelp::fixds( $_SERVER['HTTP_HOST'] . APP_URL_ROOT,'/'));
     //deb(APP_URL_HOST);
 }
 // ####################################################################################################
 {
-    define("APP_TIMESTAMP", time());
+    /**
+     * timestamp no momento do ciclo (carregamento)
+     * @var int
+     */
+    define("APP_TIMESTAMP", time());    
 }
 // ####################################################################################################
 {
-    define("APP_UNIQID", uniqid());
+    // 
+    /**
+     * identificador do ciclo (cada processamento do index.php)
+     * @var
+     */
+    define("APP_ITERATION", uniqid());
 }
 // ####################################################################################################
 

@@ -24,7 +24,7 @@ class ControllerToolsModules extends ControllerTools
                 $ModuleName = ucfirst($_POST['modulename']);
             }
             {
-                Exception::deb('To Do!');
+                throw new Exception('To do!');
                 // $results = CMSToolsModules::GenerateFile($platform, $ModuleName);
             }
             View::PageDevend('tools_modules_result', get_defined_vars());

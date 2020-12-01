@@ -31,9 +31,9 @@ class ControllerUsersProfiles extends Controller
             //debc($user_profile);
             if($user_profile!==false){
                 File::writeContent(self::filename, utf8_decode($user_profile));
-                Alert::setSuccess("Perfis dos usuários salvos com sucesso!");
+                Alert::Success("Perfis dos usuários salvos com sucesso!");
             }else{
-                Alert::setWarning("Parâmetros não informados.");
+                Alert::Warning("Parâmetros não informados.");
             }
             Controller::HeaderLocation('/dev/users_profiles');
         });       

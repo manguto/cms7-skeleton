@@ -31,9 +31,9 @@ class ControllerProfiles extends Controller
             //debc($profiles);
             if($profiles!==false){
                 File::writeContent(self::filename, utf8_decode($profiles));
-                Alert::setSuccess("Perfis salvos com sucesso!");
+                Alert::Success("Perfis salvos com sucesso!");
             }else{
-                Alert::setWarning("Parâmetros não informados.");
+                Alert::Warning("Parâmetros não informados.");
             }
             Controller::HeaderLocation('/dev/profiles');
         });       

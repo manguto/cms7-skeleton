@@ -15,7 +15,7 @@ class ControllerLogs extends Controller
     const logsDir = '_logs' . DS;
 
     //ESPECIFICACAO DA VISIBILIDADE DOS LOGS! (em producao => true)
-    const privative_access = false;
+    const privative_access = true;
     
     static function RouteMatchCheck(Route $route)
     {

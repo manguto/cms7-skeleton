@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/manguto/cms7.git",
-                "reference": "1270d7c81660e52444ad9528a6750fdaac36bd0d"
+                "reference": "bdbd0853640b8d60630a99c4171e7ad47be0b440"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/manguto/cms7/zipball/1270d7c81660e52444ad9528a6750fdaac36bd0d",
-                "reference": "1270d7c81660e52444ad9528a6750fdaac36bd0d",
+                "url": "https://api.github.com/repos/manguto/cms7/zipball/bdbd0853640b8d60630a99c4171e7ad47be0b440",
+                "reference": "bdbd0853640b8d60630a99c4171e7ad47be0b440",
                 "shasum": ""
             },
             "require": {
@@ -46,25 +46,26 @@
                 }
             ],
             "description": "Content management system suport libraries.",
-            "time": "2020-10-01T12:31:10+00:00"
+            "time": "2020-10-11T18:48:10+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.1.7",
+            "version": "v6.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0"
+                "reference": "917ab212fa00dc6eacbb26e8bc387ebe40993bc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
-                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/917ab212fa00dc6eacbb26e8bc387ebe40993bc1",
+                "reference": "917ab212fa00dc6eacbb26e8bc387ebe40993bc1",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
                 "ext-filter": "*",
+                "ext-hash": "*",
                 "php": ">=5.5.0"
             },
             "require-dev": {
@@ -108,7 +109,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2020-07-14T18:50:27+00:00"
+            "time": "2020-10-09T14:55:58+00:00"
         }
     ],
     "packages-dev": [],

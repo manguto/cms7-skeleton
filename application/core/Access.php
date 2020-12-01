@@ -59,12 +59,19 @@ class Access
             Logger::success("ACESSO PERMITIDO");            
         }else{
             Logger::warning("ACESSO NEGADO. O USUÁRIO NÃO POSSUI O PERFIL NECESSÁRIO!!!");
-            Alert::setWarning('Acesso negado! Contate o Administrador!');
+            Alert::Warning('Acesso negado! Contate o Administrador!');
             Controller::HeaderLocation('/');          
         }
     }
     // ############################################################################################################################################
-    static function checkUserProfiles(array $required_profile_nickname_array)
+    
+    /**
+     * verifica se o usuario atual possui um dos perfis
+     * especificados pela lista de 'apelidos' informada
+     * @param array $required_profile_nickname_array
+     * @return bool
+     */
+    static function checkUserProfiles(array $required_profile_nickname_array):bool
     {
         Logger::info("Verificacao dos perfis do usuario quanto ao(s) perfil(ís): '".implode("', '", $required_profile_nickname_array)."' => ");
         if (sizeof($required_profile_nickname_array) == 0) {
@@ -124,7 +131,8 @@ class Access
         if($user_id!==false){
             $user = new User($user_id);
         }else{
-            $user = false;
+            $user = new User();
+            $user->setName('Visitante');
         }        
         return $user;
     }

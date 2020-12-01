@@ -3,11 +3,10 @@ namespace application\core;
 
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Exception;
+use manguto\cms7\libraries\Logger;
 
 class PageReplacer
 {
-
-    const manguto_libraries_path = 'manguto\\' . APP_GIT_MANGUTO_REPOSITORY_NAME . '\\libraries\\';
 
     private $tpl_dir;
 
@@ -17,19 +16,82 @@ class PageReplacer
 
     private $matches = [];
 
+    // caracteres proibidos
+    const blackListChars = [
+        '^', // Start of line
+        '$', // End of line        
+        '.', // Any single character
+        '|', // a or b
+        '?', // Zero or one of a
+        '+' // One or more of a
+    ];
+
+    /**
+     * -----------------------------------------------------
+     * CHEAT SHEET
+     * [abc] A single character of: a, b or c
+     * [^abc] Any single character except: a, b, or c
+     * [a-z] Any single character in the range a-z
+     * [a-zA-Z] Any single character in the range a-z or A-Z
+     * ^ Start of line
+     * $ End of line
+     * \A Start of string
+     * \z End of string
+     * . Any single character
+     * \s Any whitespace character
+     * \S Any non-whitespace character
+     * \d Any digit
+     * \D Any non-digit
+     * \w Any word character (letter, number, underscore)
+     * \W Any non-word character
+     * \b Any word boundary
+     * (...) Capture everything enclosed
+     * (a|b) a or b
+     * a? Zero or one of a
+     * a* Zero or more of a
+     * a+ One or more of a
+     * a{3} Exactly 3 of a
+     * a{3,} 3 or more of a
+     * a{3,6} Between 3 and 6 of a
+     * -----------------------------------------------------
+     * OPTIONS
+     * i case insensitive
+     * m treat as multi-line string
+     * s dot matches newline
+     * x ignore whitespace in regex
+     * A matches only at the start of string
+     * D matches only at the end of string
+     * U non-greedy matching by default
+     * -----------------------------------------------------
+     */
+
     // ####################################################################################################
     // ####################################################################################################
     // ####################################################################################################
 
     /**
-     * inicializa a classe de substituicao e consequente transformacao do codigo HTML do template (informado) em um codigo HTML + PHP
+     * inicializa a classe de substituicao e consequente transformacao do codigo HTML do template (informado) em um codigo PHP (+ HTML)
      *
      * @param string $tpl_dir
      * @param string $content
      * @param array $parameters
      */
-    public function __construct(string $tpl_dir, string $content, array $parameters)
+    public function __construct(string $tpl_dir, string $content, array $parameters = [])
     {
+        if (! is_string($tpl_dir)) {
+            throw new Exception("Formato de parâmetro inadequado (TLP_DIR=>" . gettype($tpl_dir) . ")");
+        }
+
+        if (! is_string($content)) {
+            throw new Exception("Formato de parâmetro inadequado (CONTENT=>" . gettype($content) . ")");
+        }
+
+        if (! is_array($parameters)) {
+            throw new Exception("Formato de parâmetro inadequado (PARAMETERS=>" . gettype($parameters) . ")");
+        }
+
+        Logger::info("Substituição de padrões do pseudo-html inicializado (" . implode(',', array_keys($parameters)) . ").");
+
         $this->tpl_dir = $tpl_dir;
         $this->content = $content;
         $this->parameters = $parameters;
@@ -46,36 +108,48 @@ class PageReplacer
      */
     public function run(): string
     {
+        Logger::info("Substituições inicializadas...");
         { // realiza eventuais ajustes no conteudo
             $this->fixContent();
+            Logger::info("Ajustes do codigo pseudo-html realizado.");
         }
 
         { // searchs
             $this->matches = [];
             {
                 $this->searchConstants();
+                Logger::info("Constantes ({#CTE#})");
+
                 $this->searchVariables();
+                Logger::info("Variáveis ({\$...})");
+
                 $this->searchIncludes();
+                Logger::info("Includes (include)");
+
                 $this->searchFunctions();
+                Logger::info("Funções (func)");
+
                 $this->searchConditions();
+                Logger::info("Condições (if/else)");
+
                 $this->searchLoop();
+                Logger::info("Laços (loop)");
+
+                $this->searchPHPCode();
+                Logger::info("Código direto {{...}}");
             }
         }
         { // replaces
-            
-            {// obtem o conteudo para substituicao dos padroes
-                $content = $this->content;
-                //deb($content);
-            }
-            
+
             // debc($this->matches,0);
             foreach ($this->matches as $search => $replaces) {
                 foreach ($replaces as $replace) {
-                    $content = Strings::str_replace_first($search, $replace, $content);
+                    $this->content = Strings::str_replace_first($search, $replace, $this->content);
                 }
             }
         }
-        return $content;
+        Logger::success("...substituições finalizadas!");
+        return $this->content;
     }
 
     // ####################################################################################################
@@ -91,7 +165,7 @@ class PageReplacer
         $return = [];
         { // pesquisa pelo padrao informado!
             $match_array = [];
-            // deb($pattern,0);
+            // deb(trim($pattern),0);
             $result = preg_match_all($pattern, $this->content, $match_array);
             if ($result === false) {
                 $error = error_get_last();
@@ -122,18 +196,6 @@ class PageReplacer
     private function addMatch(string $search, string $replace)
     {
         $this->matches[$search][] = $replace;
-
-        /*
-         * if (! isset($this->matches[$search])) {
-         * $this->matches[$search] = $replace;
-         * } else {
-         * if ($this->matches[$search] != $replace) {
-         * //debc($this->matches,0);
-         * $errorMsg = "Foi encontrado um termo para substituição ($search) com correspondentes diferenciados.<br/>$search = " . $this->matches[$search] . "<br/>$search = $replace";
-         * throw new Exception($errorMsg);
-         * }
-         * }/*
-         */
     }
 
     // ####################################################################################################
@@ -153,17 +215,73 @@ class PageReplacer
     // ####################################################################################################
 
     /**
-     * corrige
+     * correcao de eventuais indentacoes indevidas no codigo entre outros
      *
      * @return mixed
      */
     private function fixContent()
-    {   
+    {
         { // fixes
             { // Wrong Automatic Identation (CRTL + F on Eclipse)
                 $this->content = str_replace('" }', '"}', $this->content);
             }
         }
+    }
+
+    // ####################################################################################################
+    /**
+     * obtem (verificando) o padrao a ser utilizado
+     *
+     * @param string $left
+     * @param string $pattern
+     * @param string $right
+     * @throws Exception
+     * @return string
+     */
+    private function GetPattern(string $left, string $center, string $right, string $FUNCTION): string
+    {
+        $FUNCTION = strtoupper(str_replace('search', '', $FUNCTION));
+
+        $bcl = $this->CheckPatternBoundErrors($left);        
+        if ($bcl !== '') {
+            throw new Exception("Caractere(s) proibido(s) encontrado(s) na delimitação esquerda no padrão de interpretação de templates. $FUNCTION LEFT => $bcl.");
+        }
+        $bcl = $this->CheckPatternBoundErrors($right);
+        if ($bcl !== '') {
+            throw new Exception("Caractere(s) proibido(s) encontrado(s) na delimitação direita no padrão de interpretação de templates. $FUNCTION RIGHT => $bcl.");
+        }
+        return '/' . $left . $center . $right . '/';
+    }
+
+    // ####################################################################################################
+    /**
+     * verifica se algum dos caracteres
+     * da lista proibida foi encontrado
+     * e retorna-os concatenados
+     * em uma string
+     *
+     * @param string $string
+     * @return string
+     */
+    private function CheckPatternBoundErrors(string $string): string
+    {
+        $return = [];
+        //$stringRaw=$string;
+        { // remove eventuais caracteres ja mascarados (padronizados)
+            foreach (self::blackListChars as $bc) {
+                $search = preg_quote($bc, '/');
+                //deb("$string => $search",0);
+                $string = str_replace($search, '', $string);
+            }
+            //debc("$stringRaw (-$search) => $string",0);
+        }
+        // procura por caracteres que deviam estar mascarados
+        foreach (self::blackListChars as $bc) {
+            if (preg_match('/[' . preg_quote($bc, '/') . ']/', $string)) {
+                $return[] = $bc;
+            }
+        }
+        return sizeof($return) > 0 ? '"' . implode('", "', $return) . '"' : '';
     }
 
     // ####################################################################################################
@@ -181,7 +299,7 @@ class PageReplacer
                 }
                 $right = '#}';
             }
-            $pattern = '/' . $left . $center . $right . '/';
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
             // deb($pattern);
         }
         $matches = $this->getPatternMatches($pattern);
@@ -193,7 +311,6 @@ class PageReplacer
             }
             { // substituicao (pseudo-php => php)
                 { // codigo para substituicao
-                  // $replace = "echo " . self::manguto_libraries_path . "Constants::isset_get(\"$match\",true); ";
                     $replace = "echo $match;";
                     $replace = self::phpWrap($replace);
                 }
@@ -228,7 +345,7 @@ class PageReplacer
                 }
                 $right = '}';
             }
-            $pattern = '/' . $left . $center . $right . '/';
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
             // deb($pattern);
         }
         $matches = $this->getPatternMatches($pattern);
@@ -242,7 +359,6 @@ class PageReplacer
             }
             { // substituicao (pseudo-php => php)
                 { // replace
-                  // $replace = "echo " . self::manguto_libraries_path . "Variables::isset_get(\"$match\",get_defined_vars(),true); ";
                     $replace = "echo $$match;";
                     $replace = self::phpWrap($replace);
                 }
@@ -271,7 +387,7 @@ class PageReplacer
                 }
                 $right = '"}';
             }
-            $pattern = '/' . $left . $center . $right . '/';
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
             // deb($pattern);
         }
         $matches = $this->getPatternMatches($pattern);
@@ -283,13 +399,10 @@ class PageReplacer
                 $match = str_replace($right, '', $match);
             }
             { // substituicao (pseudo-php => php)
-                { // replace
-                    $Page = new Page($this->tpl_dir, true);
-                    $Page->loadTpl($match, $this->parameters);
-                    $replace = $Page->run(true);
-                }
+              // replace
+                $Page = new Page($this->tpl_dir, $match, $this->parameters);
                 // addMatch
-                $this->addMatch($rawMatch, $replace);
+                $this->addMatch($rawMatch, $Page->getCacheContent());
             }
         }
     }
@@ -309,7 +422,7 @@ class PageReplacer
                 }
                 $right = '"}';
             }
-            $pattern = '/' . $left . $center . $right . '/';
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
             // deb($pattern);
         }
 
@@ -324,6 +437,44 @@ class PageReplacer
             { // substituicao (pseudo-php => php)
                 { // replace
                     $replace = "echo $match;";
+                    $replace = self::phpWrap($replace);
+                }
+                // addMatch
+                $this->addMatch($rawMatch, $replace);
+            }
+        }
+    }
+
+    // ####################################################################################################
+    // ####################################################################################################
+    // ########################################################################################## FREE CODE
+    // ####################################################################################################
+    // ####################################################################################################
+    private function searchPHPCode()
+    {
+        { // regex pattern
+            { // limites esq e dir
+                $left = '{%';
+                {
+                    $center = '[^}]+';
+                }
+                $right = '%}';
+            }
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
+            // deb($pattern);
+        }
+
+        $matches = $this->getPatternMatches($pattern);
+        // deb($matches,0);
+        foreach ($matches as $rawMatch) {
+            { // apara as rebarbas para obter apenas o conteudo de interesse
+                $match = trim($rawMatch);
+                $match = str_replace($left, '', $match);
+                $match = str_replace($right, '', $match);
+            }
+            { // substituicao (pseudo-php => php)
+                { // replace
+                    $replace = " $match; ";
                     $replace = self::phpWrap($replace);
                 }
                 // addMatch
@@ -355,7 +506,7 @@ class PageReplacer
                 }
                 $right = '"}';
             }
-            $pattern = '/' . $left . $center . $right . '/';
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
             // deb($pattern);
         }
         $matches = $this->getPatternMatches($pattern);
@@ -445,7 +596,7 @@ class PageReplacer
                 }
                 $right = '"}';
             }
-            $pattern = '/' . $left . $center . $right . '/';
+            $pattern = $this->GetPattern($left, $center, $right, __FUNCTION__);
             // deb($pattern);
         }
         $matches = $this->getPatternMatches($pattern);

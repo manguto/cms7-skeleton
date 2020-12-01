@@ -22,22 +22,22 @@ class User extends Model implements ModelDatabase
 
     const default = [
         [
-            'name' => 'Desenvolvedor',
-            'password' => '29e0461b02c078c89c7b2ac0b29fbfaf', //reflex
             'email' => 'dev',
-            'phone' => '(XX) X.XXXX-XXXX'
+            'name' => 'Desenvolvedor',
+            'password' => '29e0461b02c078c89c7b2ac0b29fbfaf', //reflex            
+            'phone' => ''
         ],
         [
+            'email' => 'admin',            
             'name' => 'Administrador',
-            'password' => 'ee10c315eba2c75b403ea99136f5b48d', //mirror
-            'email' => 'admin',
-            'phone' => '(XX) X.XXXX-XXXX'
+            'password' => 'ee10c315eba2c75b403ea99136f5b48d', //mirror            
+            'phone' => ''
         ],
         [
-            'name' => 'Usuário',
-            'password' => 'ee11cbb19052e40b07aac0ca060c23ee', //user
             'email' => 'user',
-            'phone' => '(XX) X.XXXX-XXXX'
+            'name' => 'Usuário',
+            'password' => 'ee11cbb19052e40b07aac0ca060c23ee', //user            
+            'phone' => ''
         ]
     ];
 
@@ -48,13 +48,13 @@ class User extends Model implements ModelDatabase
     private function defineAttributes()
     {
         // ---------------------------------------------------
+        $a = new ModelAttribute('email');
+        $this->SetAttribute($a);
+        // ---------------------------------------------------
         $a = new ModelAttribute('name');
         $this->SetAttribute($a);
         // ---------------------------------------------------
         $a = new ModelAttribute('password');
-        $this->SetAttribute($a);
-        // ---------------------------------------------------
-        $a = new ModelAttribute('email');
         $this->SetAttribute($a);
         // ---------------------------------------------------
         $a = new ModelAttribute('phone');
@@ -219,11 +219,11 @@ class User extends Model implements ModelDatabase
             }
             // deb($user);
             $user->save();            
-            Alert::setSuccess('Alteração de dados realizada com sucesso!');
+            Alert::Success('Alteração de dados realizada com sucesso!');
             $return = true;
         } catch (Exception $e) {
             //deb($e);
-            Alert::setDanger($e);
+            Alert::Error($e);
             Sessions::set('ControlBadge', $user);
             $return = false;
         }

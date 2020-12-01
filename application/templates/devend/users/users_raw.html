@@ -18,12 +18,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12">
-				<b>Ajuda!</b>
-				<br />
-				<label for="password">Senha:</label>
-				<input type="text" id="password" value="" style="font-size: 12px; width: 25%;">
-				<input type="button" class="btn btn-sm btn-primary" value="Cifrar" onclick="encrypt()" />
+			<div class="col-12">				
+				<label for="password">Password Help!</label>
+				<input type="text" id="password" value="" style="font-size: 12px; width: 25%;" class="form-control mb-2" onkeyup="encrypt()">
+				<div id="result" style="font-size: 12px; cursor: pointer;" title="Clique para copiar o conteudo!" class="mb-2" onclick="CopyToClipboard('result')"></div>				
+				<input type="button" class="btn btn-sm btn-primary d-none" value="Encrypt" onclick="encrypt()" />
 			</div>
 		</div>
 
@@ -51,12 +50,15 @@
 		$.post('{#APP_URL_ROOT#}dev/users/encrypt', {
 			'password' : p
 		}, function(data) {
-			$('#password').val(data);
+			$('#result').html(data);
 		});
 	}
 
 	$(document).ready(function() {
-
+		$('#password').click(function(){ 
+			$(this).val('');
+		});
+		
 	});
 </script>
 {include="../_general/footer"} {include="../_general/close"}

@@ -30,18 +30,18 @@ class ControllerLogin extends Controller
             if ($user_id!==false) {
                 Access::setSessionUser_id($user_id);
                 $user = Access::getSessionUser();
-                Alert::setSuccess('Credenciais validadas com sucesso! <br/>Bem Vindo(a) '.$user->getName().'!');                
+                Alert::Success('Credenciais validadas com sucesso! <br/>Bem Vindo(a) '.$user->getName().'!');                
                 Controller::HeaderLocation('/');
             } else {
                 Access::unsetSessionUser();
-                Alert::setDanger('As credenciais informadas não são válidas!<br/>Por favor, tente novamente!');                
+                Alert::Error('As credenciais informadas não são válidas!<br/>Por favor, tente novamente!');                
                 Controller::HeaderLocation('/login');
             }
         });
 
         $route->get('/logout', function () {
             Access::unsetSessionUser();
-            Alert::setSuccess('Saída realizada com sucesso!');
+            Alert::Success('Saída realizada com sucesso!');
             Controller::HeaderLocation("/");
         });
     }

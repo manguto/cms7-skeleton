@@ -30,7 +30,7 @@ class ControllerDocs extends Controller
     // ####################################################################################################
     static private function docs_parameters()
     {
-        $folder = APP_DIRECTORY . 'docs';
+        $folder = APP_ROOT_PATH . 'docs';
         $samples = [];
         // deb($folder);
         if (file_exists($folder)) {
@@ -50,7 +50,7 @@ class ControllerDocs extends Controller
 
     static private function docs_page_parameters($page)
     {
-        $folder = APP_DIRECTORY . 'docs';
+        $folder = APP_ROOT_PATH . 'docs';
         {
             $pageTitle = ucfirst($page);
         }

@@ -41,9 +41,9 @@ class ControllerUsers extends Controller
             //debc($users);
             if($users!==false){
                 File::writeContent(self::filename, utf8_decode($users));
-                Alert::setSuccess("Usuários salvos com sucesso!");
+                Alert::Success("Usuários salvos com sucesso!");
             }else{
-                Alert::setWarning("Parâmetros não informados.");
+                Alert::Warning("Parâmetros não informados.");
             }
             Controller::HeaderLocation('/dev/users');
         });
@@ -107,11 +107,11 @@ class ControllerUsers extends Controller
             $user->verifyFieldsToCreateUpdate();
             // deb($user);
             $user->save();
-            Alert::setSuccess("Usuário salvo com sucesso!");
+            Alert::Success("Usuário salvo com sucesso!");
             Controller::HeaderLocation("/dev/users");
             exit();
         } catch (Exception $e) {
-            Alert::setDanger($e);
+            Alert::Error($e);
             Controller::HeaderLocation("/dev/user/create");
             exit();
         }
@@ -133,11 +133,11 @@ class ControllerUsers extends Controller
             $user->save();
             // deb("$user");
 
-            Alert::setSuccess("Usuário atualizado com sucesso!");
+            Alert::Success("Usuário atualizado com sucesso!");
             Controller::HeaderLocation("/dev/users");
             exit();
         } catch (Exception $e) {
-            Alert::setDanger($e);
+            Alert::Error($e);
             Controller::HeaderLocation("/dev/user/create");
             exit();
         }
@@ -147,7 +147,7 @@ class ControllerUsers extends Controller
     {
         $user = new User($id);
         $user->delete();
-        Alert::setSuccess("Usuário removido com sucesso!");
+        Alert::Success("Usuário removido com sucesso!");
         Controller::HeaderLocation("/dev/users");
         exit();
     }

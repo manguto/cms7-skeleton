@@ -100,12 +100,12 @@ class User_password_recover extends Model
                 $msg .= "Foi enviada uma mensagem de e-mail para '$email', com as informações necessárias para a realização da sua solicitação.<br/>";
                 $msg .= "Verifique a respectiva caixa de entrada, e siga as instruções contidas nesta mensagem.<br/>";
                 $msg .= "Att,<br/>" . APP_FULL_NAME;
-                Alert::setSuccess($msg);
+                Alert::Success($msg);
             } else {
-                Alert::setError($email_result);
+                Alert::Error($email_result);
             }
         } else {
-            Alert::setError($emailTestResult);
+            Alert::Error($emailTestResult);
         }
     }
 
@@ -280,7 +280,7 @@ class User_password_recover extends Model
                 $result = 'As senhas não podem ser diferentes. Tente novamente!';
             } else {
                 // references load
-                $User_password_recover->loadReferences(false);
+                $User_password_recover->loadReferences();
                 // define upr como utilizado!
                 $User_password_recover->setForgotUsed();
 

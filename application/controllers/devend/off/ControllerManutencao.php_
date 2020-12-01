@@ -36,7 +36,7 @@ class ControllerManutencao extends Controller
                     $emManutencao = new EmManutencao();
                     $emManutencao->setMotivo($_POST['motivo']);
                     $emManutencao->save();
-                    Alert::setSuccess("Manutenção ativada com sucesso!");
+                    Alert::Success("Manutenção ativada com sucesso!");
                     Controller::HeaderLocation('/dev/manutencao');
                 } else {
                     // DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO! - DESATIVACAO!
@@ -45,7 +45,7 @@ class ControllerManutencao extends Controller
                     $emManutencao = new EmManutencao($_POST['id']);
                     $emManutencao->setStatus('inativa');
                     $emManutencao->save();
-                    Alert::setSuccess("Manutenção desativada com sucesso!");
+                    Alert::Success("Manutenção desativada com sucesso!");
                     Controller::HeaderLocation('/dev/manutencao');
                 }
                 $emManutencao = EmManutencao::EmFuncionamento();

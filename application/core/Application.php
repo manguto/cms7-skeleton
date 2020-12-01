@@ -16,7 +16,7 @@ class Application
     {   
         Logger::info(str_repeat('=', Logger::lineLen-10).' START!');
         Logger::info('Aplicação inicializacao');
-        // ######################################################        
+        // ######################################################     
         {   
             $this->configuration = new Configuration();
             $this->controller = new Controller();

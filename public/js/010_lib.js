@@ -15,6 +15,18 @@ function backButtonHandler() {
 	}
 }
 
+// #########################################################################################################
+
+// copia conteudo da tag informada
+function CopyToClipboard(tagId) {
+	var range = document.createRange();
+	range.selectNode(document.getElementById(tagId));
+	window.getSelection().removeAllRanges(); // clear current selection
+	window.getSelection().addRange(range); // to select text
+	document.execCommand("copy");
+	window.getSelection().removeAllRanges();// to deselect
+	console.log("Text has been copied!");
+}
 // ###########################################################################
 // ###########################################################################
 // ###########################################################################

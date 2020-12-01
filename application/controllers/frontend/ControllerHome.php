@@ -14,11 +14,11 @@ class ControllerHome extends Controller
         { // ROTAS
           // ===============================================
             $route->get('/', function () {
-                View::PageFrontend("home");
-            });
+                Controller::HeaderLocation('home');
+            });           
             // ===============================================
-            $route->get('/log', function () {                
-                header('location:log.php');
+            $route->get('/hits', function () {                
+                header('location:hits.php');
                 exit();
             });
             // ===============================================

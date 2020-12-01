@@ -1,7 +1,6 @@
 <?php
 namespace application\core;
 
-
 class View
 {
 
@@ -13,73 +12,89 @@ class View
 
     const EXTRA_TEMPLATE_DIR = APP_TPL_DIR . '_extra' . DS;
 
-    //const MODULES_DIR = '..' . DS . '..' . DS . 'modules' . DS;
-    //const MODULES_DIR = APP_MODULES_DIR;
-
     // ####################################################################################################
+    // ######################################################################################### pages run!
     // ####################################################################################################
-    // ####################################################################################################
-    static function PageFrontend(string $templateFilename, array $parameters = [], bool $toString = false)
+    //
+    static function PageFrontend(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::FRONTEND_TEMPLATE_DIR);
-        $page->loadTpl($templateFilename, $parameters);
-        return self::PageRun($page, $toString);
+        return self::PageRun(self::FRONTEND_TEMPLATE_DIR, $tpl_filename, $parameters, $toString);
     }
 
-    static function PageBackend(string $templateFilename, array $parameters = [], bool $toString = false)
+    static function PageBackend(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::BACKEND_TEMPLATE_DIR);
-        $page->loadTpl($templateFilename, $parameters);
-        return self::PageRun($page, $toString);
+        return self::PageRun(self::BACKEND_TEMPLATE_DIR, $tpl_filename, $parameters, $toString);
     }
 
-    static function PageDevend(string $templateFilename, array $parameters = [], bool $toString = false)
+    static function PageDevend(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::DEVEND_TEMPLATE_DIR);
-        $page->loadTpl($templateFilename, $parameters);
-        return self::PageRun($page, $toString);
+        return self::PageRun(self::DEVEND_TEMPLATE_DIR, $tpl_filename, $parameters, $toString);
     }
 
-    static function PageExtra(string $templateFilename, array $parameters = [], bool $toString = false)
+    static function PageExtra(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        $page = new Page(self::EXTRA_TEMPLATE_DIR);
-        $page->loadTpl($templateFilename, $parameters);
-        return self::PageRun($page, $toString);
+        return self::PageRun(self::EXTRA_TEMPLATE_DIR, $tpl_filename, $parameters, $toString);
     }
 
     // ####################################################################################################
-    // ####################################################################################### MODULE PAGES
-    // ####################################################################################################
-    
-    static function PageFrontendModule(string $templateFilename, array $parameters = [], bool $toString = false)
+    //
+    static function PageFrontendModule(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        return self::PageFrontend(self::GET_MODULES_DIR_REFERENCE() . $templateFilename, $parameters, $toString);
+        return self::PageFrontend(self::GET_MODULES_DIR_REFERENCE() . $tpl_filename, $parameters, $toString);
     }
 
-    static function PageBackendModule(string $templateFilename, array $parameters = [], bool $toString = false)
+    static function PageBackendModule(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        return self::PageBackend(self::GET_MODULES_DIR_REFERENCE() . $templateFilename, $parameters, $toString);
+        return self::PageBackend(self::GET_MODULES_DIR_REFERENCE() . $tpl_filename, $parameters, $toString);
     }
 
-    static function PageDevendModule(string $templateFilename, array $parameters = [], bool $toString = false)
+    static function PageDevendModule(string $tpl_filename, array $parameters = [], bool $toString = false)
     {
-        return self::PageDevend(self::GET_MODULES_DIR_REFERENCE() . $templateFilename, $parameters, $toString);
+        return self::PageDevend(self::GET_MODULES_DIR_REFERENCE() . $tpl_filename, $parameters, $toString);
     }
 
     // ####################################################################################################
     // ##################################################################################### STATIC PRIVATE
     // ####################################################################################################
-    static private function PageRun(Page $page, bool $toString)
-    {   
-        return $page->run($toString);
-    }
-    // ####################################################################################################
+    //
     /**
-     * obtem o endereço do diretorio dos modulos utilizando como referencia os diretorio dos templates (APP_TPL_DIR) 
+     * executa o template 
+     * @param string $tpl_dir
+     * @param string $tpl_filename
+     * @param array $parameters
+     * @param bool $toString
      * @return string
      */
-    static private function GET_MODULES_DIR_REFERENCE():string{
-        return str_repeat('..'.DS, sizeof(explode(DS, APP_TPL_DIR))).str_replace(APP_TPL_DIR, '', APP_MODULES_DIR);        
+    static private function PageRun(string $tpl_dir, string $tpl_filename, array $parameters = [], bool $toString = false)
+    {
+        $page = new Page($tpl_dir, $tpl_filename, $parameters);
+        $return = $page->run($toString);
+        return $return;
+    }
+
+    // ####################################################################################################
+    /**
+     * obtem o endereço do diretorio dos modulos
+     * utilizando como referencia os diretorio
+     * dos templates (APP_TPL_DIR)
+     *
+     * @return string
+     */
+    static private function GET_MODULES_DIR_REFERENCE(): string
+    {
+        { // up folders
+            {
+                $repeat = '..' . DS;
+                $mult = sizeof(explode(DS, APP_TPL_DIR));
+            }
+            $up = str_repeat($repeat, $mult);
+        }
+        { // path
+            $path = str_replace(APP_TPL_DIR, '', APP_MODULES_DIR);
+        }
+
+        $return = $up . $path;
+        return $return;
     }
     // ####################################################################################################
     // ####################################################################################################

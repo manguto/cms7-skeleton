@@ -97,9 +97,9 @@
 			var checked = input.is(':checked');
 			var key = input.prop('id');
 			if(checked){
-				document.location = '{#APP_DIRECTORY#}dev/modules/set/'+key;
+				document.location = '{#APP_ROOT_PATH#}dev/modules/set/'+key;
 			}else{
-				document.location = '{#APP_DIRECTORY#}dev/modules/unset/'+key;
+				document.location = '{#APP_ROOT_PATH#}dev/modules/unset/'+key;
 			}
 		});
 	});

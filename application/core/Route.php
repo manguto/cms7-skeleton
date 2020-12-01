@@ -5,7 +5,6 @@ use manguto\cms7\libraries\ServerHelp;
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Exception;
 use manguto\cms7\libraries\Logger;
-use manguto\cms7\libraries\Arrays;
 
 class Route
 {
@@ -206,7 +205,26 @@ class Route
         //Logger::info("Verificação da rota '$url_masc'");
         $parameters = $this->checkRoute($method, $url_masc);
         if ($parameters !== false) {
-            $function($parameters);
+        	{ // extrai as variaveis (``,$p_0, $p_1, $p_2) e obtem como retorno a quant. de parametros declarados
+        		$parametersLength = extract($parameters, EXTR_PREFIX_ALL, 'p');
+        	}
+        	{ // teste e execucao da funcao
+        		if ($parametersLength == 0) {
+        			$function();
+        		} else if ($parametersLength == 1) {
+        			$function($p_0);
+        		} else if ($parametersLength == 2) {
+        			$function($p_0, $p_1);
+        		} else if ($parametersLength == 3) {
+        			$function($p_0, $p_1, $p_2);
+        		} else if ($parametersLength == 4) {
+        			$function($p_0, $p_1, $p_2, $p_3);
+        		} else if ($parametersLength == 5) {
+        			$function($p_0, $p_1, $p_2, $p_3, $p_4);
+        		} else {
+        			throw new Exception("Foram definidos mais parâmetros do que o programado. Contate o administrador para acréscimo na implementação.");
+        		}
+        	}
         }
     }
 

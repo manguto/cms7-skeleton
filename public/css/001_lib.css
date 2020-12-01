@@ -55,7 +55,6 @@ label {
 /* ####################################### IMAGES */
 /* ####################################### IMAGES */
 /* ####################################### IMAGES */
-
 .icon {
 	
 }
@@ -81,9 +80,8 @@ a .icon:hover {
 	filter: invert(11%) sepia(100%) saturate(6146%) hue-rotate(3deg) brightness(99%) contrast(117%);
 }
 
-
 .image {
-	margin:0;
+	margin: 0;
 	padding: 0;
 }
 
@@ -94,6 +92,7 @@ a .icon:hover {
 .image-64 {
 	width: 64px;
 }
+
 .image-128 {
 	width: 128px;
 }
@@ -105,7 +104,6 @@ a .icon:hover {
 /* ##################### UL */
 /* ##################### UL */
 /* ##################### UL */
-
 ul.list {
 	margin-top: 5px;
 	margin-bottom: 10px;
@@ -145,7 +143,6 @@ ul.list.list-hover li:hover {
 /* ##################### OL */
 /* ##################### OL */
 /* ##################### OL */
-
 ol.list {
 	margin-top: 5px;
 	margin-bottom: 10px;
@@ -180,6 +177,33 @@ ol.list.list-hover li:hover {
 	background: #f0f0f0;
 }
 
+/* ############################## THROWABLE MSGS */
+/* ############################## THROWABLE MSGS */
+/* ############################## THROWABLE MSGS */
+
+div.throwable {
+	padding:10px 20px;
+	margin:10px 20px;	
+}
+div.throwable .title{
+	font-weight: bold;	
+}
+
+div.throwable.Notice {
+	color:#760;	
+}
+
+div.throwable.Warning {
+	color:#730;
+}
+
+div.throwable.Exception {
+	color:#700;
+}
+
+div.throwable.Error {
+	color:#300;
+}
 
 /* ################################################################################################### REGIOES */
 /* ################################################################################################### REGIOES */
@@ -233,25 +257,30 @@ header #platform-menu a img {
 nav {
 	
 }
-nav #main-menu{
-	
-}
-nav #user-menu{
-	
-}
-nav #user-menu a.back{
-	
-}
-nav #user-menu a.login{
-	
-}
-nav #user-menu a.logout{
-	
-}
-nav #user-menu a.back img{
+
+nav #main-menu {
 	
 }
 
+nav #user-menu {
+	
+}
+
+nav #user-menu a.back {
+	
+}
+
+nav #user-menu a.login {
+	
+}
+
+nav #user-menu a.logout {
+	
+}
+
+nav #user-menu a.back img {
+	
+}
 
 /* ########################################################### INFO */
 div#info {
@@ -285,10 +314,22 @@ div#info #alert-area .alert {
 	font-size: 12px;
 }
 
+
+
+
 /* ########################################################## MAIN */
 section {
 	min-height: 480px;
-	padding-bottom:20px;
+	padding: 0px 5px 20px 10px;
+	margin: 0;
+}
+
+.container {
+	
+}
+
+.container_large {
+	padding: 0 5px;
 }
 
 /* ######################################################### FOOTER */
@@ -298,7 +339,7 @@ footer {
 
 footer .content {
 	padding: 20px 0px;
-	font-size:12px;
+	font-size: 12px;
 	line-height: 130%;
 }
 

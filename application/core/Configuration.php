@@ -87,14 +87,14 @@ class Configuration
             define('APP_USER_IP_MASKED', $APP_USER_IP_MASKED);
         }
         // ####################################################################################################
-        { // iteracao
+        { // Identificador do pedido (ticket). Pode compreender mais de uma iteracao (APP_ITERATIONs)
             {
-                $APP_ITERATION = Sessions::get('APP_ITERATION', false, true);
-                if ($APP_ITERATION === false) {
-                    $APP_ITERATION = date('Ymd-His', APP_TIMESTAMP) . '-' . APP_UNIQID;
+                $APP_TICKET_ID = Sessions::get('APP_TICKET_ID', false, true);
+                if ($APP_TICKET_ID === false) {
+                    $APP_TICKET_ID = date('Ymd-His', APP_TIMESTAMP) . '-' . APP_ITERATION;
                 }
             }
-            define("APP_ITERATION", $APP_ITERATION);
+            define("APP_TICKET_ID", $APP_TICKET_ID);
         }
         // ####################################################################################################
         // ####################################################################################################

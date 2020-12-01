@@ -5,20 +5,19 @@
 // ##################################################################################### CONFIGURACOES
 // ####################################################################################################
 
-define("APP_FULL_NAME", "Controle de Acesso");
+define("APP_FULL_NAME", "Controle Financeiro");
 
-define("APP_SHORT_NAME", "Controle de Acesso à Unidade");
+define("APP_SHORT_NAME", "Controle Financeiro");
 
-define("APP_ABREV", "CAc");
+define("APP_ABREV", "CFIN");
 
 define("APP_TITLE", APP_ABREV . " | " . APP_SHORT_NAME);
 
-//define("APP_DOMAIN", "http://suporte.uast.ufrpe.br/tools/controle_acesso/");
-define("APP_DOMAIN", "http://l.manguto.com/controle_acesso/");
+define("APP_DOMAIN", "http://l.manguto.com/contas/");
 
-define("APP_EMAIL", "marcos.torres@ufrpe.br");
+define("APP_EMAIL", "admin@manguto.com");
 
-define("APP_EMAIL_ADMIN", "marcos.torres@ufrpe.br");
+define("APP_EMAIL_ADMIN", "admin@manguto.com");
 
 // ######################################################################
 // ##################################################### BANCOS DE DADOS

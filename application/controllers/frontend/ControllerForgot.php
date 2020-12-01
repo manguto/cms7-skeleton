@@ -27,7 +27,7 @@ class ControllerForgot extends Controller
          * $route->get('/forgot/reset/:code', function ($code) {
          * $result = User_password_recover::checkCode__getSelf($code, false);
          * if (! is_string($result)) {
-         * $result->loadReferences(false);
+         * $result->loadReferences();
          * {
          * $pars = [
          * 'user' => $result->getUser(),
@@ -36,7 +36,7 @@ class ControllerForgot extends Controller
          * }
          * View::PageFrontend("forgot-reset", $pars);
          * } else {
-         * Alert::setDanger($result);
+         * Alert::Error($result);
          * Controller::HeaderLocation('/login');
          * }
          * });/*
@@ -54,9 +54,9 @@ class ControllerForgot extends Controller
          * if ($result === true) {
          * $msg = 'A senha do usuário foi atualizada com sucesso!<br/>';
          * $msg .= 'Realize o login no sistema para confirmar esta atualização!<br/>';
-         * Alert::setSuccess($msg);
+         * Alert::Success($msg);
          * } else {
-         * Alert::setDanger($result);
+         * Alert::Error($result);
          * }
          * Controller::HeaderLocation('/login');
          * });/*

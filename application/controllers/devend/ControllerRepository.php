@@ -58,7 +58,7 @@ class ControllerRepository extends Controller
                 $register = new $repositoryNameCall($id);
                 // deb($register);
                 $register->delete();
-                Alert::setSuccess("Registro removido com sucesso.");
+                Alert::Success("Registro removido com sucesso.");
                 Controller::HeaderLocation("/dev/repository/$repository");
                 exit();
             }
@@ -104,7 +104,7 @@ class ControllerRepository extends Controller
                 $register->save();
                 // deb($register);
                 $id = $register->getId();
-                Alert::setSuccess($msg);
+                Alert::Success($msg);
                 // Controller::HeaderLocation("/dev/repository/$repository/$id/view");
                 Controller::HeaderLocation("/dev/repository/$repository");
                 exit();

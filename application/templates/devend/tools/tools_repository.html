@@ -1,7 +1,7 @@
 {include="../_general/open"} {include="../_general/header"} {include="../_general/info"}
 <section>
 	
-	<div class="container_large">
+	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<h1>Ferramentas</h1>
@@ -11,7 +11,7 @@
 		</div>
 		<hr />
 	</div>
-	<div class="container_large">
+	<div class="container">
 		{loop="$repository_array"}
 		<form action="/dev/tools/repository/save" method="post">
 			<div class="row mb-5" id="{$key}">

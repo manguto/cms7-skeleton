@@ -138,7 +138,7 @@ class Controller
     static function GetCallableClassName(string $filename): string
     {
         $return = $filename;
-        $return = str_replace(APP_DIRECTORY, '', $return);
+        $return = str_replace(APP_ROOT_PATH, '', $return);
         $return = str_replace('.php', '', $return);
         $return = ServerHelp::fixds($return, '\\');
         return $return;
@@ -155,7 +155,7 @@ class Controller
     static function HeaderLocation(string $route = '/', bool $die = true)
     {
         { // save iteration! - salva a iteracao para continuacao
-            Sessions::set('APP_ITERATION', APP_ITERATION);
+            Sessions::set('APP_TICKET_ID', APP_TICKET_ID);
         }        
         $location = ServerHelp::fixURLseparator('../' . APP_URL_ROOT . $route);
         Logger::info("Redirecionamento via GET solicitado para a URL: '$location'");
@@ -175,7 +175,7 @@ class Controller
     static function headerLocationPost(string $URLAbsolute, array $variables = [], bool $die = true)
     {
         { // save iteration! - salva a iteracao para continuacao
-            Sessions::set('APP_ITERATION', APP_ITERATION);
+            Sessions::set('APP_TICKET_ID', APP_TICKET_ID);
         }
 
         $url = APP_URL_ROOT . $URLAbsolute;
