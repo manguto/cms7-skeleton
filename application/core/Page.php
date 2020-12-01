@@ -53,7 +53,7 @@ class Page
     {
         $PageReplacer = new PageReplacer($this->tpl_dir, $this->tpl_content, $this->tpl_parameters);
         $return = $PageReplacer->run();
-        Logger::success("Conteudo do template convertido com sucesso ({$this->tpl_basename}.php).");
+        //Logger::success("Conteudo do template convertido com sucesso ({$this->tpl_basename}.php).");
         return $return;
     }
 
@@ -78,7 +78,7 @@ class Page
      */
     public function run(bool $toString = false)
     {
-        Logger::info("Execucao do template '{$this->tpl_basename}' solicitada!");
+        //Logger::info("Execucao do template '{$this->tpl_basename}' solicitada!");
 
         { // executa o template sem a sua impressao
 
@@ -98,7 +98,7 @@ class Page
                     Logger::info("RETORNO da execução do cache solicitado.");
                     return $return;
                 } else {
-                    Logger::info("IMPRESSÃO da execução do cache solicitado.");
+                    Logger::info("Impressão da execução do cache solicitado.");
                     print $return;
                 }
             } catch (\Throwable $t) {

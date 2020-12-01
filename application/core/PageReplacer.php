@@ -90,7 +90,7 @@ class PageReplacer
             throw new Exception("Formato de parâmetro inadequado (PARAMETERS=>" . gettype($parameters) . ")");
         }
 
-        Logger::info("Substituição de padrões do pseudo-html inicializado (" . implode(',', array_keys($parameters)) . ").");
+        //Logger::info("Substituição de padrões do pseudo-html inicializado (" . implode(',', array_keys($parameters)) . ").");
 
         $this->tpl_dir = $tpl_dir;
         $this->content = $content;
@@ -108,35 +108,35 @@ class PageReplacer
      */
     public function run(): string
     {
-        Logger::info("Substituições inicializadas...");
+        //Logger::info("Substituições inicializadas...");
         { // realiza eventuais ajustes no conteudo
             $this->fixContent();
-            Logger::info("Ajustes do codigo pseudo-html realizado.");
+            //Logger::info("Ajustes do codigo pseudo-html realizado.");
         }
 
         { // searchs
             $this->matches = [];
             {
                 $this->searchConstants();
-                Logger::info("Constantes ({#CTE#})");
+                //Logger::info("Constantes ({#CTE#})");
 
                 $this->searchVariables();
-                Logger::info("Variáveis ({\$...})");
+                //Logger::info("Variáveis ({\$...})");
 
                 $this->searchIncludes();
-                Logger::info("Includes (include)");
+                //Logger::info("Includes (include)");
 
                 $this->searchFunctions();
-                Logger::info("Funções (func)");
+                //Logger::info("Funções (func)");
 
                 $this->searchConditions();
-                Logger::info("Condições (if/else)");
+                //Logger::info("Condições (if/else)");
 
                 $this->searchLoop();
-                Logger::info("Laços (loop)");
+                //Logger::info("Laços (loop)");
 
                 $this->searchPHPCode();
-                Logger::info("Código direto {{...}}");
+                //Logger::info("Código direto {{...}}");
             }
         }
         { // replaces
@@ -148,7 +148,7 @@ class PageReplacer
                 }
             }
         }
-        Logger::success("...substituições finalizadas!");
+        //Logger::success("...substituições finalizadas!");
         return $this->content;
     }
 

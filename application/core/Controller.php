@@ -3,7 +3,6 @@ namespace application\core;
 
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\ServerHelp;
-use manguto\cms7\libraries\File;
 use manguto\cms7\libraries\Strings;
 use manguto\cms7\libraries\Sessions;
 use manguto\cms7\libraries\Logger;
@@ -21,6 +20,9 @@ class Controller
         'yyy',
         'zzz'
     ];
+    
+    //nome padrao da pasta das controladoras de cada modulo
+    const module_controller_foldername = 'controllers';
 
     // ####################################################################################################
     public function __construct()
@@ -38,7 +40,7 @@ class Controller
      */
     public function Run()
     {
-        Logger::info('Controladora Geral execucao');
+        Logger::info('Controladora Geral - EXECUÇÃO');
         {//tratamento da rota solicitada
             $rawURL = Strings::removeRepeatedOccurrences('/', $this->route->getRawURL());
             $URL = $this->route->getURL();
@@ -54,11 +56,12 @@ class Controller
         }
         //deb(getcwd(),0);
         {//verificacao quanto a existencia de um controladora responsavel para a rota
-            foreach ($controllers as $controller) {
-                //Logger::info("Testando a controladora '$controller'");
+            foreach ($controllers as $i=>$controller) {
+            	$n = str_pad($i+1, 3,'0',STR_PAD_LEFT);
+                Logger::info("Verificação: Controladora $controller ($n)");
                 $controller::RouteMatchCheck($this->route);
                 if($this->route->route_found==true){
-                    Logger::success('Controladora executada: ' . basename($controller));
+                    Logger::success('Controladora encontrada/executada: ' . basename($controller));
                     break;
                 }
             }            
@@ -92,19 +95,21 @@ class Controller
             ]);
         }
         { // OBTENCAO DE EVENTUAIS CONTROLADORES MODULARES
-            $modules_files = Diretorios::obterArquivosPastas(APP_MODULES_DIR, true, true, false, [
-                'php'
-            ]);
-            foreach ($modules_files as $module_file) {
-
-                $file_content = File::getContent($module_file);
-                // verifica se o aruqivo eh um arquivo de controle
-                if (strpos($file_content, ' extends Controller') !== false) {
-                    // adicao a lista de arquivos de controle
-                    $controller_filename_array[] = $module_file;
-                }
-            }
-            // deb($filenames);
+        	
+        	
+        	$modules_folders = Diretorios::obterArquivosPastas(APP_MODULES_DIR, false, false, true);
+        	//deb($modules_files);
+        	foreach ($modules_folders as $module_folder) {
+        		//
+        		$module_controller_folder_path = $module_folder . DS . self::module_controller_foldername;
+        		//
+        		$module_controller_folder_filenames = Diretorios::obterArquivosPastas($module_controller_folder_path, true, true, false,['php']);
+        		//
+        		foreach ($module_controller_folder_filenames as $module_controller_folder_filename){
+        			$controller_filename_array[] = $module_controller_folder_filename;
+        		}        		
+        	}
+        	//deb($controller_filename_array);
         }
 
         { // JUNCAO DAS CONTROLADORAS OFICIAIS E GERAIS E TRATAMENTO DOS MODELOS
