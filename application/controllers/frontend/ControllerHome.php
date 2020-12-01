@@ -14,7 +14,7 @@ class ControllerHome extends Controller
         { // ROTAS
           // ===============================================
             $route->get('/', function () {
-                Controller::HeaderLocation('home');
+            	View::PageFrontend("home");
             });           
             // ===============================================
             $route->get('/hits', function () {                
