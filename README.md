@@ -1,5 +1,5 @@
 # cms7-skeleton
 SETUP:
-1. git clone https://github.com/manguto/cms7-skeleton
-2. composer clearcache
-3. composer install
+git clone https://github.com/manguto/cms7-skeleton
+composer clearcache
+composer install
