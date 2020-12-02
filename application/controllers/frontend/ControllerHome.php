@@ -2,9 +2,9 @@
 namespace application\controllers\frontend;
 
 use manguto\cms7\libraries\Sessions;
-use application\core\View;
-use application\core\Controller;
-use application\core\Route;
+use manguto\cms7\application\core\View;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
 
 class ControllerHome extends Controller
 {

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/manguto/cms7.git",
-                "reference": "b0293ed6a5b11cbf4dac7447487eac357d5b1fa2"
+                "reference": "a4ef9160b65347037f1913d5f91752da49c5e6ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/manguto/cms7/zipball/b0293ed6a5b11cbf4dac7447487eac357d5b1fa2",
-                "reference": "b0293ed6a5b11cbf4dac7447487eac357d5b1fa2",
+                "url": "https://api.github.com/repos/manguto/cms7/zipball/a4ef9160b65347037f1913d5f91752da49c5e6ce",
+                "reference": "a4ef9160b65347037f1913d5f91752da49c5e6ce",
                 "shasum": ""
             },
             "require": {
@@ -28,6 +28,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
+                    "manguto\\cms7\\application\\": "application/",
                     "manguto\\cms7\\database\\": "database/",
                     "manguto\\cms7\\libraries\\": "libraries/",
                     "manguto\\cms7\\model\\": "model/"
@@ -51,7 +52,7 @@
                 "issues": "https://github.com/manguto/cms7/issues",
                 "source": "https://github.com/manguto/cms7/tree/master"
             },
-            "time": "2020-12-01T13:58:26+00:00"
+            "time": "2020-12-02T18:23:29+00:00"
         },
         {
             "name": "phpmailer/phpmailer",

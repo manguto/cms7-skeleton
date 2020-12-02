@@ -3,8 +3,8 @@ namespace application\controllers\frontend;
 
 use application\models\User;
 
-use application\core\Controller; use application\core\Route; 
-use application\core\Access;
+use manguto\cms7\application\core\Controller; use manguto\cms7\application\core\Route; 
+use manguto\cms7\application\core\Access;
 use application\views\frontend\ViewBadge;
   
 class ControllerBadge extends Controller

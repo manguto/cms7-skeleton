@@ -1,16 +1,16 @@
 <?php
 namespace application\controllers\devend;
 
-use application\core\Access;
-use application\core\View;
+use manguto\cms7\application\core\Access;
+use manguto\cms7\application\core\View;
 use manguto\cms7\libraries\Diretorios;
 use manguto\cms7\libraries\File;
 use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\CSV;
 use manguto\cms7\model\Model;
 use manguto\cms7\model\ModelHelper;
-use application\core\Route;
-use application\core\Controller;
+use manguto\cms7\application\core\Route;
+use manguto\cms7\application\core\Controller;
 
 class ControllerToolsRepository extends ControllerTools
 {

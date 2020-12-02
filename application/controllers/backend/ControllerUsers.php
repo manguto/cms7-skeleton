@@ -3,10 +3,10 @@ namespace application\controllers\backend;
 
 use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\Exception;
-use application\core\Controller;
-use application\core\Route;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
 use application\models\User;
-use application\core\Access;
+use manguto\cms7\application\core\Access;
 use application\views\backend\ViewUsers;
 
 class ControllerUsers extends Controller

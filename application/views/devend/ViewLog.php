@@ -1,7 +1,7 @@
 <?php
 namespace application\views\devend;
 
-use application\core\View;
+use manguto\cms7\application\core\View;
 
 class ViewLog extends View
 {

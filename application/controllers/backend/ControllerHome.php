@@ -1,10 +1,10 @@
 <?php
 namespace application\controllers\backend;
 
-use application\core\View;
-use application\core\Controller;
-use application\core\Route;
-use application\core\Access;
+use manguto\cms7\application\core\View;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
+use manguto\cms7\application\core\Access;
 
 class ControllerHome extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 namespace application\controllers\frontend;
 
-use application\core\Controller;
-use application\core\Route;
-use application\core\View;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
+use manguto\cms7\application\core\View;
 
 class ControllerForgot extends Controller
 {

@@ -1,10 +1,10 @@
 <?php
 namespace application\controllers\devend;
 
-use application\core\Access;
-use application\core\View;
+use manguto\cms7\application\core\Access;
+use manguto\cms7\application\core\View;
 use manguto\cms7\libraries\Exception;
-use application\core\Route;
+use manguto\cms7\application\core\Route;
 
 class ControllerToolsModules extends ControllerTools
 {

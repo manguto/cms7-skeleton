@@ -1,7 +1,7 @@
 <?php
 namespace application\views\frontend;
 
-use application\core\View;
+use manguto\cms7\application\core\View;
 
 class ViewZzz extends View
 {

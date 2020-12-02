@@ -1,11 +1,11 @@
 <?php
 namespace application\controllers\devend;
 
-use application\core\Access;
+use manguto\cms7\application\core\Access;
 use manguto\cms7\model\ModelHelper;
-use application\core\Controller;
-use application\core\Route;
-use application\core\View;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
+use manguto\cms7\application\core\View;
 
 class ControllerModels extends Controller
 {

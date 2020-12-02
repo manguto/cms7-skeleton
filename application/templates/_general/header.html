@@ -10,7 +10,7 @@
 
 				<div class="row">
 					<div class="col-12 user-menu">
-						{if="application\core\Access::checkUserLogged()==false"}
+						{if="manguto\cms7\application\core\Access::checkUserLogged()==false"}
 						<a href="{#APP_URL_ROOT#}login" class="float-right ml-1 login" title="Clique para efetuar o login no sistema (LOGIN).">
 							<img src="{#APP_URL_ROOT#}public/img/icons/login.png" class="icon icon-24" />
 						</a>
@@ -18,27 +18,27 @@
 						<a href="{#APP_URL_ROOT#}logout" class="float-right ml-1 logout" title="Sair do sistema (LOGOUT).">
 							<img src="{#APP_URL_ROOT#}public/img/icons/logout.png" class="icon icon-16" />
 						</a>
-						<a id="user_name" href="{#APP_URL_ROOT#}badge" class="float-right ml-1" title="Clique para alterar os seus dados pessoais."> {func="application\core\Access::getSessionUserAttribute('name')"} </a>
+						<a id="user_name" href="{#APP_URL_ROOT#}badge" class="float-right ml-1" title="Clique para alterar os seus dados pessoais."> {func="manguto\cms7\application\core\Access::getSessionUserAttribute('name')"} </a>
 						{/if}
 					</div>
 
 
 					<div class="col-12 platform-menu">
-						{if="application\core\Access::checkUserLogged()!=false"}
+						{if="manguto\cms7\application\core\Access::checkUserLogged()!=false"}
 						<span>
-							{if="application\core\Access::checkUserProfiles(['dev'])"}
+							{if="manguto\cms7\application\core\Access::checkUserProfiles(['dev'])"}
 							<a href="{#APP_URL_ROOT#}dev" class="float-right ml-2" title='Acessar a plataforma de DESENVOLVIMENTO'>
 								<img src="{#APP_URL_ROOT#}public/img/icons/devend.png" class="icon icon-24" />
 							</a>
 							{/if}
 							<!--  -->
-							{if="application\core\Access::checkUserProfiles(['dev','admin'])"}
+							{if="manguto\cms7\application\core\Access::checkUserProfiles(['dev','admin'])"}
 							<a href="{#APP_URL_ROOT#}admin" class="float-right ml-2" title='Acessar a plataforma ADMINISTRATIVA'>
 								<img src="{#APP_URL_ROOT#}public/img/icons/backend.png" class="icon icon-24" />
 							</a>
 							{/if}
 							<!--  -->
-							{if="application\core\Access::checkUserProfiles(['dev','admin','user'])"}
+							{if="manguto\cms7\application\core\Access::checkUserProfiles(['dev','admin','user'])"}
 							<a href="{#APP_URL_ROOT#}" class="float-right ml-2" title='Acessar o SITE'>
 								<img src="{#APP_URL_ROOT#}public/img/icons/frontend.png" class="icon icon-24" />
 							</a>

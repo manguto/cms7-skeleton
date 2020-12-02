@@ -1,12 +1,12 @@
 <?php
 namespace application\controllers\devend;
 
-use application\core\Access;
+use manguto\cms7\application\core\Access;
 use application\models\User;
 use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\Exception;
-use application\core\Controller;
-use application\core\Route;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
 use application\views\devend\ViewUsers;
 use manguto\cms7\libraries\File;
 

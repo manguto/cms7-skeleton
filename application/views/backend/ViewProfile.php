@@ -1,7 +1,7 @@
 <?php
 namespace application\views\backend;
 
-use application\core\View;
+use manguto\cms7\application\core\View;
 
 class ViewProfile extends View
 {

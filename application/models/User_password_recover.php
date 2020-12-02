@@ -8,7 +8,7 @@ use manguto\cms7\model\ModelSetup;
 use manguto\cms7\libraries\Safety;
 use manguto\cms7\libraries\Email;
 use manguto\cms7\libraries\Exception;
-use application\core\View;
+use manguto\cms7\application\core\View;
 use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\Logger;
 

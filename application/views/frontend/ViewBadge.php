@@ -1,8 +1,8 @@
 <?php
 namespace application\views\frontend;
 
-use application\core\View;
-use application\core\Access;
+use manguto\cms7\application\core\View;
+use manguto\cms7\application\core\Access;
 
 class ViewBadge extends View
 {

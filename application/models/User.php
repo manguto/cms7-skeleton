@@ -10,7 +10,7 @@ use manguto\cms7\database\ModelDatabase;
 use manguto\cms7\libraries\Alert;
 use manguto\cms7\libraries\Sessions;
 use manguto\cms7\libraries\Numbers;
-use application\core\Access;
+use manguto\cms7\application\core\Access;
 use manguto\cms7\libraries\Logger;
 use manguto\cms7\libraries\Variables;
 

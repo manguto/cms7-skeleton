@@ -2,9 +2,9 @@
 namespace application\controllers\backend;
 
 use application\views\backend\ViewZzz;
-use application\core\Controller;
-use application\core\Route;
-use application\core\Access;
+use manguto\cms7\application\core\Controller;
+use manguto\cms7\application\core\Route;
+use manguto\cms7\application\core\Access;
 
 class ControllerZzz extends Controller
 {
